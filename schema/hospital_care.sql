@@ -37,7 +37,8 @@ VALUES
 DROP TABLE IF EXISTS types CASCADE;
 CREATE TABLE IF NOT EXISTS types (
     type_id      bigserial PRIMARY KEY,
-    title        varchar(100) NOT NULL CONSTRAINT unique_type UNIQUE
+    title        varchar(100) NOT NULL CONSTRAINT unique_type UNIQUE,
+    active       boolean DEFAULT true
 );
 INSERT INTO types (title) VALUES ('Hospital'),('Doctor'),('Dentist');
 
@@ -46,7 +47,8 @@ DROP TABLE IF EXISTS sub_types CASCADE;
 CREATE TABLE IF NOT EXISTS sub_types (
     sub_type_id      bigserial PRIMARY KEY,
     title            varchar(100) NOT NULL CONSTRAINT unique_sub_type UNIQUE,
-    parent           bigint NOT NULL CONSTRAINT valid_parent_type REFERENCES types(type_id)
+    parent           bigint NOT NULL CONSTRAINT valid_parent_type REFERENCES types(type_id),
+    active       boolean DEFAULT true
 );
 INSERT INTO sub_types(title,parent) VALUES ('Hospital',1),('General Practitioner',2),('Peridontist',3);
 
@@ -65,7 +67,8 @@ CREATE TABLE IF NOT EXISTS entities (
     email       varchar(50) CONSTRAINT unique_email UNIQUE,
     web         varchar(100),
     country     smallint DEFAULT '112',
-    others      text
+    others      text,
+    active      boolean DEFAULT true
 );
 INSERT INTO entities 
  (title,type,location,telephone,office,landline,address,fax,email,web,others)
@@ -79,7 +82,8 @@ DROP TABLE IF EXISTS admission_rights CASCADE;
 CREATE TABLE IF NOT EXISTS admission_rights (
     doctor      bigint NOT NULL CONSTRAINT valid_doctor REFERENCES entities(entity_id),
     hospital    bigint NOT NULL CONSTRAINT valid_hospital REFERENCES entities(entity_id),
-    note        text
+    note        text,
+    active      boolean DEFAULT true
 );
 INSERT INTO admission_rights 
 (doctor,hospital,note)
@@ -217,6 +221,24 @@ SELECT username,users.name,users.email,users.telephone,account_number
 FROM users
 WHERE users.active = false;
 
+--     sub_type_id      bigserial PRIMARY KEY,
+--     title            varchar(100) NOT NULL CONSTRAINT unique_sub_type UNIQUE,
+--     parent           bigint NOT NULL CONSTRAINT valid_parent_type REFERENCES types(type_id),
+--     active           boolean DEFAULT true
+
+--- VW_TYPES ---
+DROP VIEW IF EXISTS vw_types;
+CREATE OR REPLACE VIEW vw_types AS 
+SELECT type_id,title,active
+FROM types;
+
+--- VW_SUB_TYPES ---
+DROP VIEW IF EXISTS vw_sub_types;
+CREATE OR REPLACE VIEW vw_sub_types AS 
+SELECT sub_type_id,sub_types.title,parent,types.title as parent_title, active
+FROM sub_types
+JOIN s
+
 -- VW_ENTITIES --
 DROP VIEW IF EXISTS vw_entities CASCADE;
 CREATE OR REPLACE VIEW vw_entities AS 
@@ -237,4 +259,4 @@ SELECT
 admission_rights.doctor,admission_rights.hospital,note
 FROM admission_rights 
     INNER JOIN entities
-        ON admission_rights.doctor = admission_rights.entity_id;
+        ON admission_rights.doctor = entities.entity_id;
