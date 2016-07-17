@@ -1,0 +1,9 @@
+{	
+	"title" : "e-health",
+	"alias": "e-health",
+    "navbar": {
+            "title" : "Healthcare provision",
+	    "alias": "Bixbyte Matibabu"
+    },
+    "version" : "0.0.0"
+}
