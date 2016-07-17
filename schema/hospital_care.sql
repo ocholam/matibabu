@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS sub_types (
     sub_type_id      bigserial PRIMARY KEY,
     title            varchar(100) NOT NULL CONSTRAINT unique_sub_type UNIQUE,
     parent           bigint NOT NULL CONSTRAINT valid_parent_type REFERENCES types(type_id),
-    active       boolean DEFAULT true
+    active           boolean DEFAULT true
 );
 INSERT INTO sub_types(title,parent) VALUES ('Hospital',1),('General Practitioner',2),('Peridontist',3);
 
@@ -235,9 +235,11 @@ FROM types;
 --- VW_SUB_TYPES ---
 DROP VIEW IF EXISTS vw_sub_types;
 CREATE OR REPLACE VIEW vw_sub_types AS 
-SELECT sub_type_id,sub_types.title,parent,types.title as parent_title, active
+SELECT sub_type_id,sub_types.title,parent,types.title as parent_title, sub_types.active
 FROM sub_types
-JOIN s
+    JOIN types 
+        ON sub_types.parent     = types.type_id
+        WHERE types.active      = true;
 
 -- VW_ENTITIES --
 DROP VIEW IF EXISTS vw_entities CASCADE;
