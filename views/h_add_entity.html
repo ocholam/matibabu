@@ -201,50 +201,28 @@
                         <!-- EDIT -->
                         <div ng-switch-when="edit" ng-if="frame.currTab=='edit'" ng-controller="entitiesController">
                             <!--<json-formatter json="fetched.vw_entities" open="2"></json-formatter>-->
-                             
-                                <!--ng-click="editEntity()"-->
-                            <button 
-                                class="button button-balanced button-block"
-                                data-toggle="modal" 
-                                data-target="#myModal"
-                            >OPEN MODAL
-                            </button>
-
-                            <div id="myModal" class="col-lg-10"  role="dialog">
-                                <div class="modal-dialog">
-
-                                    <!-- Modal content-->
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Modal Header</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Some text in the modal.</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
+                            
                              <label class="item item-input pull-left col-lg-5">
                                 <i class="icon ion-search placeholder-icon"></i>
                                 <input type="text" class="" ng-model="search" value="" placeholder="Search"> 
                             </label>
-                            <!--<table id="table-id"  align="center"  class="table table-striped  responsive-table"  name="content">
+                            <table id="table-id"  align="center"  class="table table-striped  responsive-table"  name="content">
                                 <thead>
                                 <tr  style="font-weight:bold; text-transform:uppercase;">                           
                                     <th ng-click="sort('entity_id')">id
                                         <span class="icon " ng-show="sortKey=='name'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
                                     </th>
                                     <th ng-click="sort('title')">Title
+                                        <span class="icon " ng-show="sortKey=='title'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                    </th> 
+                                    <th ng-click="sort('location')">Location
+                                        <span class="icon " ng-show="sortKey=='location'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                    </th> 
+                                     <th ng-click="sort('telephone')">Telephone
                                         <span class="icon " ng-show="sortKey=='telephone'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
                                     </th>                        
-                                    <th ng-click="sort('parent')">Parent Category
-                                        <span class="icon" ng-show="sortKey=='parent'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                    <th ng-click="sort('type_title')">Parent Category
+                                        <span class="icon" ng-show="sortKey=='type_title'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
                                     </th>            
                                     <th class="noprint" style="margin:0 auto;text-align:center;"></th>
                                 </tr>
@@ -252,43 +230,29 @@
                                 <tbody>
                                 <form  name="type_edit" novalidate >
                                 <tr dir-paginate="entity in fetched.vw_entities |orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
-                                   -->
-<!-- title       varchar(100) NOT NULL,
-    type        bigint NOT NULL CONSTRAINT valid_type REFERENCES sub_types(sub_type_id),
-    location    varchar(255),
-    telephone   varchar(20) CONSTRAINT unique_telephone UNIQUE,
-    office      varchar(20),
-    landline    varchar(20),
-    address     text,
-    fax         varchar(100),
-    email       varchar(50) CONSTRAINT unique_email UNIQUE,
-    web         varchar(100),
-    country     smallint DEFAULT '112',
-    others      text,
-    active      boolean DEFAULT true-->
-
-                                        <!--<th scope="row" data-label="ID">{{entity.entity_id}}</th>
-                                        <td data-label="Title" class="form-group">
-                                            <input type="text" name="title" class="form-control" value="{{entity.title}}"
-                                            ng-model="entity.title"
-                                            ng-minlength="3"
-                                            ng-maxlength="100"
-                                            required>
-                                        </td>
-                                        <td>
-                                            {{entity.parent_title}}
-                                        </td>
-                                        <td data-label="" class="noprint" style="margin:0 auto;text-align:center;"> {{data.temp}}
-                                            <button 
-                                                ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" 
-                                                style="border-radius:50%;" 
-                                                ng-disabled="!entity.title" 
-                                                class="btn btn-raised btn-md icon btn-raised ion-checkmark-round btn-success" 
-                                                style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
-                                                ng-click="update('vw_sub_types',{ title: entity.title, extras: ' entity_id=\'{{entity.entity_id}}\'' },'response')" 
-                                                ></button>
-                                        </td>
-                                    
+                                    <th scope="row" data-label="ID">{{entity.entity_id}}</th>
+                                    <td data-label="Title" class="form-group">
+                                       {{entity.title}}
+                                    </td>
+                                    <td data-label="Location" class="form-group">
+                                       {{entity.location}}
+                                    </td>
+                                    <td data-label="Telephone" class="form-group">
+                                       {{entity.telephone}}
+                                    </td>
+                                    <td data-label="Category" class="form-group">
+                                        {{entity.type_title}}
+                                    </td>
+                                    <td data-label="" class="noprint" style="margin:0 auto;text-align:center;"> {{data.temp}}
+                                        <button 
+                                            ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" 
+                                            style="border-radius:50%;" 
+                                            ng-disabled="!entity.title" 
+                                            class="btn btn-raised btn-md icon btn-raised ion-checkmark-round btn-success" 
+                                            style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
+                                            ng-click="update('vw_sub_types',{ title: entity.title, extras: ' entity_id=\'{{entity.entity_id}}\'' },'response')" 
+                                            ></button>
+                                    </td>                                    
                                 </tr>
                                 </form>
                                 </tbody>
@@ -297,7 +261,7 @@
                                 max-size="5"
                                 direction-links="true"
                                 boundary-links="true" >
-                            </dir-pagination-controls>-->
+                            </dir-pagination-controls>
                             
                             
                             
