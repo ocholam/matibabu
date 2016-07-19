@@ -517,5 +517,4 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
    $scope.currmoin =  $scope.app.monthNum();
    $scope.setMoin  = (moin)=>{$scope.currmoin=moin;} 
 
-    
 }])
