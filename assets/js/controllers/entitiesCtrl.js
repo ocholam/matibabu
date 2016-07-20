@@ -1,30 +1,19 @@
 app.controller("entitiesController",["$scope","$ionicModal",($scope,$ionicModal) => {
     
-    /**
-    *@ MODAL DISPLAY
-    */
+    //@ CURRENT EDIT ITEM HANDLER
+    $scope.current      = [];
+    $scope.editing      = false;
 
-    $scope.editEntity = () => {
-
-        $ionicModal.fromTemplateUrl('entity_edit.html', {
-            scope: $scope,
-            animation: 'slide-in-up'
-        }).then(function(modal) {
-            $scope.modal = modal;
-            console.log("Modal loaded!");
-            
-            if( !$scope.storage.setup ){
-
-                $scope.modal.show();
-
-            }else{
-
-                //! Do Something else here 
-
-            }
-        });
-
+    //@ HANDLE ENTITY EDITING
+    $scope.editEntity   = (currdata) => {
+        $scope.current  = currdata;
+        $scope.editing  = true;
     };
-    
 
-}])
+    //@ CLEAR ENTITY EDITING
+    $scope.clearEntity  = () => {
+        $scope.current  = [];
+        $scope.editing  = false;
+    };    
+
+}]);
