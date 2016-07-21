@@ -80,10 +80,11 @@ INSERT INTO entities
 ---  ADMISSION_RIGHTS
 DROP TABLE IF EXISTS admission_rights CASCADE;
 CREATE TABLE IF NOT EXISTS admission_rights (
-    doctor      bigint NOT NULL CONSTRAINT valid_doctor REFERENCES entities(entity_id),
-    hospital    bigint NOT NULL CONSTRAINT valid_hospital REFERENCES entities(entity_id),
-    note        text,
-    active      boolean DEFAULT true
+    admission_right_id  bigserial PRIMARY KEY,
+    doctor              bigint NOT NULL CONSTRAINT valid_doctor REFERENCES entities(entity_id),
+    hospital            bigint NOT NULL CONSTRAINT valid_hospital REFERENCES entities(entity_id),
+    note                text,
+    active              boolean DEFAULT true
 );
 INSERT INTO admission_rights 
 (doctor,hospital,note)
@@ -258,7 +259,7 @@ FROM entities
 DROP VIEW IF EXISTS vw_admission_rights CASCADE;
 CREATE VIEW vw_admission_rights AS 
 SELECT 
-admission_rights.doctor,admission_rights.hospital,note,admission_rights.active
+admission_right_id,admission_rights.doctor, entities.title as doctor_name, admission_rights.hospital,note,admission_rights.active
 FROM admission_rights 
     INNER JOIN entities
         ON admission_rights.doctor = entities.entity_id;
