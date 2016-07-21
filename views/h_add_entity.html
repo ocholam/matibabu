@@ -4,7 +4,7 @@
 <div  class="" ng-init="authorize();" ></div>
 
  <div class="" ng-if="frame.isAdmin()">
-     <div class="" ng-init="fetch([['vw_entities'],['vw_types'],['vw_sub_types']]);frame.currTab='add'">
+     <div class="" ng-init="fetch([['vw_entities'],['vw_types'],['vw_sub_types']]);frame.currTab='add';sort('entity_id');">
          
          <div class="col-lg-12">
            
@@ -200,17 +200,18 @@
                         
                         <!-- EDIT -->
                         <div ng-switch-when="edit" ng-if="frame.currTab=='edit'" ng-controller="entitiesController">
-                            <!--<json-formatter json="fetched.vw_entities" open="2"></json-formatter>-->
+                            <!--<json-formatter -json="fetched.vw_entities" open="2"></json-formatter>-->
+                            
                             <div ng-if="!editing">
                              <label class="item item-input pull-left col-lg-5">
                                 <i class="icon ion-search placeholder-icon"></i>
                                 <input type="text" class="" ng-model="search" value="" placeholder="Search"> 
                             </label>
-                            <table id="table-id"  align="center"  class="table table-striped  responsive-table"  name="content">
+                            <table id="table-edit"  align="center"  class="table table-striped  responsive-table"  name="content">
                                 <thead>
                                 <tr  style="font-weight:bold; text-transform:uppercase;">                           
                                     <th ng-click="sort('entity_id')">id
-                                        <span class="icon " ng-show="sortKey=='name'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                        <span class="icon " ng-show="sortKey=='entity_id'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
                                     </th>
                                     <th ng-click="sort('title')">Title
                                         <span class="icon " ng-show="sortKey=='title'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
@@ -265,13 +266,13 @@
                             </div>
                             
                             <div ng-if="editing">
-                                <json-formatter json="current" open="1"></json-formatter>
-
+                                <!--<json-formatter json="current" open="1"></json-formatter>-->
+                                <div ng-init="dPush(current,'extras','entity_id=\''+ current.entity_id+'\'')"></div>
                                 <form name="edit_entity_form" class="col-lg-10" style="" novalidate>
                                  <div ng-if="!frame.isRoot()" class="alert alert-danger"><button class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button><center style="font-weight:bold;">Your access level does not permit you to add entities.</center></div>
                                 
                                 <!-- Title -->
-                                <div class="">
+                                <div class="form-group">
                                     <label>Entity Title<sup style="color:red">*</sup></label>
                                     <input type="text" name="title" class="form-control" 
                                         ng-model="current.title"
@@ -427,14 +428,12 @@
                                     </textarea>
                                 </div>
 
-                                 <!--
                                  
-
                                 <!-- Submit Button -->
                                 <div class="form-group">
                                     <button 
                                     ng-disabled="!frame.isRoot() || edit_entity_form.$invalid" 
-                                    ng-click="app.alert('success','something happened',app.doNothing,'Oops; Its unimplemented')" 
+                                    ng-click="update('vw_entities',current,'response');clearEntity()" 
                                     class=" button button-positive"
                                     >Apply Changes</button>
                                      <button 
@@ -456,38 +455,57 @@
                         
                         <!--DELETE-->
                         <div ng-switch-when="delete" ng-if="frame.currTab=='delete'" >
-                            <!--<json-formatter json="fetched.types" open="2"></json-formatter>-->
+                            <!--<json-formatter json="fetched.entities" open="2"></json-formatter>-->
                             <label class="item item-input pull-left col-lg-5">
                                 <i class="icon ion-search placeholder-icon"></i>
                                 <input type="text" class="" ng-model="search" placeholder="Search">               
                             </label>
-                            <table id="del_type"  align='center'  class="table table-striped  responsive-table"  name="content">
-                                <thead>
+                            <table id="table-delete"  align="center"  class="table table-striped  responsive-table"  name="content">
+                            <thead>
                                 <tr  style="font-weight:bold; text-transform:uppercase;">                           
-                                    <th ng-click="sort('type_id')">ID
-                                        <span class="icon " ng-show="sortKey=='name'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                    <th ng-click="sort('entity_id')">id
+                                        <span class="icon " ng-show="sortKey=='entity_id'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
                                     </th>
                                     <th ng-click="sort('title')">Title
                                         <span class="icon " ng-show="sortKey=='title'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
-                                    </th>                                    
+                                    </th> 
+                                    <th ng-click="sort('location')">Location
+                                        <span class="icon " ng-show="sortKey=='location'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                    </th> 
+                                     <th ng-click="sort('telephone')">Telephone
+                                        <span class="icon " ng-show="sortKey=='telephone'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                    </th>                        
+                                    <th ng-click="sort('type_title')">Parent Category
+                                        <span class="icon" ng-show="sortKey=='type_title'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                    </th>            
                                     <th class="noprint" style="margin:0 auto;text-align:center;"></th>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                <tr dir-paginate="sub_type in fetched.vw_sub_types |orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
-                                    <th scope="row" data-label="Name">{{entity.entity_id}}</th>
-                                    <td data-label="Telephone">{{entity.title }}</td>
+                            </thead>
+                            <tbody>
+                                 <tr dir-paginate="entity in fetched.vw_entities |orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
+                                    <th scope="row" data-label="ID">{{entity.entity_id}}</th>
+                                    <td data-label="Title" class="form-group">
+                                       {{entity.title}}
+                                    </td>
+                                    <td data-label="Location" class="form-group">
+                                       {{entity.location}}
+                                    </td>
+                                    <td data-label="Telephone" class="form-group">
+                                       {{entity.telephone}}
+                                    </td>
+                                    <td data-label="Category" class="form-group">
+                                        {{entity.type_title}}
+                                    </td>
                                     <td data-label="" class="noprint" style="margin:0 auto;text-align:center;">
-                                        
                                         <button 
                                         ng-class="{'ion-eye-disabled btn-danger':!entity.active,'ion-eye btn-success':entity.active}" 
                                         ng-disabled="(admin.admin_name==storage.admin.admin_name || (admin.access==0 && storage.admin.access!=0)) || admin.admin_name=='userAdmin'" 
                                         class="btn btn-raised btn-md icon " 
                                         style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
-                                        ng-click="update('vw_sub_types',{ active: !entity.active, extras: ' entity_id=\'{{entity.entity_id}}\'' },'response')" ></button>
+                                        ng-click="update('vw_entities',{ active: !entity.active, extras: ' entity_id=\'{{entity.entity_id}}\'' },'response')" ></button>
                                     </td>
                                 </tr>
-                                </tbody>
+                            </tbody>
                             </table>
                             <dir-pagination-controls
                                 max-size="5"

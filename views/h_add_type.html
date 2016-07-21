@@ -4,7 +4,7 @@
 <div  class="" ng-init="authorize();" ></div>
 
  <div class="" ng-if="frame.isAdmin()">
-     <div class="" ng-init="fetch('vw_types');frame.currTab='add'">
+     <div class="" ng-init="fetch('vw_types');frame.currTab='add';sort('title');">
          
          <div class="col-lg-12">
            
@@ -65,10 +65,10 @@
                                 <thead>
                                 <tr  style="font-weight:bold; text-transform:uppercase;">                           
                                     <th ng-click="sort('type_id')">id
-                                        <span class="icon " ng-show="sortKey=='name'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                        <span class="icon " ng-show="sortKey=='type_id'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
                                     </th>
                                     <th ng-click="sort('title')">Title
-                                        <span class="icon " ng-show="sortKey=='telephone'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                        <span class="icon " ng-show="sortKey=='title'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
                                     </th>                                    
                                     <th class="noprint" style="margin:0 auto;text-align:center;"></th>
                                 </tr>
@@ -123,7 +123,7 @@
                                 <thead>
                                 <tr  style="font-weight:bold; text-transform:uppercase;">                           
                                     <th ng-click="sort('type_id')">ID
-                                        <span class="icon " ng-show="sortKey=='name'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                        <span class="icon " ng-show="sortKey=='type_id'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
                                     </th>
                                     <th ng-click="sort('title')">Title
                                         <span class="icon " ng-show="sortKey=='title'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>

@@ -245,8 +245,8 @@ FROM sub_types
 DROP VIEW IF EXISTS vw_entities CASCADE;
 CREATE OR REPLACE VIEW vw_entities AS 
 SELECT 
-entity_id, entities.title as title,type,location,telephone,office,landline,address,fax,email,web,country,others,
-sub_types.title as type_title, 
+entity_id, entities.title as title,type,location,telephone,office,landline,address,fax,email,web,country,others,entities.active,
+sub_types.title as type_title,
 type_id as super_type, types.title as super_type_title
 FROM entities
     LEFT JOIN sub_types
@@ -258,7 +258,7 @@ FROM entities
 DROP VIEW IF EXISTS vw_admission_rights CASCADE;
 CREATE VIEW vw_admission_rights AS 
 SELECT 
-admission_rights.doctor,admission_rights.hospital,note
+admission_rights.doctor,admission_rights.hospital,note,admission_rights.active
 FROM admission_rights 
     INNER JOIN entities
         ON admission_rights.doctor = entities.entity_id;

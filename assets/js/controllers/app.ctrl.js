@@ -510,7 +510,14 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
         $scope.reverse = !$scope.reverse; //if true make it false and vice versa
     }
  
- 
+
+   /**
+    * PUSH DATA TO OBJECT
+   */
+    $scope.dPush = (obj,key,val) =>{
+       obj[key] = val;
+    };
+
    /**
    * @ MONTH REGULATION
    */
