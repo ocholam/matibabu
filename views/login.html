@@ -8,9 +8,9 @@
         <!-- name field -->
         <div class="form-group">
             <label>Username</label>
-            <input type="tel" name="name" class="form-control" 
-                ng-model="data.login.telephone_number"
-                ng-minlength="10"
+            <input type="text" name="name" class="form-control" 
+                ng-model="data.login.username"
+                ng-minlength="3"
                 ng-maxlength="15"
                 required>
             <div class="help-block" ng-messages="loginForm.name.$error" ng-if="loginForm.name.$touched">
@@ -25,7 +25,7 @@
             <label>Password</label>
             <input type="password" name="password" class="form-control" 
                 ng-model="data.login.password"
-                ng-minlength="5"
+                ng-minlength="4"
                 ng-maxlength="50"
                 required>
                 
@@ -37,7 +37,7 @@
         </div>
         
         <div class="form-group">
-            <button ng-click="login()" class=" button button-positive" ng-hide="loginForm.$invalid">Submit</button>
+            <button ng-click="login('password')" class=" button button-positive" ng-hide="loginForm.$invalid">Submit</button>
         </div>
         
     </form>

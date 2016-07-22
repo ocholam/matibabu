@@ -46,7 +46,7 @@
                                      class="form-control" 
                                      name="type" 
                                      ng-model="data.entities.type" 
-                                     ng-options="entity.entity_id as entity.title for sub_type in fetched.vw_sub_types">   
+                                     ng-options="sub_type.sub_type_id as sub_type.title for sub_type in fetched.vw_sub_types">   
                                      <option value="" selected>Pick a Category </option>                                   
                                     </select>
                                     <div class="help-block" ng-messages="add_entity_form.type.$error" ng-if="add_entity_form.type.$touched">
@@ -188,11 +188,11 @@
                                 <div class="form-group">
                                     <button 
                                     ng-disabled="!frame.isRoot() || add_entity_form.$invalid" 
-                                    ng-click="add('vw_entities',data.entities,'response')" 
+                                    ng-click="add('vw_entities',data.entities,'response');data.entities={}" 
                                     class=" button button-positive"
                                     >Add Entity</button>
                                 </div>
-                                
+                                <br><br><br>
                             </form>
     
                             <br><br><br>
@@ -249,7 +249,7 @@
                                             ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" 
                                             style="border-radius:50%;" 
                                             ng-disabled="!entity.title"
-                                            class="btn btn-raised btn-md icon btn-raised ion-checkmark-round btn-success" 
+                                            class="btn btn-raised btn-md icon btn-raised ion-compose btn-success" 
                                             style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
                                             ng-click="editEntity(entity)" 
                                             ></button>
@@ -441,12 +441,10 @@
                                         ng-click="clearEntity()"
                                     >CLEAR DATA</button>
                                 </div>
-                                
-                                <br>
-                                <br>
-                                <br>
+                                <br><br><br>
                             </form>
 
+                            
                                
                             </div>
                             

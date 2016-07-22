@@ -31,10 +31,10 @@
                                         class="form-control"  
                                         ng-model="data.admission_rights.doctor" 
                                         ng-options="entity.entity_id as entity.title for entity in fetched.vw_entities">   
-                                        <option value="" selected>Practitioner </option>                                   
+                                        <option value="" selected>Select a Practitioner </option>                                   
                                     </select>
                                     <div class="help-block" ng-messages="add_admission_rights_form.doctor.$error" ng-if="add_admission_rights_form.doctor.$touched">
-                                        <p ng-message="required">Please pick a practitioner.</p>
+                                        <p ng-message="required">Please select a practitioner.</p>
                                     </div>
                                 </div>
 
@@ -46,10 +46,10 @@
                                         class="form-control"  
                                         ng-model="data.admission_rights.hospital" 
                                         ng-options="entity.entity_id as entity.title for entity in fetched.vw_entities">   
-                                        <option value="" selected>Pick an Institution.</option>                                   
+                                        <option value="" selected>Select an Institution.</option>                                   
                                     </select>
                                     <div class="help-block" ng-messages="add_admission_rights_form.hospital.$error" ng-if="add_admission_rights_form.hospital.$touched">
-                                        <p ng-message="required">Please pick an Institution.</p>
+                                        <p ng-message="required">Please select an Institution.</p>
                                     </div>
                                 </div>
 
@@ -59,7 +59,7 @@
                                     <textarea type="text" 
                                         name="note" 
                                         class="form-control" 
-                                        ng-model="data.entities.note"
+                                        ng-model="data.admission_rights.note"
                                         ng-minlength="5"
                                         ng-maxlength="255"
                                         required>
