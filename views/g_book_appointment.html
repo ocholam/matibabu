@@ -1,0 +1,48 @@
+<framify menu="true" path="book_appointment" url="/book_appointment" title="Book Appointment" parent="false" icon="book"  controller="" ></framify>
+<ion-content scrollbar-x="false" scrollbar-y="false" style="padding-bottom:40px;">
+    <div ng-init="fetch([['vw_types',{ active:true }],['vw_sub_types', { active: true, parent_active:true }]])"></div>
+
+    <json-formatter json="data.appointments" open="1"></json-formatter>
+    <div>
+        Pick an entity type
+        <select ng-disabled="data.appointments.sub_type" ng-model="data.appointments.type" required>
+            <option value="" selected>Pick a Type</option>
+            <option ng-repeat="type in fetched.vw_types" value="{{type.type_id}}">{{type.title}}</option>
+        </select>
+    </div>    
+    <br>
+
+    <div >
+        Pick an entity sub-type
+        <select ng-model="data.appointments.sub_type">
+            <option value="" selected>Pick a Sub Type</option>
+            <option ng-show="sub_type.parent==data.appointments.type"  ng-repeat="sub_type in fetched.vw_sub_types" value="{{sub_type.sub_type_id}}">{{sub_type.title}}</option>
+        </select>
+    </div>
+    <br>
+
+    <div>
+        <button ng-if="data.appointments.sub_type" class="button button-balanced" ng-click="fetch([['vw_entities',{type: data.appointments.type}]])">Search</button>
+    </div>
+    <br>
+
+    <div>
+        <json-formatter json="fetched.vw_entities" open="2"></json-formatter>
+    </div>
+    <br>
+    
+
+    <br>
+    <br>
+    <br>
+
+
+    <ul>
+       <li>Pick main/sub Type</li><br>
+       <li>Allow to pick relevant practitioners</li><br>
+       <li>Write reason for appointment</li><br>
+       <li>Allow user to leave their contact info {email,telephone,name}</li><br>
+       <li>Send Appointment SMS to both parties</li><br>
+       <li>Allow for the specific doctor to review the appointment </li><br>
+    </ul>
+</ion-content>

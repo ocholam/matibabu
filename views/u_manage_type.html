@@ -1,4 +1,4 @@
-<framify menu="true" path="add_type" url="/h_add_type" title="Manage Main Types" parent="true" icon="note_add" controller="appController" ></framify>
+<framify menu="false" path="u_add_type" url="/u_add_type" title="Manage Main Types" parent="false" icon="note_add" controller="appController" ></framify>
 <ion-content scrollbar-x="false" scrollbar-y="false" style="padding-bottom:20px;">
 <div class="col-lg-12" id="response"></div>
 <!--<div  class="" ng-init="authorize();" ></div>-->
@@ -90,8 +90,8 @@
                                         </td>
                                         
                                         <td data-label="" class="noprint" style="margin:0 auto;text-align:center;"> {{data.temp}}
-                                            <button 
-                                                ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" 
+                                           <!--ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" -->
+                                            <button                                                 
                                                 style="border-radius:50%;" 
                                                 ng-disabled="!type.title" 
                                                 class="btn btn-raised btn-md icon btn-raised ion-checkmark-round btn-success" 

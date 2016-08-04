@@ -236,7 +236,7 @@ FROM types;
 --- VW_SUB_TYPES ---
 DROP VIEW IF EXISTS vw_sub_types;
 CREATE OR REPLACE VIEW vw_sub_types AS 
-SELECT sub_type_id,sub_types.title,parent,types.title as parent_title, sub_types.active
+SELECT sub_type_id,sub_types.title,parent,types.title as parent_title,types.active as parent_active,sub_types.active
 FROM sub_types
     JOIN types 
         ON sub_types.parent     = types.type_id
