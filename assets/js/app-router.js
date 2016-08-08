@@ -3,7 +3,7 @@ app.config(["$stateProvider","$urlRouterProvider","ChartJsProvider",function($st
     
     $stateProvider.state( "framify" , {
                url          :"/framify",
-               templateUrl  : "views/adminLogin.html",
+               templateUrl  : "views/login.html",
                controller   : "appController",
                cache        : false
             }); 
@@ -41,20 +41,23 @@ app.config(["$stateProvider","$urlRouterProvider","ChartJsProvider",function($st
 }]);
 
 //!DEFINE THE APPLICATION RUNTIME DEFAULTS
-app.run(["app","cgi","$rootScope","$location", "formlyConfig","formlyValidationMessages","$localStorage",function( app,cgi, $rootScope, $location, formlyConfig, formlyValidationMessages,$localStorage ){
+app.run(["app","cgi","sms","$rootScope","$location", "formlyConfig","formlyValidationMessages","$localStorage",function( app,cgi,sms, $rootScope, $location, formlyConfig, formlyValidationMessages,$localStorage ){
     
-    //!INJECT THE LOCATION SOURCE TO THE ROOT SCOPE
+    //! INJECT THE LOCATION SOURCE TO THE ROOT SCOPE
     $rootScope.location = $location;
 
-    //!INJECT THE $localStorage instance into the root scope
-    $rootScope.storage = $localStorage;
+    //! INJECT THE $localStorage instance into the root scope
+    $rootScope.storage  = $localStorage;
     
-    //!INJECT THE APPLICATION'S MAIN SERVICE TO THE ROOT SCOPE SUCH THAT ALL SCOPES MAY INHERIT IT
-    $rootScope.app = app;
+    //! INJECT THE APPLICATION'S MAIN SERVICE TO THE ROOT SCOPE SUCH THAT ALL SCOPES MAY INHERIT IT
+    $rootScope.app      = app;
     
-     //! INJECT THE APP BASICS SERVICE
-    $rootScope.cgi   = cgi;
+    //! INJECT THE APP BASICS SERVICE
+    $rootScope.cgi      = cgi;
      
+    //! INJECT THE SMS SERVICE TO THE APPLICATION'S PARENT SCOPE
+    $rootScope.sms      = sms;
+
     //! SIMPLE APPLICATION BEHAVIOR SETUP
     $rootScope.frame    = {};
     

@@ -1,0 +1,11 @@
+<framify menu="false" path="u_manage_appointments" url="/u_appointment_management" title="Manage Appointments" parent="false" icon="local_hospital" controller="appController" ></framify>
+<ion-content scrollbar-x="false" scrollbar-y="false" style="padding-bottom:20px;">
+<div class="col-lg-12" id="response" ng-init="fetch([['appointments']])"></div>
+
+<json-formatter json="fetched.appointments" open="2"></json-formatter>
+
+<br>
+<br>
+<br>
+
+</ion-content>

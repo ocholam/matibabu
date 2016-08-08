@@ -26,6 +26,7 @@ CREATE TABLE users (
     email           varchar(30) NOT NULL UNIQUE,
     telephone       varchar(15),
     account_number  varchar(30),
+    entity          bigint CONSTRAINT valid_entity REFERENCES entities(entity_id),
     active          boolean DEFAULT true
 );
 INSERT INTO users 
@@ -91,6 +92,46 @@ INSERT INTO admission_rights
 VALUES 
 (1,2,'Ask to see Naani'),
 (1,3,'');
+
+
+--- APPOINTMENTS
+DROP TABLE IF EXISTS appointments CASCADE;
+CREATE TABLE IF NOT EXISTS appointments (
+    appointment_id      bigserial PRIMARY KEY,
+    entity              bigint NOT NULL CONSTRAINT valid_entity REFERENCES entities(entity_id),
+    name                varchar(50) NOT NULL,
+    email               varchar(50) NOT NULL,
+    telephone           varchar(20) NOT NULL,
+    message             text NOT NULL,
+    added_on            timestamp DEFAULT CURRENT_TIMESTAMP,
+    active              boolean DEFAULT true,
+    confirmed           boolean,
+    scheduled           date
+);
+
+--- SERVICES / PRODUCTS
+DROP TABLE IF EXISTS services CASCADE;
+CREATE TABLE IF NOT EXISTS services (
+    service_id          bigserial PRIMARY KEY,
+    title               varchar(50),
+    description         text,
+    type                varchar(1) NOT NULL DEFAULT 's',
+    active              boolean DEFAULT true,
+    added_on            timestamp DEFAULT CURRENT_TIMESTAMP
+);
+
+--- SERVICE_OFFERINGS / PRODUCT_OFFERINGS
+DROP TABLE IF EXISTS service_offerings CASCADE;
+CREATE TABLE IF NOT EXISTS service_offerings (
+    service_offering_id     bigserial PRIMARY KEY,
+    entity                  bigint NOT NULL CONSTRAINT valid_entity REFERENCES entities(entity_id),
+    description             text,
+    service                 bigint NOT NULL CONSTRAINT valid_service REFERENCES services(service_id),
+    purchase                integer DEFAULT 0,
+    retail                  integer NOT NULL,
+    active                  boolean DEFAULT true,
+    added_on                timestamp DEFAULT CURRENT_TIMESTAMP
+);
 
 
 -- --
@@ -263,3 +304,22 @@ admission_right_id,admission_rights.doctor, entities.title as doctor_name, admis
 FROM admission_rights 
     INNER JOIN entities
         ON admission_rights.doctor = entities.entity_id;
+
+-- VW_SERVICES
+DROP VIEW IF EXISTS vw_services CASCADE;
+CREATE VIEW vw_services AS 
+SELECT 
+service_id,title,description,type,active,added_on 
+FROM services;
+
+-- VW_SERVICE_OFFERINGS
+DROP VIEW IF EXISTS vw_service_offerings CASCADE;
+CREATE VIEW vw_service_offerings AS 
+SELECT 
+service_offerings.service_offering_id, service_offerings.entity, service_offerings.description, service_offerings.purchase, service_offerings.retail, service_offerings.active, 
+entities.title as entity_title, services.title as title, services.type as type
+FROM service_offerings
+    INNER JOIN entities 
+        ON service_offerings.entity = entities.entity_id
+    JOIN services
+        ON service_offerings.service = services.service_id;

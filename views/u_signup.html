@@ -80,6 +80,8 @@
         </div>
         
         <div class="form-group" ng-controller="hospitalCtrl">
+            <span hidden ng-if="!add_user_form.$invalid">{{data.users=setCreds(data.users)}}</span>
+            <json-formatter json="data.users" open="1"></json-formatter>
             <!--!frame.isRoot()-->
             <button ng-click="add('vw_users',data.users,'response','password',loginRedirect)" class=" button button-positive" ng-disabled="add_user_form.$invalid">Add User</button>
         </div>

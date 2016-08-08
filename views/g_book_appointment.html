@@ -1,48 +1,187 @@
 <framify menu="true" path="book_appointment" url="/book_appointment" title="Book Appointment" parent="false" icon="book"  controller="" ></framify>
-<ion-content scrollbar-x="false" scrollbar-y="false" style="padding-bottom:40px;">
-    <div ng-init="fetch([['vw_types',{ active:true }],['vw_sub_types', { active: true, parent_active:true }]])"></div>
+<ion-content scrollbar-x="false" scrollbar-y="false" style="padding-bottom:40px;" ng-controller="hospitalCtrl">
+    <div id="response" ng-init="fetch([['vw_types',{ active:true }],['vw_sub_types', { active: true, parent_active:true }]])"></div>
 
-    <json-formatter json="data.appointments" open="1"></json-formatter>
-    <div>
-        Pick an entity type
-        <select ng-disabled="data.appointments.sub_type" ng-model="data.appointments.type" required>
-            <option value="" selected>Pick a Type</option>
-            <option ng-repeat="type in fetched.vw_types" value="{{type.type_id}}">{{type.title}}</option>
-        </select>
-    </div>    
-    <br>
+    <!--<json-formatter json="data.appointments" open="1"></json-formatter>-->
+    <div class="col-lg-12" ng-if="!bookAppointment">
+        <div class="form-group col-lg-5" ng-class="{'balanced':data.appointments.type, 'assertive': !data.appointments.type}" >
+            Pick an entity type
+            <select class="form-control" ng-disabled="data.appointments.sub_type" ng-model="data.appointments.type" required>
+                <option value="" selected>Pick a Type</option>
+                <option ng-repeat="type in fetched.vw_types" value="{{type.type_id}}">{{type.title}}</option>
+            </select>
+        </div> 
 
-    <div >
-        Pick an entity sub-type
-        <select ng-model="data.appointments.sub_type">
-            <option value="" selected>Pick a Sub Type</option>
-            <option ng-show="sub_type.parent==data.appointments.type"  ng-repeat="sub_type in fetched.vw_sub_types" value="{{sub_type.sub_type_id}}">{{sub_type.title}}</option>
-        </select>
+        <div class="form-group col-lg-5" ng-class="{'balanced':data.appointments.sub_type,'assertive': !data.appointments.sub_type}" >
+            Pick an entity sub-type
+            <select class="form-control" ng-model="data.appointments.sub_type" >
+                <option value="" selected>Pick a Sub Type</option>
+                <option ng-show="sub_type.parent==data.appointments.type"  ng-repeat="sub_type in fetched.vw_sub_types" value="{{sub_type.sub_type_id}}">{{sub_type.title}}</option>
+            </select>
+        </div>
+
+        <div class="col-lg-2">
+            <button style="margin-top:30px;" ng-if="data.appointments.sub_type" class="button button-balanced" ng-click="fetch([['vw_entities',{type: data.appointments.type}]])">Search</button>
+        </div>
     </div>
-    <br>
-
-    <div>
-        <button ng-if="data.appointments.sub_type" class="button button-balanced" ng-click="fetch([['vw_entities',{type: data.appointments.type}]])">Search</button>
-    </div>
-    <br>
-
-    <div>
-        <json-formatter json="fetched.vw_entities" open="2"></json-formatter>
-    </div>
-    <br>
     
+    <hr class="col-lg-12" ng-if="!bookAppointment"/>
+  
+
+    <div ng-if="!bookAppointment">
+         <table ng-if="fetched.vw_entities" id="edit-form"  align="center"  class="table table-striped  responsive-table"  name="content">
+            <thead>
+            <tr  style="font-weight:bold; text-transform:uppercase;">                           
+                <th ng-click="sort('title')">Title
+                    <span class="icon " ng-show="sortKey=='title'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                </th>
+                <th ng-click="sort('location')">Location
+                    <span class="icon " ng-show="sortKey=='location'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                </th>                        
+                <th ng-click="sort('telephone')">Telephone
+                    <span class="icon" ng-show="sortKey=='telephone'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                </th> 
+                <th ng-click="sort('email')">email
+                    <span class="icon" ng-show="sortKey=='email'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                </th>           
+                <th class="noprint" style="margin:0 auto;text-align:center;"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <form  name="type_edit" novalidate >
+            <tr dir-paginate="entity in fetched.vw_entities |orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
+                
+                    <th scope="row" data-label="Title">{{entity.title}}</th>
+                    <td data-label="Location" class="form-group">
+                           {{entity.location}} 
+                    </td>
+                    <td data-label="Telephone" class="form-group">
+                           {{entity.telephone}} 
+                    </td>
+                    <td data-label="Email" class="form-group">
+                           {{entity.email}} 
+                    </td>
+                    <td data-label="" class="noprint" style="margin:0 auto;text-align:center;"> {{data.temp}}                                             
+                            <!--ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" -->
+                        <button
+                            style="border-radius:50%;" 
+                            ng-disabled="false" 
+                            class="btn btn-raised btn-md icon btn-raised ion-checkmark-round btn-success" 
+                            style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
+                            ng-click="setAppointment(entity)" 
+                            ></button>
+                    </td>
+                
+            </tr>
+            </form>
+            </tbody>
+        </table>
+        <dir-pagination-controls
+            max-size="5"
+            direction-links="true"
+            boundary-links="true" >
+        </dir-pagination-controls>
+        <br><br><br>
+       
+    </div> 
+
+    <!--<json-formatter json="data.appointment" open="2"></json-formatter>-->
+    <div ng-if="bookAppointment" class="container">
+        
+        <center>
+        <div class="col-lg-12">
+            <b><u>Booking an Appointment</u></b>
+            <div style="background-color: beige;border-radius:10px;padding:10px;">
+                <h3>{{appointmentTitle}}</h3>
+                <form name="form_appointment_book" novalidate>
+                    <label >Name<sup style="color:red">*</sup></label>
+                    <div class="form-group">
+                        <input 
+                            type="text"
+                            name="name" 
+                            class="form-control" 
+                            placeholder="Your Name Here" 
+                            ng-model="data.appointment.name"
+                            required>
+                        <div class="help-block" ng-messages="form_appointment_book.name.$error" ng-if="form_appointment_book.name.$touched">
+                            <p ng-message="required">Please enter your name.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label >Email<sup style="color:red">*</sup></label>
+                        <input 
+                            type="email" 
+                            name="email"
+                            class="form-control" 
+                            ng-pattern="app.isemail"
+                            placeholder="Your Email" 
+                            ng-model="data.appointment.email"
+                            required>
+                        <div class="help-block" ng-messages="form_appointment_book.email.$error" ng-if="form_appointment_book.email.$touched">
+                            <p ng-message="required">Please enter your email.</p>
+                            <p ng-message="pattern">Enter a valid email.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label >Telephone<sup style="color:red">*</sup></label>
+                        <input 
+                            type="tel" 
+                            name="telephone"
+                            class="form-control" 
+                            ng-pattern="app.istelephone"
+                            placeholder="Your Telephone" 
+                            ng-model="data.appointment.telephone"
+                            required>
+                        <div class="help-block" ng-messages="form_appointment_book.telephone.$error" ng-if="form_appointment_book.telephone.$touched">
+                            <p ng-message="required">Please enter your telephone number.</p>
+                            <p ng-message="pattern">Enter a valid telephone number.</p>
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <label >Message<sup style="color:red">*</sup></label>
+                        <textarea 
+                            name="message"
+                            class="form-control"
+                            ng-minlength="15"
+                            placeholder="Your message to the doctor" 
+                            ng-model="data.appointment.message"
+                            required>
+                        </textarea>
+                        <div class="help-block" ng-messages="form_appointment_book.message.$error" ng-if="form_appointment_book.message.$touched">
+                            <p ng-message="required">Please enter an appointment description message.</p>
+                            <p ng-message="minlength">Please type a longer message/description.</p>
+                        </div>
+                    </div>
+                    
+                    <span hidden>{{data.appointment.entity=data.appointments.sub_type}}</span>
+                    <span hidden ng-if="!add_user_form.$invalid">{{data.appointment=setCreds(data.appointment)}}</span>
+                    
+                    <div class="form-group">                        
+                        <button 
+                            class="button button-small button-royal" 
+                            ng-click="add('appointments',data.appointment,'response',null,nextAppointment)"
+                            ng-disabled="form_appointment_book.$invalid"
+                        >Book Appointment</button>
+                        <button 
+                            class="button button-small button-assertive" 
+                            ng-click="clearAppointment()"
+                        >Go Back</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        </center>
+    </div>
+
+    <!--<json-formatter json="fetched.vw_entities" open="2"></json-formatter>-->
 
     <br>
     <br>
     <br>
 
-
-    <ul>
-       <li>Pick main/sub Type</li><br>
-       <li>Allow to pick relevant practitioners</li><br>
-       <li>Write reason for appointment</li><br>
-       <li>Allow user to leave their contact info {email,telephone,name}</li><br>
-       <li>Send Appointment SMS to both parties</li><br>
-       <li>Allow for the specific doctor to review the appointment </li><br>
-    </ul>
 </ion-content>

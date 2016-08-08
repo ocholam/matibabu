@@ -163,7 +163,11 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
                            $scope.fetch(table,{specifics: data.specifics}); 
                            $scope.data[data.toString().replace(/vw_/ig,'')] = {};
                            if(typeof(cb)==="function"){
-                               cb(r);
+                               cb(data,r);
+                           }else{
+                               console.log('\n\n An invalid callback function was passed.')
+                               console.dir( typeof(cb) );
+                               console.log('\n\n')
                            }
                        }else{
                             //POSTGRESQL MATCHING

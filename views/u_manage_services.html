@@ -1,0 +1,245 @@
+<framify menu="false" path="u_manage_services" url="/u_manage_services" title="Manage Products/Services" parent="false" icon="local_hospital" controller="appController" ></framify>
+<ion-content scrollbar-x="false" scrollbar-y="false" style="padding-bottom:20px;">
+<div class="col-lg-12" id="response" ng-init="fetch([['services']])"></div>
+
+<!--<div  class="" ng-init="authorize();" ></div>-->
+<!--ng-if="frame.isAdmin()"-->
+ <div class="" ng-controller="hospitalCtrl" >
+     <div class="" ng-init="fetch('vw_types');frame.currTab='add';sort('title');">
+         
+         <div class="col-lg-12">
+           
+                <ul class="nav nav-pills col-lg-12">
+                    <li ng-class="{active: frame.currTab == 'add' }"><a ng-click="frame.currTab='add'">Add Product/Service</a></li>
+                    <li ng-class="{active: frame.currTab == 'edit' }"><a ng-click="frame.currTab='edit'">Edit Product/Service</a></li>
+                    <li ng-class="{active: frame.currTab == 'delete' }"><a ng-click="frame.currTab='delete'">Disable Product/Service</a></li>
+                </ul>
+            
+                <div class="tab-content" style="padding-top:1em;">
+                    <div ng-switch="frame.currTab">
+                        
+                        <!--ADD-->
+                        <div ng-switch-when="add">
+                           
+                            
+                            <form name="add_service_form" class="col-lg-10" style="" novalidate>
+                                <!--ng-if="!frame.isRoot()"-->
+                                 <!--<div  class="alert alert-danger"><button class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button><center style="font-weight:bold;">Your access level does not permit you to add main categories.</center></div>-->
+                                
+                                <!-- Title -->
+                                <div class="form-group">
+                                    <label>Title<sup style="color:red">*</sup></label>
+                                    <input type="text" name="title" class="form-control" 
+                                        ng-model="data.services.title"
+                                        ng-minlength="3"
+                                        ng-maxlength="100"
+                                        required>
+                                    <div class="help-block" ng-messages="add_service_form.title.$error" ng-if="add_service_form.title.$touched">
+                                        <p ng-message="minlength">Please Enter a longer Title.</p>
+                                        <p ng-message="maxlength">The title you entered is too long.</p>
+                                        <p ng-message="required">A title is required.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Description -->
+                                <div class="form-group">
+                                    <label >Description<sup style="color:red">*</sup></label>
+                                    <textarea 
+                                        name="description"
+                                        class="form-control"
+                                        ng-minlength="5"
+                                        placeholder="Your message to the doctor" 
+                                        ng-model="data.services.description"
+                                        required>
+                                    </textarea>
+                                    <div class="help-block" ng-messages="add_service_form.description.$error" ng-if="form_appointment_book.description.$touched">
+                                        <p ng-message="required">Please enter a description message.</p>
+                                        <p ng-message="minlength">Please type a longer description.</p>
+                                    </div>
+                                </div>
+
+
+                                <!-- type (product/service) -->
+                                <div class="form-group">
+                                    <label >Type<sup style="color:red">*</sup></label>
+                                        <select 
+                                        name="type"
+                                        class="form-control"  
+                                        ng-model="data.services.type" 
+                                        required>   
+                                        <option value="s" ng-selected="true">Service </option>  
+                                        <option value="p">Product </option>                                  
+                                    </select>
+                                    <div class="help-block" ng-messages="add_service_form.type.$error" ng-if="add_service_form.type.$touched">
+                                        <p ng-message="required">Please pick a type.</p>
+                                    </div>
+                                </div>
+
+                                <!--<json-formatter open="1" json="data.services"></json-formatter>-->
+                                <span hidden ng-if="!add_service_form.$invalid">{{data.services=sudo(data.services,storage.user)}}</span>
+                                <!-- Submit Button -->
+                                <div class="form-group">
+                                    <!--!frame.isRoot() ||-->
+                                    <button 
+                                    ng-disabled=" add_service_form.$invalid" 
+                                    ng-click="add('services',data.services,'response')" 
+                                    class=" button button-positive"
+                                    >Add Product/Service</button>
+                                </div>
+                                
+                            </form>
+    
+                            <br><br><br>
+                        </div>
+                        
+                        <!-- EDIT -->
+                        <div ng-switch-when="edit" ng-if="frame.currTab=='edit'">
+                            <!--<json-formatter json="fetched.types" open="2"></json-formatter>-->
+                            
+                             <label class="item item-input pull-left col-lg-5">
+                                <i class="icon ion-search placeholder-icon"></i>
+                                <input type="text" class="" ng-model="search" value="" placeholder="Search"> 
+                            </label>
+                            <table id="table-id"  align="center"  class="table table-striped  responsive-table"  name="content">
+                                <thead>
+                                <tr  style="font-weight:bold; text-transform:uppercase;">                           
+                                    <th ng-click="sort('type_id')">id
+                                        <span class="icon " ng-show="sortKey=='type_id'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                    </th>
+                                    <th ng-click="sort('title')">Title
+                                        <span class="icon " ng-show="sortKey=='title'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                    </th>
+                                    <th ng-click="sort('description')">Description
+                                        <span class="icon " ng-show="sortKey=='description'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                    </th>
+                                    <th ng-click="sort('type')">Type
+                                        <span class="icon " ng-show="sortKey=='type'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                    </th>                                    
+                                    <th class="noprint" style="margin:0 auto;text-align:center;"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <form  name="service_edit" novalidate >
+                                <tr dir-paginate="service in fetched.services |orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
+                                   
+                                        <th scope="row" data-label="ID">{{service.service_id}}</th>
+                                        <td data-label="Title" class="form-group">
+                                            <input type="text" name="title" class="form-control" value="{{service.title}}"
+                                            ng-model="service.title"
+                                            ng-minlength="3"
+                                            ng-maxlength="100"
+                                            required>
+                                        </td>
+
+                                        <td data-label="Description" class="form-group">
+                                            <textarea 
+                                                name="description"
+                                                class="form-control"
+                                                ng-minlength="5"
+                                                placeholder="Your message to the doctor" 
+                                                ng-model="service.description"
+                                                required>
+                                            </textarea>
+                                        </td>
+
+                                        <td data-label="Type" class="form-group">
+                                            <select 
+                                                name="type"
+                                                class="form-control"  
+                                                ng-model="service.type" 
+                                                required>   
+                                                <option value="s"  ng-selected="service.type=='s'">Service </option>  
+                                                <option value="p"  ng-selected="service.type=='p'">Product </option>                                  
+                                            </select>
+                                        </td>
+                                        
+                                        <td data-label="" class="noprint" style="margin:0 auto;text-align:center;"> {{data.temp}}
+                                           <!--ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" -->
+                                            <button                                                 
+                                                style="border-radius:50%;" 
+                                                ng-disabled="service_edit.$invalid" 
+                                                class="btn btn-raised btn-md icon btn-raised ion-checkmark-round btn-success" 
+                                                style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
+                                                ng-click="update('services',{ title: service.title, description: service.description, type: service.type, extras: ' service_id=\'{{service.service_id}}\'', token: { user: 'userAdmin', key: '153797e5fc6433812172aa8d47ec69e1', specifics: storage.user  } },'response')" 
+                                                ></button>
+                                        </td>
+                                    
+                                </tr>
+                                </form>
+                                </tbody>
+                            </table>
+                            <dir-pagination-controls
+                                max-size="5"
+                                direction-links="true"
+                                boundary-links="true" >
+                            </dir-pagination-controls>
+                            
+                            
+                            
+                            <br><br><br>
+                        </div>
+                        
+                        <!--DELETE-->
+                        <div ng-switch-when="delete" ng-if="frame.currTab=='delete'" >
+                           <label class="item item-input pull-left col-lg-5">
+                                <i class="icon ion-search placeholder-icon"></i>
+                                <input type="text" class="" ng-model="search" value="" placeholder="Search"> 
+                            </label>
+                            <table id="table-id"  align="center"  class="table table-striped  responsive-table"  name="content">
+                                <thead>
+                                <tr  style="font-weight:bold; text-transform:uppercase;">                           
+                                    <th ng-click="sort('type_id')">id
+                                        <span class="icon " ng-show="sortKey=='type_id'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                    </th>
+                                    <th ng-click="sort('title')">Title
+                                        <span class="icon " ng-show="sortKey=='title'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                    </th>
+                                    <th ng-click="sort('description')">Description
+                                        <span class="icon " ng-show="sortKey=='description'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                    </th>
+                                    <th ng-click="sort('type')">Type
+                                        <span class="icon " ng-show="sortKey=='type'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+                                    </th>                                    
+                                    <th class="noprint" style="margin:0 auto;text-align:center;"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr dir-paginate="service in fetched.services |orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
+                                   
+                                        <th scope="row" data-label="ID">{{service.service_id}}</th>
+                                        <td data-label="Title" class="form-group">{{service.title}}</td>
+                                        <td data-label="Description" class="form-group">{{service.description}}</td>
+                                        <td data-label="Type" class="form-group">{{service.type}}</td>
+                                        
+                                        <td data-label="" class="noprint" style="margin:0 auto;text-align:center;">
+                                            <!--ng-disabled="(admin.admin_name==storage.admin.admin_name || (admin.access==0 && storage.admin.access!=0)) || admin.admin_name=='userAdmin'" -->
+                                            <button 
+                                            ng-class="{'ion-eye-disabled btn-danger':!service.active,'ion-eye btn-success':service.active}"                                        
+                                            class="btn btn-raised btn-md icon " 
+                                            style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
+                                            ng-click="update('services',{ active: !service.active, extras: ' service_id=\'{{service.service_id}}\'', token: { user: 'userAdmin', key: '153797e5fc6433812172aa8d47ec69e1', specifics: storage.user  } },'response')" ></button>
+                                        </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <dir-pagination-controls
+                                max-size="5"
+                                direction-links="true"
+                                boundary-links="true" >
+                            </dir-pagination-controls>
+                            
+                            <br><br><br>
+                        </div>
+                        
+                        
+                    </div>                    
+                </div>
+            </div>
+         
+         
+     </div>
+ </div>
+ 
+ <br><br><br>
+
+</ion-content>
