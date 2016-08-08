@@ -20,7 +20,7 @@ INSERT INTO admins (admin_name,password,telephone,email,name,access) VALUES ( 'u
 -- USERS --
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
-    username        varchar(15) PRIMARY KEY NOT NULL,
+    username        varchar(50) PRIMARY KEY NOT NULL,
     password        text NOT NULL,
     name            varchar(30) NOT NULL,
     email           varchar(30) NOT NULL UNIQUE,
@@ -179,17 +179,17 @@ CREATE OR REPLACE FUNCTION audit_admins()
 $BODY$
 BEGIN 
     IF (TG_OP = 'DELETE') THEN
-        INSERT INTO aud_suppliers (admin_name,password,telephone,email,added,name,access,active,func) 
+        INSERT INTO aud_admins (admin_name,password,telephone,email,added,name,access,active,func) 
         SELECT OLD.admin_name,OLD.password,OLD.telephone,OLD.email,OLD.added,OLD.name,OLD.access,OLD.active,TG_OP;
         RETURN OLD;
     END IF;
     IF (TG_OP = 'INSERT') THEN
-        INSERT INTO aud_suppliers (admin_name,password,telephone,email,added,name,access,active,func) 
+        INSERT INTO aud_admins (admin_name,password,telephone,email,added,name,access,active,func) 
         SELECT NEW.admin_name,NEW.password,NEW.telephone,NEW.email,NEW.added,NEW.name,NEW.access,NEW.active,TG_OP;
         RETURN NEW;
     END IF;
     IF (TG_OP = 'UPDATE') THEN
-        INSERT INTO aud_suppliers (admin_name,password,telephone,email,added,name,access,active,func) 
+        INSERT INTO aud_admins (admin_name,password,telephone,email,added,name,access,active,func) 
         SELECT OLD.admin_name,OLD.password,OLD.telephone,OLD.email,OLD.added,OLD.name,OLD.access,OLD.active,TG_OP;
         RETURN NEW;
     END IF;
@@ -204,17 +204,41 @@ CREATE OR REPLACE FUNCTION audit_users()
 $BODY$
 BEGIN 
     IF (TG_OP = 'DELETE') THEN
-        INSERT INTO aud_suppliers (username,password,name,email,telephone,account_number,active,func) 
+        INSERT INTO aud_users (username,password,name,email,telephone,account_number,active,func) 
         SELECT OLD.username,OLD.password,OLD.name,OLD.email,OLD.telephone,OLD.account_number,OLD.active,TG_OP;
         RETURN OLD;
     END IF;
     IF (TG_OP = 'INSERT') THEN
-        -- INSERT INTO aud_suppliers (username,password,name,email,telephone,account_number,active,func) 
+        -- INSERT INTO aud_users (username,password,name,email,telephone,account_number,active,func) 
         -- SELECT NEW.username,NEW.password,NEW.name,NEW.email,NEW.telephone,NEW.account_number,NEW.active,TG_OP;
         RETURN NEW;
     END IF;
     IF (TG_OP = 'UPDATE') THEN
-        INSERT INTO aud_suppliers (username,password,name,email,telephone,account_number,active,func) 
+        INSERT INTO aud_users (username,password,name,email,telephone,account_number,active,func) 
+        SELECT OLD.username,OLD.password,OLD.name,OLD.email,OLD.telephone,OLD.account_number,OLD.active,TG_OP;
+        RETURN NEW;
+    END IF;
+END;
+$BODY$
+LANGUAGE plpgsql VOLATILE;
+
+--- ENTITIES
+CREATE OR REPLACE FUNCTION audit_users()
+    RETURNS trigger AS
+$BODY$
+BEGIN 
+    IF (TG_OP = 'DELETE') THEN
+        INSERT INTO aud_users (username,password,name,email,telephone,account_number,active,func) 
+        SELECT OLD.username,OLD.password,OLD.name,OLD.email,OLD.telephone,OLD.account_number,OLD.active,TG_OP;
+        RETURN OLD;
+    END IF;
+    IF (TG_OP = 'INSERT') THEN
+        -- INSERT INTO aud_users (username,password,name,email,telephone,account_number,active,func) 
+        -- SELECT NEW.username,NEW.password,NEW.name,NEW.email,NEW.telephone,NEW.account_number,NEW.active,TG_OP;
+        RETURN NEW;
+    END IF;
+    IF (TG_OP = 'UPDATE') THEN
+        INSERT INTO aud_users (username,password,name,email,telephone,account_number,active,func) 
         SELECT OLD.username,OLD.password,OLD.name,OLD.email,OLD.telephone,OLD.account_number,OLD.active,TG_OP;
         RETURN NEW;
     END IF;
