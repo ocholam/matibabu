@@ -43,6 +43,12 @@ header("Content-Type:application/json");
 				exit;
 			break;
 			
+			//# SIMPLE COUNTER FUNCTION 
+			case 'count':
+				echo $proc->countFunc( $_REQUEST );
+				exit;
+			break;
+
 			//# SIMPLE GETTER HANDLER
 			case 'get':
 				echo $proc->getFunc( $_REQUEST );

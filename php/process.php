@@ -53,6 +53,42 @@ header("Content-Type:application/json");
 			return $this->c->aQuery( $query ,true, "Done", "Failed");
 			
 		}
+
+		//@ CUSTOM COUNTER
+		public function countFunc( $countData ){
+
+			$table  	= $countData["table"];
+			$extras 	= @$countData["extras"];
+			
+			unset( $countData["table"] );
+			unset( $countData["extras"] );
+			unset( $countData["specifics"] );
+
+			$keys   = [];
+			$values = [];
+			
+			while( $field_name = current($countData) ) {   
+				//echo key($addData).' '.$field_name.'<br>';
+				array_push( $keys, key($countData) );
+				array_push( $values, $field_name );
+				next($countData);
+			}
+			
+			$conditions = [];
+			
+			forEach( $keys as $pos => $field ){
+				
+				array_push($conditions, $field."='".$values[$pos]."'");
+				
+			}
+			$conditions = ( sizeof($conditions) > 0 )? ( " WHERE ".implode(" AND ", $conditions)  ) : "";
+
+			$query = "SELECT count(*) FROM ".$table." ".$conditions."".@$extras;
+			
+			//return $this->c->wrapResponse(200,$query,"");
+			return $this->c->printQueryResults( $query, true, true );
+
+		}
 		
 		//@ SPECIFIC GETTER
 		public function getFunc( $getData ){
@@ -225,7 +261,7 @@ header("Content-Type:application/json");
 			
 		}
 		
-
+		
 		//@ CUSTOM QUERYSTRING;
 		public function customFunc( $customData  ){
 			$ret = $this->c->printQueryResults( $customData['query'] ,true,true);
