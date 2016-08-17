@@ -86,7 +86,9 @@ header("Content-Type:application/json");
 			$query = "SELECT count(*) FROM ".$table." ".$conditions."".@$extras;
 			
 			//return $this->c->wrapResponse(200,$query,"");
-			return $this->c->printQueryResults( $query, true, true );
+			$result = $this->c->printQueryResults($query,true,false);
+
+			return $this->c->wrapResponse(200, $result[0], true );
 
 		}
 		
