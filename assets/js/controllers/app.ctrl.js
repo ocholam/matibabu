@@ -135,6 +135,7 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
     $scope.add      = {};
     $scope.fetch    = {};
     $scope.fetched  = {};
+    $scope.counted  = {};
     $scope.data     = {};
      
     $scope.data.login   = {};
@@ -533,7 +534,7 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
             r = $scope.app.json(r);
 
             if(r.response == 200){
-                
+
                 if( mess ) {
                     $scope.app.UID(UID,(mess), "success");
                 }

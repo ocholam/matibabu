@@ -49,7 +49,8 @@
     <!-- CHECK IF THE USER HAS ANY REGISTERED ENTITIES -->
     <div class="" ng-if="true">
         <span hidden>{{data.checkEntity=setCreds()}}</span>
-        <div class="" ng-init="custom()"></div>
+        <div class="" ng-init="custom('users',data.checkEntity)"></div>
+        
     </div>
 
  	<div class="container">
