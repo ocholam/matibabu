@@ -57,6 +57,7 @@ INSERT INTO sub_types(title,parent) VALUES ('Hospital',1),('General Practitioner
 DROP TABLE IF EXISTS entities CASCADE;
 CREATE TABLE IF NOT EXISTS entities (
     entity_id   bigserial PRIMARY KEY,
+    owner       varchar(50) NOT NULL CONSTRAINT valid_user REFERENCES users(username),
     title       varchar(100) NOT NULL,
     type        bigint NOT NULL CONSTRAINT valid_type REFERENCES sub_types(sub_type_id),
     location    varchar(255),
@@ -72,11 +73,11 @@ CREATE TABLE IF NOT EXISTS entities (
     active      boolean DEFAULT true
 );
 INSERT INTO entities 
- (title,type,location,telephone,office,landline,address,fax,email,web,others)
+ (owner,title,type,location,telephone,office,landline,address,fax,email,web,others)
  VALUES
- ('Ian Innocent',3,'Chebarbar','0725678447','072345678','','Text Lane Off Limuru Road','','ianmin2@ianmin2.cf','http://ianmin2.cf',''),
- ('Jeremic Hospital',1,'Baraton, Kapsabet','0700100100','','','1 Jeremic Close University of Eastern Africa Baraton','','jeremic@ueab.ac.ke','http://jeremic.ueab.ac.ke',''),
- ('Chemundu Hospital',1,'Chemundu, Kapsabet','0700100101','','','1 Chemundu Drive; Chemundu','','chemundu@ueab.ac.ke','http://ueab.ac.ke/chemundu','');
+ ('ianmin2','Ian Innocent',3,'Chebarbar','0725678447','072345678','','Text Lane Off Limuru Road','','ianmin2@ianmin2.cf','http://ianmin2.cf',''),
+ ('ianmin2','Jeremic Hospital',1,'Baraton, Kapsabet','0700100100','','','1 Jeremic Close University of Eastern Africa Baraton','','jeremic@ueab.ac.ke','http://jeremic.ueab.ac.ke',''),
+ ('ianmin2','Chemundu Hospital',1,'Chemundu, Kapsabet','0700100101','','','1 Chemundu Drive; Chemundu','','chemundu@ueab.ac.ke','http://ueab.ac.ke/chemundu','');
 
 ---  ADMISSION_RIGHTS
 DROP TABLE IF EXISTS admission_rights CASCADE;
@@ -311,14 +312,16 @@ FROM sub_types
 DROP VIEW IF EXISTS vw_entities CASCADE;
 CREATE OR REPLACE VIEW vw_entities AS 
 SELECT 
-entity_id, entities.title as title,type,location,telephone,office,landline,address,fax,email,web,country,others,entities.active,
+entity_id, entities.title as title,entities.type,owner,users.username as owner_name,entities.location,entities.telephone,entities.office,entities.landline,entities.address,entities.fax,entities.email,entities.web,entities.country,entities.others,entities.active,
 sub_types.title as type_title,
 type_id as super_type, types.title as super_type_title
 FROM entities
     LEFT JOIN sub_types
         ON entities.type     = sub_types.sub_type_id
     JOIN types  
-        ON sub_types.parent  = types.type_id; 
+        ON sub_types.parent  = types.type_id
+    JOIN users  
+        ON entities.owner    = users.username;
 
 -- VW_ADMISSION-RIGHTS -- 
 DROP VIEW IF EXISTS vw_admission_rights CASCADE;

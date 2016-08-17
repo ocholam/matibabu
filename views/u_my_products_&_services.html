@@ -6,7 +6,7 @@
 <!--ng-if="frame.isAdmin()"-->
  <div class="" ng-controller="hospitalCtrl" >
      <div class="" ng-init="fetch('vw_types');frame.currTab='add';sort('title');">
-         <div ng-init="fetch([['']])"></div>
+         <div ng-init="fetch([['entities',{ specifics: 'entity_id' }]])"></div>
          <div class="col-lg-12">
                 
                 <ul class="nav nav-pills col-lg-12">

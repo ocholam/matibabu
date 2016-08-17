@@ -1,9 +1,9 @@
 {	
-	"title" : "e-health",
-	"alias": "e-health",
+	"title" : "infor-med",
+	"alias": "infor-med",
     "navbar": {
             "title" : "Healthcare provision",
-	    "alias": "Bixbyte Matibabu"
+	    "alias": "info-med healthcare provision"
     },
     "version" : "0.0.1"
 }
