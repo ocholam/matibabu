@@ -88,7 +88,7 @@ header("Content-Type:application/json");
 			//return $this->c->wrapResponse(200,$query,"");
 			$result = $this->c->printQueryResults($query,true,false);
 
-			return $this->c->wrapResponse(200, $result[0], true );
+			return $this->c->wrapResponse(200, $result[0]["count"], true );
 
 		}
 		

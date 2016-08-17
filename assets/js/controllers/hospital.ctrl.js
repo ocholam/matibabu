@@ -20,6 +20,8 @@ app.controller('hospitalCtrl',['$scope',function($scope){
        
     }
 
+   
+
     //@ LIST A REPORT FOR THE NEXT APPOINTMENT
     $scope.nextAppointment = (entity) => {
         const sms = [
