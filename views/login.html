@@ -84,7 +84,7 @@
         </div>
 
     <!-- HANDLE NEW USER ENTITY REGISTRATION -->
-    <div class="" ng-if="Object.keys(counted).length >= 1&&!counted.entities">
+    <div class="" ng-if="!counted.entities">
         <div ng-init="fetch([['vw_sub_types']])"></div>
         <center><h4>Welcome to the <b>{{nav.alias}}</b> platform. <br><u>Please register an entity that you manage to continue.</u></h4></center>
         <form name="add_entity_form" class="col-lg-10" style="" novalidate ng-controller="hospitalCtrl">

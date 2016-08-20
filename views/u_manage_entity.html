@@ -269,6 +269,7 @@
                             
                             <div ng-if="editing" ng-controller="hospitalCtrl">
                                 <!--<json-formatter json="current" open="1"></json-formatter>-->
+                               <div class="" ng-init="sanitize(current,'owner_name,type_title,super_type,super_type_title')"></div>
                                 <div ng-init="dPush(current,'extras','entity_id=\''+ current.entity_id+'\'')"></div>
                                 <form name="edit_entity_form" class="col-lg-10" style="" novalidate>
                                  <!--<div ng-if="!frame.isRoot()" class="alert alert-danger"><button class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button><center style="font-weight:bold;">Your access level does not permit you to add entities.</center></div>-->

@@ -573,6 +573,17 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
     }
  
 
+    /**
+     *  DELETE UNWANTED FIELDS
+     */
+    $scope.sanitize = (data,keys) => {
+        if(keys){
+            keys.split(",").forEach((key)=>{
+                delete data[key];
+            }); 
+        }
+    };
+
    /**
     * PUSH DATA TO OBJECT
    */
