@@ -62,6 +62,8 @@ app.controller('hospitalCtrl',['$scope',function($scope){
         //$scope.$apply();
     }
 
+
+
     //@ SET DEFAULT APPLICATION ACCESS CREDENTIALS 
     $scope.sudo = (obj,usercreds) => {
 

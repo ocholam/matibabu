@@ -1,9 +1,11 @@
-app.controller("appController", ['app','$scope','$location','$ionicModal','$rootScope','$ionicSideMenuDelegate','$ionicSlideBoxDelegate',function( app, $scope, $location, $ionicModal, $rootScope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate ){
+app.controller("appController", ['app','$scope','$location','$ionicModal','$rootScope','$ionicSideMenuDelegate','$ionicSlideBoxDelegate',"$stateParams",function( app, $scope, $location, $ionicModal, $rootScope, $ionicSideMenuDelegate, $ionicSlideBoxDelegate, $stateParams ){
     
     //!APPLICATION GLOBAL SCOPE COMPONENTS
     $scope.current  = {};
     $scope.ui       = {};
     
+    $scope.urlParams = $stateParams;
+
     $rootScope.nav = [];
     //$rootScope.nav.search; 
     $rootScope.links = [];
@@ -597,8 +599,71 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
    $scope.currmoin =  $scope.app.monthNum();
    $scope.setMoin  = (moin)=>{$scope.currmoin=moin;} 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+//@ INJECT A STANDARD WHERE "Extras" OBJECT
+$scope.addExtras = ( targetObj, extrasObj, subStrings, removeKeys) => {
 
+    targetObj  = targetObj || {};
+    extrasObj  = extrasObj || {};
+    subStrings = subStrings || '';
+    removeKeys = removeKeys || '';
+
+    var extras = ' WHERE';
+
+    var k = [],v = [];
+
+    //@ CAPTURE THE REMOVE KEYS
+    removeKeys = removeKeys.split(',').filter(e=>e);
+
+
+    removeKeys.forEach( e => {
+        extrasObj[e] = null;
+        delete extrasObj[e];
+    });
+
+    //@ CAPTURE REPLACE STRINGS
+    subStrings.split(',')
+    .forEach( (e,i) => {
+        let x = e.split(':');
+        k[i] = (x[0]);
+        v[i] = (x[1]);				
+    })
+
+    //@ GET THE DEFINED KEYS
+    var keys = Object.keys( extrasObj);
+
+    //@ REPLACE THE DEFINED WITH THE DESIRED REPLACE KEYS
+    k.forEach( (e,i) => {
+
+        let pos = keys.indexOf(e);
+
+        if( pos != -1 ){
+            
+            extrasObj[ v[i] ]  = extrasObj[e];
+            delete extrasObj[e];
+
+        }
+        
+    });
+
+    
+    k = Object.keys(extrasObj);
+    v = [];
+
+    k.forEach( (e,i) => {
+        
+        extras += ' ' + e + "='"+extrasObj[e]+"' AND" 
+
+    });
+
+    
+    targetObj.extras =  extras.replace(/AND+$/,'') ;
+
+    return targetObj;
+
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// APPLICATION SPECIFIC ADDITIONS
 
  //@ Count my entities
     $scope.howMany = () => {

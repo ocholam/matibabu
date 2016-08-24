@@ -4,6 +4,64 @@
 
 <json-formatter json="fetched.appointments" open="2"></json-formatter>
 
+<table id="table-id"  align="center"  class="table table-striped  responsive-table"  name="content">
+    <thead>
+    <tr  style="font-weight:bold; text-transform:uppercase;">                           
+        <th ng-click="sort('type_id')">id
+            <span class="icon " ng-show="sortKey=='type_id'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+        </th>
+        <th ng-click="sort('name')">Name
+            <span class="icon " ng-show="sortKey=='name'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+        </th>
+        <th ng-click="sort('message')">Message
+            <span class="icon " ng-show="sortKey=='message'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+        </th>
+        <th ng-click="sort('telephone')">Contact
+            <span class="icon " ng-show="sortKey=='telephone'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
+        </th>                                    
+        <th class="noprint" style="margin:0 auto;text-align:center;"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <form  name="appointment_edit" novalidate >
+    <tr dir-paginate="appointment in fetched.appointments|orderBy:sortKey:reverse|filter:search|itemsPerPage:5" >
+        
+            <th scope="row" data-label="ID">{{appointment.appointment_id}}</th>
+            <td data-label="Name" class="form-group">
+                {{appointment.name}}
+            </td>
+
+            <td data-label="Description" class="form-group">
+               {{appointment.message}}
+            </td>
+
+            <td data-label="Contact" class="form-group">
+                {{appointment.telephone}} , {{appointment.email}}
+            </td>
+            
+            <td data-label="" class="noprint" style="margin:0 auto;text-align:center;"> {{data.temp}}
+                <!--ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" -->
+                <button                                                 
+                    style="border-radius:50%;" 
+                    ng-disabled="appointment_edit.$invalid" 
+                    class="btn btn-raised btn-md icon btn-raised ion-checkmark-round btn-success" 
+                    style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
+                    ng-click="update('appointments',{ title: appointment.title, description: appointment.description, type: appointment.type, extras: ' appointment_id=\'{{appointment.appointment_id}}\'', token: { user: 'userAdmin', key: '153797e5fc6433812172aa8d47ec69e1', specifics: storage.user  } },'response')" 
+                    ></button>
+            </td>
+        
+    </tr>
+    </form>
+    </tbody>
+</table>
+    <dir-pagination-controls
+    max-size="5"
+    direction-links="true"
+    boundary-links="true" >
+    </dir-pagination-controls>
+                            
+
+
 <br>
 <br>
 <br>
