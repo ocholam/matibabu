@@ -192,7 +192,7 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
                 };
     
      //! BASIC UPDATING
-     $scope.update = (table,data,UID,cryptFields)=>{
+     $scope.update = (table,data,UID,cryptFields,cb,cbData)=>{
                     data = (data)?$scope.app.json(data):{};                    
                     data.command   = "update";
                     data.table     = (table != undefined)?table.toString().replace(/vw_/ig,''):"";
@@ -210,6 +210,10 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
                            $scope.app.UID(UID,`<center> "Successfully Updated."</center>`, "success");                          
                            $scope.fetch(table,{specifics: data.specifics}); 
                            $scope.data[table.toString().replace(/vw_/ig,'')] = {};
+                           if( typeof(cb) == 'function' ){
+                              cb( (cbData || data.data.message) );                               
+                           }
+
                        }else{
                            //POSTGRESQL MATCHING
                             if(Array.isArray(r.data.message)){
@@ -602,63 +606,65 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
 //@ INJECT A STANDARD WHERE "Extras" OBJECT
 $scope.addExtras = ( targetObj, extrasObj, subStrings, removeKeys) => {
 
-    targetObj  = targetObj || {};
-    extrasObj  = extrasObj || {};
-    subStrings = subStrings || '';
-    removeKeys = removeKeys || '';
+        targetObj  = targetObj || {};
+        extrasObj  = extrasObj || {};
+            subStrings = subStrings || '';
+        removeKeys = removeKeys || '';
 
-    var extras = ' WHERE';
+        var extras = '';
 
-    var k = [],v = [];
+        var k = [],v = [];
 
-    //@ CAPTURE THE REMOVE KEYS
-    removeKeys = removeKeys.split(',').filter(e=>e);
+        //@ CAPTURE THE REMOVE KEYS
+        removeKeys = removeKeys.split(',').filter(e=>e);
 
 
-    removeKeys.forEach( e => {
-        extrasObj[e] = null;
-        delete extrasObj[e];
-    });
-
-    //@ CAPTURE REPLACE STRINGS
-    subStrings.split(',')
-    .forEach( (e,i) => {
-        let x = e.split(':');
-        k[i] = (x[0]);
-        v[i] = (x[1]);				
-    })
-
-    //@ GET THE DEFINED KEYS
-    var keys = Object.keys( extrasObj);
-
-    //@ REPLACE THE DEFINED WITH THE DESIRED REPLACE KEYS
-    k.forEach( (e,i) => {
-
-        let pos = keys.indexOf(e);
-
-        if( pos != -1 ){
-            
-            extrasObj[ v[i] ]  = extrasObj[e];
+        removeKeys.forEach( e => {
+            extrasObj[e] = null;
             delete extrasObj[e];
+        });
 
-        }
+        //@ CAPTURE REPLACE STRINGS
+        subStrings
+            .split(',')
+        .forEach( (e,i) => {
+            let x = e.split(':');
+            k[i] = (x[0]);
+            v[i] = (x[1]);				
+        })
+
+        //@ GET THE DEFINED KEYS
+        var keys = Object.keys(extrasObj);
+
+        //@ REPLACE THE DEFINED WITH THE DESIRED REPLACE KEYS
+        k.forEach( (e,i) => {
+
+            if( keys.indexOf(e) != -1 ){
+                
+                extrasObj[ v[i] ]  = extrasObj[e];
+                extrasObj[e] = null;
+                delete extrasObj[e];
+
+            }
+            
+        });
+
         
-    });
+        k = Object.keys(extrasObj);
+        v = null;
 
-    
-    k = Object.keys(extrasObj);
-    v = [];
+        k.forEach( (e,i) => {
+            
+            extras += ' ' + e + "='"+extrasObj[e]+"' AND";
 
-    k.forEach( (e,i) => {
+        });
+
+        k = null;
+
         
-        extras += ' ' + e + "='"+extrasObj[e]+"' AND" 
+        targetObj.extras =  extras.replace(/AND+$/,'');
 
-    });
-
-    
-    targetObj.extras =  extras.replace(/AND+$/,'') ;
-
-    return targetObj;
+        return targetObj;
 
 };
 

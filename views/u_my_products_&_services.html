@@ -1,14 +1,14 @@
 <framify menu="false" path="u_my_products_&_services" url="/u_my_products_&_services" title="My Products & Services" parent="false" icon="local_hospital" controller="appController" ></framify>
 <ion-content scrollbar-x="false" scrollbar-y="false" style="padding-bottom:20px;">
-<div class="col-lg-12" id="response" ng-init="fetch([['services']])"></div>
+<div class="col-lg-12" id="response" ></div>
 
 <!--<div  class="" ng-init="authorize();" ></div>-->
 <!--ng-if="frame.isAdmin()"-->
  <div class="" ng-controller="hospitalCtrl" >
-     <div class="" ng-init="fetch('vw_types');frame.currTab='add';sort('title');">
-         <div ng-init="fetch([['entities',{ specifics: 'entity_id' }]])"></div>
+     <div class="" >
+         <div ng-init="fetch([['vw_services'],['vw_types'],['entities',{ specifics: 'entity_id' }],['vw_service_offerings', { owner: storage.user.username }]]);frame.currTab='add';sort('title');"></div>
          <div class="col-lg-12">
-                
+                 <json-formatter open="1" json="data.my_services"></json-formatter>
                 <ul class="nav nav-pills col-lg-12">
                     <li ng-class="{active: frame.currTab == 'add' }"><a ng-click="frame.currTab='add'">Add Product/Service</a></li>
                     <li ng-class="{active: frame.currTab == 'edit' }"><a ng-click="frame.currTab='edit'">Edit Product/Service</a></li>
@@ -22,22 +22,24 @@
                         <div ng-switch-when="add">
                            
                             
-                            <form name="add_service_form" class="col-lg-10" style="" novalidate>
+                            <form name="add_my_service_form" class="col-lg-10" style="" novalidate>
                                 <!--ng-if="!frame.isRoot()"-->
                                  <!--<div  class="alert alert-danger"><button class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button><center style="font-weight:bold;">Your access level does not permit you to add main categories.</center></div>-->
                                 
-                                <!-- Title -->
+                                <!-- Service -->
                                 <div class="form-group">
-                                    <label>Title<sup style="color:red">*</sup></label>
-                                    <input type="text" name="title" class="form-control" 
-                                        ng-model="data.services.title"
-                                        ng-minlength="3"
-                                        ng-maxlength="100"
-                                        required>
-                                    <div class="help-block" ng-messages="add_service_form.title.$error" ng-if="add_service_form.title.$touched">
-                                        <p ng-message="minlength">Please Enter a longer Title.</p>
-                                        <p ng-message="maxlength">The title you entered is too long.</p>
-                                        <p ng-message="required">A title is required.</p>
+                                    <label>Service<sup style="color:red">*</sup></label>
+                                        <select 
+                                        name="parent"
+                                        class="form-control"  
+                                        ng-model="data.my_services.service" 
+                                        ng-options="service.service_id as service.title for service in fetched.vw_services">   
+                                        <option value="" selected>Pick a service </option>                                   
+                                        </select>
+                                    <div class="help-block" ng-messages="add_my_service_form.service.$error" ng-if="add_my_service_form.service.$touched">
+                                        <p ng-message="minlength">Please Enter a longer service.</p>
+                                        <p ng-message="maxlength">The service you entered is too long.</p>
+                                        <p ng-message="required">A service is required.</p>
                                     </div>
                                 </div>
 
@@ -48,50 +50,57 @@
                                         name="description"
                                         class="form-control"
                                         ng-minlength="5"
-                                        placeholder="Your message to the doctor" 
-                                        ng-model="data.services.description"
+                                        placeholder="Product/Service Description" 
+                                        ng-model="data.my_services.description"
                                         required>
                                     </textarea>
-                                    <div class="help-block" ng-messages="add_service_form.description.$error" ng-if="form_appointment_book.description.$touched">
+                                    <div class="help-block" ng-messages="add_my_service_form.description.$error" ng-if="form_appointment_book.description.$touched">
                                         <p ng-message="required">Please enter a description message.</p>
                                         <p ng-message="minlength">Please type a longer description.</p>
                                     </div>
                                 </div>
 
 
-                                <!-- type (product/service) -->
+                                <!-- Purchase cost -->
                                 <div class="form-group">
-                                    <label >Type<sup style="color:red">*</sup></label>
-                                        <select 
-                                        name="type"
-                                        class="form-control"  
-                                        ng-model="data.services.type" 
-                                        required>   
-                                        <option value="s" ng-selected="true">Service </option>  
-                                        <option value="p">Product </option>                                  
-                                    </select>
-                                    <div class="help-block" ng-messages="add_service_form.type.$error" ng-if="add_service_form.type.$touched">
-                                        <p ng-message="required">Please pick a type.</p>
+                                    <label >Purchase cost<sup style="color:red"></sup></label>
+                                       <input type="text" name="purchase" class="form-control" 
+                                        ng-model="data.my_services.purchase"
+                                        ng-minlength="1"> 
+                                    <div class="help-block" ng-messages="add_my_service_form.purchase.$error" ng-if="add_my_service_form.purchase.$touched">
+                                        <p ng-message="minlength">Please enter a valid purchase cost.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Retail cost -->
+                                <div class="form-group">
+                                    <label >Retail Price<sup style="color:red">*</sup></label>
+                                       <input type="text" name="retail" class="form-control" 
+                                        ng-model="data.my_services.retail"
+                                        required> 
+                                    <div class="help-block" ng-messages="add_my_service_form.retail.$error" ng-if="add_my_service_form.retail.$touched">
+                                        <p ng-message="required">Please enter a valid retail cost.</p>
                                     </div>
                                 </div>
 
 
-                                <json-formatter open="1" json="fetched"></json-formatter>
-                                
-                                <span hidden ng-if="!add_service_form.$invalid">{{data.services=sudo(data.services,storage.user)}}</span>
+                                <!--<json-formatter open="1" json="fetched"></json-formatter>-->
+                                <span hidden ng-if="!add_my_service_form.$invalid" ng-controller="hospitalCtrl">{{(data.my_services= sudo( addExtras(data.my_services,'username:owner','password,name,email,telephone,account_number,entity,active'),' ' ) ) }}</span>
+                                <!--<span hidden ng-if="!add_my_service_form.$invalid">{{data.my_services=sudo(data.my_services,storage.user)}}</span>-->
                                 <!-- Submit Button -->
                                 <div class="form-group">
                                     <!--!frame.isRoot() ||-->
                                     <button 
-                                    ng-disabled=" add_service_form.$invalid" 
-                                    ng-click="add('services',data.services,'response')" 
+                                    ng-disabled=" add_my_service_form.$invalid" 
+                                    ng-click="add('vw_service_offerings',data.my_services,'response')" 
                                     class=" button button-positive"
-                                    >Add Product/Service</button>
+                                    >Add Product/Service Offering</button>
                                 </div>
                                 
+                                <br><br><br>
                             </form>
     
-                            <br><br><br>
+                            
                         </div>
                         
                         <!-- EDIT -->

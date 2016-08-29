@@ -31,3 +31,4 @@ tests/**
 
 #! Ignore all webkit builder folders
 **webkit**
+sendgrid.env

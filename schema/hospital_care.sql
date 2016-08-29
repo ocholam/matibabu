@@ -118,8 +118,11 @@ CREATE TABLE IF NOT EXISTS services (
     description         text,
     type                varchar(1) NOT NULL DEFAULT 's',
     active              boolean DEFAULT true,
+    rrp                 integer DEFAULT 0,
     added_on            timestamp DEFAULT CURRENT_TIMESTAMP
 );
+INSERT INTO services ( title,description,type,active,rrp )
+VALUES ( 'Tooth Extraction','Children and adult tooth extraction','s',true,'2500' );
 
 --- SERVICE_OFFERINGS / PRODUCT_OFFERINGS
 DROP TABLE IF EXISTS service_offerings CASCADE;
@@ -133,6 +136,8 @@ CREATE TABLE IF NOT EXISTS service_offerings (
     active                  boolean DEFAULT true,
     added_on                timestamp DEFAULT CURRENT_TIMESTAMP
 );
+INSERT INTO service_offerings (service_offering_id,entity,description,service,purchase,retail)
+VALUES (1,1,'Simple and Painless',1,0,3500);
 
 
 -- --
@@ -336,7 +341,7 @@ FROM admission_rights
 DROP VIEW IF EXISTS vw_services CASCADE;
 CREATE VIEW vw_services AS 
 SELECT 
-service_id,title,description,type,active,added_on 
+service_id,title,description,type,active,rrp,added_on 
 FROM services;
 
 -- VW_SERVICE_OFFERINGS
@@ -344,7 +349,7 @@ DROP VIEW IF EXISTS vw_service_offerings CASCADE;
 CREATE VIEW vw_service_offerings AS 
 SELECT 
 service_offerings.service_offering_id, service_offerings.entity, service_offerings.description, service_offerings.purchase, service_offerings.retail, service_offerings.active, 
-entities.title as entity_title, services.title as title, services.type as type
+entities.title as entity_title, entities.owner as owner, services.title as title, services.type as type, services.rrp as rrp
 FROM service_offerings
     INNER JOIN entities 
         ON service_offerings.entity = entities.entity_id

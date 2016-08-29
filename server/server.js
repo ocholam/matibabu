@@ -11,6 +11,8 @@
 // })();
 
 require("bixbyte-frame");
+var helper = require("sendgrid").mail;
+var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
 //** SETUP THE PHP CGI
 app.use("/php", php.cgi(`${__dirname}/../php`) );
 
@@ -41,6 +43,29 @@ app.route("/config/:fname").all(function(req,res){
 	res.sendFile(req.params.fname, { "root": __dirname + "/../config/"} )
 });
 
+
+// app.route("/testMail")
+// .all((req,res)=>{
+// 	var from_email 	= new helper.Email("bixbyte@bixbyte.io");
+// 	var to_email  	= new helper.Email("ianmin2@live.com");
+// 	var subject 	= " TEST EMAIL RECOVERY EMAIL";
+// 	var content     = new helper.Content("text/plain", "Something got to the recipient.");
+
+// 	var mail = new helper.Mail(from_email, subject, to_email, content);
+
+// 	var request = sg.emptyRequest({
+// 									method: 'POST',
+// 									path: '/v3/mail/send',
+// 									body: mail.toJSON(),
+// 								});
+	
+// 	sg.API(request, function(error, response) {
+// 		console.log(response.statusCode);
+// 		console.log(response.body);
+// 		console.log(response.headers);
+// 	});
+
+// })
 
 //!THE SERVER STARTUP FILE
 server.listen(app.port ,function(err){

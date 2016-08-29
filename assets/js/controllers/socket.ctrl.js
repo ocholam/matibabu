@@ -3,7 +3,7 @@ app.controller('socketCtrl',['$scope',function($scope){
     $scope.server       = {};
     // $scope.server.host  = '41.89.162.252';
     $scope.server.host  = '127.0.0.1';
-    $scope.server.port  = '3000'
+    $scope.server.port  = '1357'
     $scope.socket = io.connect(`http://${$scope.server.host}:${$scope.server.port}`);
 
     $scope.socket.on("connect",()=>{
