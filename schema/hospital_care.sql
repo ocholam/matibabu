@@ -17,22 +17,6 @@ CREATE TABLE admins (
 INSERT INTO admins (admin_name,password,telephone,email,name,access) VALUES ( 'root',MD5('ianmin2'),'0725678447','ianmin2@live.com','Main Administrator',0);
 INSERT INTO admins (admin_name,password,telephone,email,name,access) VALUES ( 'userAdmin',MD5('ianmin2'),'0700000000','useradmin@bixbyte.io','User Affairs Administrator',0);
 
--- USERS --
-DROP TABLE IF EXISTS users CASCADE;
-CREATE TABLE users (
-    username        varchar(50) PRIMARY KEY NOT NULL,
-    password        text NOT NULL,
-    name            varchar(30) NOT NULL,
-    email           varchar(30) NOT NULL UNIQUE,
-    telephone       varchar(15),
-    account_number  varchar(30),
-    entity          bigint CONSTRAINT valid_entity REFERENCES entities(entity_id),
-    active          boolean DEFAULT true
-);
-INSERT INTO users 
-(username,password,name,email,telephone) 
-VALUES 
-('ianmin2',md5('ianmin2'),'Ian Innocent','ianmin2@live.com','0725678447');
 
 --- TYPES
 DROP TABLE IF EXISTS types CASCADE;
@@ -52,6 +36,24 @@ CREATE TABLE IF NOT EXISTS sub_types (
     active           boolean DEFAULT true
 );
 INSERT INTO sub_types(title,parent) VALUES ('Hospital',1),('General Practitioner',2),('Peridontist',3);
+
+
+-- USERS --
+DROP TABLE IF EXISTS users CASCADE;
+CREATE TABLE users (
+    username        varchar(50) PRIMARY KEY NOT NULL,
+    password        text NOT NULL,
+    name            varchar(30) NOT NULL,
+    email           varchar(30) NOT NULL UNIQUE,
+    telephone       varchar(15),
+    account_number  varchar(30),
+    -- entity          bigint CONSTRAINT valid_entity REFERENCES entities(entity_id),
+    active          boolean DEFAULT true
+);
+INSERT INTO users 
+(username,password,name,email,telephone) 
+VALUES 
+('ianmin2',md5('ianmin2'),'Ian Innocent','ianmin2@live.com','0725678447');
 
 --- ENITITIES
 DROP TABLE IF EXISTS entities CASCADE;
@@ -78,6 +80,8 @@ INSERT INTO entities
  ('ianmin2','Ian Innocent',3,'Chebarbar','0725678447','072345678','','Text Lane Off Limuru Road','','ianmin2@ianmin2.cf','http://ianmin2.cf',''),
  ('ianmin2','Jeremic Hospital',1,'Baraton, Kapsabet','0700100100','','','1 Jeremic Close University of Eastern Africa Baraton','','jeremic@ueab.ac.ke','http://jeremic.ueab.ac.ke',''),
  ('ianmin2','Chemundu Hospital',1,'Chemundu, Kapsabet','0700100101','','','1 Chemundu Drive; Chemundu','','chemundu@ueab.ac.ke','http://ueab.ac.ke/chemundu','');
+
+
 
 ---  ADMISSION_RIGHTS
 DROP TABLE IF EXISTS admission_rights CASCADE;
@@ -228,7 +232,7 @@ END;
 $BODY$
 LANGUAGE plpgsql VOLATILE;
 
---- ENTITIES
+--- USERS
 CREATE OR REPLACE FUNCTION audit_users()
     RETURNS trigger AS
 $BODY$

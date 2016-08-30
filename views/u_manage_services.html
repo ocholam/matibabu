@@ -58,7 +58,6 @@
                                     </div>
                                 </div>
 
-
                                 <!-- type (product/service) -->
                                 <div class="form-group">
                                     <label >Type<sup style="color:red">*</sup></label>
@@ -73,6 +72,13 @@
                                     <div class="help-block" ng-messages="add_service_form.type.$error" ng-if="add_service_form.type.$touched">
                                         <p ng-message="required">Please pick a type.</p>
                                     </div>
+                                </div>
+
+                                <!-- Recomended Retail Price -->
+                                <div class="form-group">
+                                    <label >Recommended Retail Price</label>
+                                    <input placeholder="0" type="text" name="title" class="form-control"
+                                    ng-model="data.services.rrp">
                                 </div>
 
                                 <!--<json-formatter open="1" json="data.services"></json-formatter>-->
@@ -114,7 +120,8 @@
                                     </th>
                                     <th ng-click="sort('type')">Type
                                         <span class="icon " ng-show="sortKey=='type'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span>
-                                    </th>                                    
+                                    </th>          
+                                    <th ng-click="sort('rrp')"><span class="icon" ng-show="sortkey=='rrp'" ng-class="{'ion-arrow-up-b':reverse,'ion-arrow-down-b':!reverse}"></span></th>                         
                                     <th class="noprint" style="margin:0 auto;text-align:center;"></th>
                                 </tr>
                                 </thead>
@@ -151,6 +158,11 @@
                                                 <option value="s"  ng-selected="service.type=='s'">Service </option>  
                                                 <option value="p"  ng-selected="service.type=='p'">Product </option>                                  
                                             </select>
+                                        </td>
+
+                                        <td data-label="Title" class="form-group">
+                                            <input type="text" name="title" class="form-control" value="{{service.rrp}}"
+                                            ng-model="service.rrp">
                                         </td>
                                         
                                         <td data-label="" class="noprint" style="margin:0 auto;text-align:center;"> {{data.temp}}

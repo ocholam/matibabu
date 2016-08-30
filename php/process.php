@@ -221,6 +221,7 @@ header("Content-Type:application/json");
     
             		$query = "UPDATE ".$table." SET ".$update_string." WHERE ".@$extras;
 			
+			// return $this->c->makeResponse( 200, $query );
 			return $this->c->aQuery( $query, true, "Done.", "Failed.");
 			
 		}
