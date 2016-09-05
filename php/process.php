@@ -49,8 +49,8 @@ header("Content-Type:application/json");
 			
 			$query = "INSERT INTO ".$table." ".$field_names." VALUES ".$field_values." ".@$extras; 					
 			
-			
-			return $this->c->aQuery( $query ,true, "Done", "Failed");
+			// return $this->c->makeResponse(200,$query);
+			return $this->c->aQuery( $query ,true, $table." record added", "Failed");
 			
 		}
 
@@ -182,7 +182,7 @@ header("Content-Type:application/json");
 			$query = "DELETE FROM ".$table.$conditions." ".@$extras;
 			
 			//return $this->c->wrapResponse(200,$query,"");
-			return $this->c->aQuery($query, true,"Done.","Failed.");
+			return $this->c->aQuery($query, true, $table." record deleted.","Failed.");
 			
 		}
 		
@@ -222,7 +222,7 @@ header("Content-Type:application/json");
             		$query = "UPDATE ".$table." SET ".$update_string." WHERE ".@$extras;
 			
 			// return $this->c->makeResponse( 200, $query );
-			return $this->c->aQuery( $query, true, "Done.", "Failed.");
+			return $this->c->aQuery( $query, true, $table." record updated.", "Failed.");
 			
 		}
 
@@ -241,7 +241,7 @@ header("Content-Type:application/json");
 			
 			$query = "TRUNCATE TABLE ".$table." ".@$extras;
 			
-			return $this->c->aQUery( $query ,true,"Done.", "Failed.");
+			return $this->c->aQUery( $query ,true, $table." table truncated.", "Failed.");
 			
 		}
 		
@@ -260,7 +260,7 @@ header("Content-Type:application/json");
 			
 			$query = "DROP TABLE ".$table." ".@$extras;
 						
-			return $this->c->aQUery( $query, true , "Done.", "Failed.");
+			return $this->c->aQUery( $query, true , $table." table dropped.", "Failed.");
 			
 		}
 		
@@ -280,4 +280,3 @@ header("Content-Type:application/json");
 	};
 
 ?>
-

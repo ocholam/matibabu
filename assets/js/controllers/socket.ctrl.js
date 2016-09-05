@@ -2,10 +2,11 @@ app.controller('socketCtrl',['$scope',function($scope){
     
     $scope.server       = {};
     // $scope.server.host  = '41.89.162.252';
-    $scope.server.host  = '127.0.0.1';
-    $scope.server.port  = '1357'
+    $scope.server.host = url[0].split(':')[0];
+    $scope.server.port = url[0].split(':')[1];
+    $scope.server.hlink = "http://"+$scope.server.host+":"+$scope.server.port;
     // `http://${$scope.server.host}:${$scope.server.port}`
-    $scope.socket = io.connect($scope.app.hlink);
+    $scope.socket = io.connect($scope.server.hlink);
 
     $scope.socket.on("connect",()=>{
         $scope.app.alert("CONNECTION ALERT","<center>SUCCESSFULLY ESTABLISHED A CONNECTION TO THE BIXBYTE SMS SERVER</center>",$scope.app.doNothing,"Continue");

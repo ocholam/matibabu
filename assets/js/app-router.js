@@ -83,6 +83,7 @@ app.run(["app","cgi","sms","$rootScope","$location", "formlyConfig","formlyValid
     //! ADMIN STATUS SWITCH
     $rootScope.frame.changeAdmin = (bool)=>{
          $rootScope.frame.is_admin = bool;
+        //  $rootScope.$apply();
      }; 
     
     //! RESET THE ADMIN STATUS

@@ -72,7 +72,7 @@
 				<div class="header-text">
 					<div class="row">
 						<div class="col-md-12 text-center">
-							<h3 class="light white">Info-Med</h3>
+							<h3 class="light white">Infor-Med</h3>
 							<h1 class="white typed">Your reliable healthcare partner</h1>
 							<span class="typed-cursor">.</span>
 						</div>
@@ -277,16 +277,16 @@
 	<section id="pricing" class="section">
 		<div class="container">
 			<div class="row title text-center">
-				<h2 class="margin-top white">Users</h2>
+				<h2 class="margin-top white">Join Us</h2>
 				<h4 class="light white">Choose your user group and get started!</h4>
 			</div>
 			<div class="row no-margin">
 				<div class="col-md-7 no-padding col-md-offset-5 pricings text-center">
 					<div class="pricing">
 						<div class="box-main active" data-img="img/pricing1.jpg">
-							<h4 class="white">Medical Practitioners</h4>
+							<h4 class="white">Medical Professionals</h4>
 							<h4 class="white regular light strikethrough">KES XXXXX.XX <span class="small-font">/ year</span></h4>
-							<a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-white-fill">Sign Up Now</a>
+							<a href="#" data-toggle="modal" data-target="#modal_medics" class="btn btn-white-fill">Sign Up Now</a>
 							<i class="info-icon icon_question"></i>
 						</div>
 						<div class="box-second active">
@@ -301,18 +301,17 @@
 					</div>
 					<div class="pricing">
 						<div class="box-main" data-img="img/pricing2.jpg">
-							<h4 class="white">Cardio Training</h4>
-							<h4 class="white regular light">$100.00 <span class="small-font">/ year</span></h4>
-							<a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-white-fill">Sign Up Now</a>
+							<h4 class="white">Non Medical Professionals</h4>
+							<h4 class="white regular light">FREE <span class="small-font">/*</span></h4>
+							<a href="#" data-toggle="modal" data-target="#modal_user" class="btn btn-white-fill">Sign Up Now</a>
 							<i class="info-icon icon_question"></i>
 						</div>
 						<div class="box-second">
 							<ul class="white-list text-left">
-								<li>One Personal Trainer</li>
-								<li>Big gym space for training</li>
-								<li>Free tools &amp; props</li>
-								<li>Free locker</li>
-								<li>Free before / after shower</li>
+								<li>General Drugs Pricing</li>
+								<li>Medical Professional's contacts</li>
+								<li>Simplified Appointment booking</li>
+								<li>Location based Professiona screening</li>
 							</ul>
 						</div>
 					</div>
@@ -327,31 +326,32 @@
 					<div class="owl-twitter owl-carousel">
 						<div class="item text-center">
 							<i class="icon fa fa-twitter"></i>
-							<h4 class="white light">To enjoy the glow of good health, you must exercise.</h4>
-							<h4 class="light-white light">#health #training #exercise</h4>
+							<h4 class="white light">Infor_Med helps me know where to buy medicine at the best prices.</h4>
+							<h4 class="light-white light">#medicine #A+ #health</h4>
 						</div>
 						<div class="item text-center">
 							<i class="icon fa fa-twitter"></i>
-							<h4 class="white light">To enjoy the glow of good health, you must exercise.</h4>
-							<h4 class="light-white light">#health #training #exercise</h4>
+							<h4 class="white light">It helps me manage the appointment schedule at my specialized clinic.</h4>
+							<h4 class="light-white light">#health #consultation</h4>
 						</div>
 						<div class="item text-center">
 							<i class="icon fa fa-twitter"></i>
-							<h4 class="white light">To enjoy the glow of good health, you must exercise.</h4>
-							<h4 class="light-white light">#health #training #exercise</h4>
+							<h4 class="white light">It has helped me grow my patient base due to my hospital affiliations for admission.</h4>
+							<h4 class="light-white light">#surgery #medicine #health</h4>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+	<div class="modal fade" id="modal_user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content modal-popup">
 				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<h3 class="white">Sign Up</h3>
+				<h3 class="white">User Signup</h3>
 				<form action="" class="popup-form">
-					<input type="text" class="form-control form-white" placeholder="Full Name">
+					<!--<input type="text" class="form-control form-white" placeholder="Full Name">
 					<input type="text" class="form-control form-white" placeholder="Email Address">
 					<div class="dropdown">
 						<button id="dLabel" class="form-control form-white dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -363,14 +363,219 @@
 							<li class="animated lightSpeedIn"><a href="#">1 year membership ($1000)</a></li>
 							<li class="animated lightSpeedIn"><a href="#">Free trial class</a></li>
 						</ul>
-					</div>
+					</div>-->
+
+					<!-- Name -->
+                        <div class="form-group">
+                            <!--<label>Full Name<sup style="color:red">*</sup></label>-->
+                            <input type="text" name="name" class="form-control form-white" 
+                                ng-model="data.users.name"
+                                ng-minlength="3"
+                                ng-maxlength="30"
+                                required placeholder="Full Name">
+                            <!--<div class="help-block" ng-messages="add_user_form.name.$error" ng-if="add_user_form.name.$touched">
+                                <p ng-message="minlength">Please Enter a longer Name.</p>
+                                <p ng-message="maxlength">The name you entered is too long.</p>
+                                <p ng-message="required">A name is required.</p>
+                            </div>-->
+                        </div>          
+                                    
+                        <!-- username -->
+                        <div class="form-group">
+                            <!--<label>Username<sup style="color:red">*</sup></label>-->
+                            <input type="text" name="username" class="form-control form-white" 
+                                ng-model="data.users.username"
+                                ng-minlength="4"
+                                ng-maxlength="15"
+                                required placeholder="username">
+                            <!--<div class="help-block" ng-messages="add_user_form.name.$error" ng-if="add_user_form.name.$touched">
+                                <p ng-message="minlength">Please Enter a valid username.</p>
+                                <p ng-message="maxlength">The username you entered is too long.</p>
+                                <p ng-message="required">A username is required.</p>
+                            </div>-->
+                        </div>
+                        
+                        <!-- password-->
+                        <div class="form-group">
+                            <!--<label>Password<sup style="color:red">*</sup></label>-->
+                            <input type="password" name="password" class="form-control form-white" 
+                                ng-model="data.users.password"
+                                ng-minlength="1"
+                                ng-maxlength="50"
+                                required placeholder="Password">
+                                
+                            <!--<div class="help-block" ng-messages="add_user_form.password.$error" ng-if="add_user_form.password.$touched">
+                                    <p ng-message="minlength">That password is too short.</p>
+                                    <p ng-message="maxlength">That password is too long.</p>
+                                    <p ng-message="required">A password is required.</p>
+                            </div>-->
+                        </div>
+                        
+                        <!-- email -->
+                        <div class="form-group">
+                            <!--<label>Email<sup style="color:red">*</sup></label>-->
+                            <input type="email" name="email" class="form-control form-white" 
+                                ng-model="data.users.email"
+                                ng-pattern="app.isemail"
+                                required placeholder="email">
+                                
+                            <!--<div class="help-block" ng-messages="add_user_form.email.$error" ng-if="add_user_form.email.$touched">
+                                <p ng-message="required">An email address is required for password recovery.</p>
+                                <p ng-message="pattern">Please enter a valid email address</p>
+                            </div>-->
+                        </div>
+                        
+                            <!-- telephone -->
+                        <div class="form-group">
+                            <!--<label>telephone<sup style="color:red">*</sup></label>-->
+                            <input type="tel" name="telephone" class="form-control form-white" 
+                                ng-model="data.users.telephone"
+                                ng-pattern="app.istelephone"
+                                required placeholder="telephone">
+                                
+                            <!--<div class="help-block" ng-messages="add_user_form.telephone.$error" ng-if="add_user_form.telephone.$touched">
+                                <p ng-message="pattern">Please enter a valid telephone number</p>
+                                <p ng-message="required">Please enter a valid telephone number</p>
+                            </div>-->
+                        </div>
+                        
+                        
+
 					<div class="checkbox-holder text-left">
 						<div class="checkbox">
 							<input type="checkbox" value="None" id="squaredOne" name="check" />
 							<label for="squaredOne"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
 						</div>
 					</div>
-					<button type="submit" class="btn btn-submit">Submit</button>
+
+					<div class="form-group" ng-controller="hospitalCtrl">
+                            <!--<span hidden ng-if="!add_user_form.$invalid">{{data.users=setCreds(data.users)}}</span>-->
+                            
+                            <button 
+							ng-click="add('vw_users',data.users,'response','password',loginRedirect)"
+							class=" btn btn-submit" 
+							ng-disabled="add_user_form.$invalid">
+								Signup</button>
+                        </div>
+					<!--<button type="submit" class="btn btn-submit">Submit</button>-->
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modal_medics" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content modal-popup">
+				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
+				<h3 class="white">Medical Professionals' Signup</h3>
+				<form action="" class="popup-form">
+					<!--<input type="text" class="form-control form-white" placeholder="Full Name">
+					<input type="text" class="form-control form-white" placeholder="Email Address">
+					<div class="dropdown">
+						<button id="dLabel" class="form-control form-white dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Pricing Plan
+						</button>
+						<ul class="dropdown-menu animated fadeIn" role="menu" aria-labelledby="dLabel">
+							<li class="animated lightSpeedIn"><a href="#">1 month membership ($150)</a></li>
+							<li class="animated lightSpeedIn"><a href="#">3 month membership ($350)</a></li>
+							<li class="animated lightSpeedIn"><a href="#">1 year membership ($1000)</a></li>
+							<li class="animated lightSpeedIn"><a href="#">Free trial class</a></li>
+						</ul>
+					</div>-->
+
+					<!-- Name -->
+                        <div class="form-group">
+                            <!--<label>Full Name<sup style="color:red">*</sup></label>-->
+                            <input type="text" name="name" class="form-control form-white" 
+                                ng-model="data.users.name"
+                                ng-minlength="3"
+                                ng-maxlength="30"
+                                required placeholder="Full Name">
+                            <!--<div class="help-block" ng-messages="add_user_form.name.$error" ng-if="add_user_form.name.$touched">
+                                <p ng-message="minlength">Please Enter a longer Name.</p>
+                                <p ng-message="maxlength">The name you entered is too long.</p>
+                                <p ng-message="required">A name is required.</p>
+                            </div>-->
+                        </div>          
+                                    
+                        <!-- username -->
+                        <div class="form-group">
+                            <!--<label>Username<sup style="color:red">*</sup></label>-->
+                            <input type="text" name="username" class="form-control form-white" 
+                                ng-model="data.users.username"
+                                ng-minlength="4"
+                                ng-maxlength="15"
+                                required placeholder="username">
+                            <!--<div class="help-block" ng-messages="add_user_form.name.$error" ng-if="add_user_form.name.$touched">
+                                <p ng-message="minlength">Please Enter a valid username.</p>
+                                <p ng-message="maxlength">The username you entered is too long.</p>
+                                <p ng-message="required">A username is required.</p>
+                            </div>-->
+                        </div>
+                        
+                        <!-- password-->
+                        <div class="form-group">
+                            <!--<label>Password<sup style="color:red">*</sup></label>-->
+                            <input type="password" name="password" class="form-control form-white" 
+                                ng-model="data.users.password"
+                                ng-minlength="1"
+                                ng-maxlength="50"
+                                required placeholder="Password">
+                                
+                            <!--<div class="help-block" ng-messages="add_user_form.password.$error" ng-if="add_user_form.password.$touched">
+                                    <p ng-message="minlength">That password is too short.</p>
+                                    <p ng-message="maxlength">That password is too long.</p>
+                                    <p ng-message="required">A password is required.</p>
+                            </div>-->
+                        </div>
+                        
+                        <!-- email -->
+                        <div class="form-group">
+                            <!--<label>Email<sup style="color:red">*</sup></label>-->
+                            <input type="email" name="email" class="form-control form-white" 
+                                ng-model="data.users.email"
+                                ng-pattern="app.isemail"
+                                required placeholder="email">
+                                
+                            <!--<div class="help-block" ng-messages="add_user_form.email.$error" ng-if="add_user_form.email.$touched">
+                                <p ng-message="required">An email address is required for password recovery.</p>
+                                <p ng-message="pattern">Please enter a valid email address</p>
+                            </div>-->
+                        </div>
+                        
+                            <!-- telephone -->
+                        <div class="form-group">
+                            <!--<label>telephone<sup style="color:red">*</sup></label>-->
+                            <input type="tel" name="telephone" class="form-control form-white" 
+                                ng-model="data.users.telephone"
+                                ng-pattern="app.istelephone"
+                                required placeholder="telephone">
+                                
+                            <!--<div class="help-block" ng-messages="add_user_form.telephone.$error" ng-if="add_user_form.telephone.$touched">
+                                <p ng-message="pattern">Please enter a valid telephone number</p>
+                                <p ng-message="required">Please enter a valid telephone number</p>
+                            </div>-->
+                        </div>
+                        
+                        
+
+					<div class="checkbox-holder text-left">
+						<div class="checkbox">
+							<input type="checkbox" value="None" id="squaredOne" name="check" />
+							<label for="squaredOne"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
+						</div>
+					</div>
+
+					<div class="form-group" ng-controller="hospitalCtrl">
+                            <!--<span hidden ng-if="!add_user_form.$invalid">{{data.users=setCreds(data.users)}}</span>-->
+                            
+                            <button 
+							ng-click="add('vw_users',data.users,'response','password',loginRedirect)"
+							class=" btn btn-submit" 
+							ng-disabled="add_user_form.$invalid">
+								Signup</button>
+                        </div>
+					<!--<button type="submit" class="btn btn-submit">Submit</button>-->
 				</form>
 			</div>
 		</div>

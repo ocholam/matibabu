@@ -46,7 +46,7 @@
                     ng-disabled="appointment_edit.$invalid" 
                     class="btn btn-raised btn-md icon btn-raised ion-checkmark-round btn-success" 
                     style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
-                    ng-click="update('appointments',{ title: appointment.title, description: appointment.description, type: appointment.type, extras: ' appointment_id=\'{{appointment.appointment_id}}\'', token: { user: 'userAdmin', key: '153797e5fc6433812172aa8d47ec69e1', specifics: storage.user  } },'response')" 
+                    ng-click="update('appointments',{  confirmed: true, extras: ' appointment_id=\'{{appointment.appointment_id}}\'', token: { user: 'userAdmin', key: '153797e5fc6433812172aa8d47ec69e1' } },'response')" 
                     ></button>
             </td>
         

@@ -194,7 +194,7 @@ app.service("app",['$http','$ionicPopup',function( $http, $ionicPopup ){
        return $ionicPopup.alert({
             
             title: title,
-            template: message,
+            template: `<center>${message}</center>`,
             okText: ok || "OK"
             /*cssClass: '', // String, The custom CSS class name
             subTitle: '', // String (optional). The sub-title of the popup.

@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS types (
     title        varchar(100) NOT NULL CONSTRAINT unique_type UNIQUE,
     active       boolean DEFAULT true
 );
-INSERT INTO types (title) VALUES ('Hospital'),('Doctor'),('Dentist');
+INSERT INTO types (title) VALUES ('Hospitals'),('Doctors'),('Labs'),('');
 
 --- SUB_TYPES
 DROP TABLE IF EXISTS sub_types CASCADE;
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS sub_types (
     parent           bigint NOT NULL CONSTRAINT valid_parent_type REFERENCES types(type_id),
     active           boolean DEFAULT true
 );
-INSERT INTO sub_types(title,parent) VALUES ('Hospital',1),('General Practitioner',2),('Peridontist',3);
+INSERT INTO sub_types(title,parent) VALUES ('Hospital',1),('Clinic',1),('General Practitioner',2),('Surgeon',2),('Dentist',2),('Paeditrician',2),('Laboratory',3),('Pharmacy',3);
 
 
 -- USERS --
@@ -336,7 +336,8 @@ FROM entities
 DROP VIEW IF EXISTS vw_admission_rights CASCADE;
 CREATE VIEW vw_admission_rights AS 
 SELECT 
-admission_right_id,admission_rights.doctor, entities.title as doctor_name, admission_rights.hospital,note,admission_rights.active
+admission_right_id,admission_rights.doctor,admission_rights.hospital,note,admission_rights.active,
+entities.title as doctor_name,entities.owner
 FROM admission_rights 
     INNER JOIN entities
         ON admission_rights.doctor = entities.entity_id;

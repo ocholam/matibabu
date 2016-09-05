@@ -162,7 +162,7 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
                     .then( (r) => {           
                        r = $scope.app.json(r);
                        if(r.response == 200){
-                           $scope.app.UID(UID,`<center> "Successfully Added."</center>`, "success");                          
+                           $scope.app.UID(UID,`<center> ${r.data.message}</center>`, "success");                          
                            $scope.fetch(table,{specifics: data.specifics}); 
                            $scope.data[table.toString().replace(/vw_/ig,'')] = {};
                            if(typeof(cb)==="function"){
@@ -207,7 +207,7 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
                     .then( (r) => {           
                        r = $scope.app.json(r);
                        if(r.response == 200){
-                           $scope.app.UID(UID,`<center> "Successfully Updated."</center>`, "success");                          
+                           $scope.app.UID(UID,`<center> ${r.data.message}</center>`, "success");                          
                            $scope.fetch(table,{specifics: data.specifics}); 
                            $scope.data[table.toString().replace(/vw_/ig,'')] = {};
                            if( typeof(cb) == 'function' ){
@@ -233,43 +233,9 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
                     })        
                 };
     
-	
-
-
-    // //! BASIC FETCHING
-    // $scope.fetch = (table,data,UID)=>{
-        
-    //     data = (data)?$scope.app.json(data):{};
-    //     data.command    = "get";
-    //     data.table      = table;        
-    //     $scope.cgi.ajax(data)
-    //     .then(function(r){
-    //         r = $scope.app.json(r);
-    //         if(r.response == 200){
-    //             $scope.fetched[table] = r.data.message;
-    //         }else{
-    //            //POSTGRESQL MATCHING
-    //             if(Array.isArray(r.data.message)){
-    //                 var v =  r.data.message[2].match(/DETAIL:(.*)/)
-    //                 if( v != undefined || v!=null ){
-    //                      r.data.message = v[1];
-    //                 }else{
-    //                      r.data.message = r.data.message[2];
-    //                 }
-    //             }else{
-    //                 r.data.message;
-    //             }
-               
-    //             $scope.app.alert("ERROR",`<center>${ r.data.message }</center>`,$scope.app.doNothing,"CONTINUE");
-    //         }
-    //         $scope.$apply();
-    //     }) 
-        
-    // }; 
-    
     
     //! BASIC DATA FETCHING
-    var do_process = ( table,data,UID )=>{
+    var do_fetch = ( table,data,UID )=>{
             
             data = (data)?$scope.app.json(data):{};
             data.command    = "get";
@@ -302,9 +268,9 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
     $scope.fetch = (table,data,UID)=>{
         
         if( Array.isArray(table) ){			
-            table.forEach( (tData,tkey)=>do_process(tData[0],tData[1],tData[2]) );
+            table.forEach( (tData,tkey)=>do_fetch(tData[0],tData[1],tData[2]) );
         }else{
-            do_process(table,data,UID);
+            do_fetch(table,data,UID);
         }
         
     };
@@ -321,7 +287,7 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
             r = $scope.app.json(r);
             if(r.response == 200){                           
                 $scope.fetched[table].splice(delID,1);  
-                $scope.app.UID('response',`<center>Deleted.</center>`,"info");                           
+                $scope.app.UID('response',`<center>${r.data.message}</center>`,"info");                           
             }else{
               
                 //POSTGRESQL MATCHING
@@ -505,7 +471,7 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
         .then( (r) => {           
             r = $scope.app.json(r);
             if(r.response == 200){
-                $scope.app.UID(UID,(mess||`<center> "Successfully Executed."</center>`), "success"); 
+                $scope.app.UID(UID,(mess||`<center>${r.data.message}</center>`), "success"); 
                 $scope.cFetched[table] = r.data.message;
                 $scope.data[table.toString().replace(/vw_/ig,'')] = {};
             }else{

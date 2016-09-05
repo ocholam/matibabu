@@ -1,5 +1,5 @@
-<framify menu="false" path="u_manage_services" url="/u_manage_services" title="Manage Products/Services" parent="false" icon="local_hospital" controller="appController" ></framify>
-<ion-content scrollbar-x="false" scrollbar-y="false" style="padding-bottom:20px;">
+<framify menu="true" path="h_manage_services" url="/h_manage_services" title="Manage Products/Services" parent="true" icon="local_hospital" controller="appController" ></framify>
+<ion-content scrollbar-x="false" scrollbar-y="false" style="padding-bottom:20px;" ng-init="authorize();">
 <div class="col-lg-12" id="response" ng-init="fetch([['services']])"></div>
 
 <!--<div  class="" ng-init="authorize();" ></div>-->
@@ -82,7 +82,7 @@
                                 </div>
 
                                 <!--<json-formatter open="1" json="data.services"></json-formatter>-->
-                                <span hidden ng-if="!add_service_form.$invalid">{{data.services=sudo(data.services,storage.user)}}</span>
+                                <!--<span hidden ng-if="!add_service_form.$invalid">{{data.services=sudo(data.services,storage.user)}}</span>-->
                                 <!-- Submit Button -->
                                 <div class="form-group">
                                     <!--!frame.isRoot() ||-->
@@ -102,6 +102,8 @@
                         <div ng-switch-when="edit" ng-if="frame.currTab=='edit' && !frame.isAdmin()" >
                             <br><br>        
                             <div class="alert alert-danger"><button class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button><center style="font-weight:bold;">Your access level does not permit you to  perform this action. <br><br> Please ask your administrator to assist you.</center></div>
+
+                            {{frame.isAdmin()}}
                         </div>
                         <div ng-switch-when="edit" ng-if="frame.currTab=='edit' && frame.isAdmin()">
                             <!--<json-formatter json="fetched.types" open="2"></json-formatter>-->
