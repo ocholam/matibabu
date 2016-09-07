@@ -26,18 +26,19 @@
                                 <!-- Practitioner -->
                                 <div class="form-group">
                                     <label>My Entity<sup style="color:red">*</sup></label>
+                                      <!--ng-options="entity.entity_id as entity.title for entity in fetched.vw_entities " -->
                                     <select 
                                         name="doctor"
                                         class="form-control"  
-                                        ng-model="data.admission_rights.doctor" 
-                                        ng-options="entity.entity_id as entity.title for entity in fetched.vw_entities " 
-                                        ng-show="entity.owner == storage.user.username">   
-                                        <option value="" selected>Select a Practitioner </option>
+                                        ng-model="data.admission_rights.doctor" >   
+                                        <option value="" selected>Select an entity </option>
                                         <option 
-                                        value="{{entity.entity_id}}" 
                                         ng-repeat="entity in fetched.vw_enntities"
-                                        ng-show="entity.owner==storage.user.username">{{entity.title}}</option>                                  
+                                        ng-show="entity.owner==storage.user.username"
+                                        value="{{entity.entity_id}}" 
+                                        >{{entity.title}}</option>                                  
                                     </select>
+                                    <!--{{fetched.vw_entities}}-->
                                     <div class="help-block" ng-messages="add_admission_rights_form.doctor.$error" ng-if="add_admission_rights_form.doctor.$touched">
                                         <p ng-message="required">Please select a practitioner.</p>
                                     </div>
