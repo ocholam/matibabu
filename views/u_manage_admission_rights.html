@@ -25,13 +25,18 @@
                                 
                                 <!-- Practitioner -->
                                 <div class="form-group">
-                                    <label>Practitioner<sup style="color:red">*</sup></label>
+                                    <label>My Entity<sup style="color:red">*</sup></label>
                                     <select 
                                         name="doctor"
                                         class="form-control"  
                                         ng-model="data.admission_rights.doctor" 
-                                        ng-options="entity.entity_id as entity.title for entity in fetched.vw_entities">   
-                                        <option value="" selected>Select a Practitioner </option>                                   
+                                        ng-options="entity.entity_id as entity.title for entity in fetched.vw_entities " 
+                                        ng-show="entity.owner == storage.user.username">   
+                                        <option value="" selected>Select a Practitioner </option>
+                                        <option 
+                                        value="{{entity.entity_id}}" 
+                                        ng-repeat="entity in fetched.vw_enntities"
+                                        ng-show="entity.owner==storage.user.username">{{entity.title}}</option>                                  
                                     </select>
                                     <div class="help-block" ng-messages="add_admission_rights_form.doctor.$error" ng-if="add_admission_rights_form.doctor.$touched">
                                         <p ng-message="required">Please select a practitioner.</p>
@@ -40,7 +45,7 @@
 
                                 <!-- Institution -->
                                 <div class="form-group">
-                                    <label >Institution<sup style="color:red">*</sup></label>
+                                    <label >Admitting Institution<sup style="color:red">*</sup></label>
                                      <select 
                                         name="hospital"
                                         class="form-control"  

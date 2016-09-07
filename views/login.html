@@ -2,7 +2,10 @@
 <ion-content scrollbar-x="false" scrollbar-y="false" style="padding-bottom:40px;">    
     <div ng-init="islogedin();" id="response"></div>
     <div class="list" ng-if="!logedin">
-       
+       <br><br> 
+       <center>
+           <h3><font color="gray"><u>User Login</u></font> </h3>
+       </center>
        <form name="loginForm" class="col-lg-10" style="" novalidate>
         
         <!-- name field -->
@@ -37,7 +40,10 @@
         </div>
         
         <div class="form-group">
-            <button ng-click="login('password')" class=" button button-positive" ng-hide="loginForm.$invalid">Submit</button>
+            <button 
+            ng-click="login('password')" 
+            class=" button button-positive" 
+            ng-disabled="loginForm.$invalid">Submit</button>
         </div>
         
     </form>

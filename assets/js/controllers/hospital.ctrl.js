@@ -81,6 +81,12 @@ app.controller('hospitalCtrl',['$scope',function($scope){
             return {};
         }
 
-    }
+    };
+
+    // //@ SIMPLE FILTER BY OWNER
+    // $scope.isMine = (genInfo) =>{
+    //     console.log(genInfo.owner==$scope.storage.user.username)
+    //     return (genInfo.owner==$scope.storage.user.username);
+    //  } 
 
 }])

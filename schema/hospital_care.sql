@@ -321,7 +321,7 @@ FROM sub_types
 DROP VIEW IF EXISTS vw_entities CASCADE;
 CREATE OR REPLACE VIEW vw_entities AS 
 SELECT 
-entity_id, entities.title as title,entities.type,owner,users.username as owner_name,entities.location,entities.telephone,entities.office,entities.landline,entities.address,entities.fax,entities.email,entities.web,entities.country,entities.others,entities.active,
+entity_id, entities.title as title,entities.type,owner,users.name as owner_name,entities.location,entities.telephone,entities.office,entities.landline,entities.address,entities.fax,entities.email,entities.web,entities.country,entities.others,entities.active,
 sub_types.title as type_title,
 type_id as super_type, types.title as super_type_title
 FROM entities
@@ -334,7 +334,7 @@ FROM entities
 
 -- VW_ADMISSION-RIGHTS -- 
 DROP VIEW IF EXISTS vw_admission_rights CASCADE;
-CREATE VIEW vw_admission_rights AS 
+CREATE OR REPLACE VIEW vw_admission_rights AS 
 SELECT 
 admission_right_id,admission_rights.doctor,admission_rights.hospital,note,admission_rights.active,
 entities.title as doctor_name,entities.owner
@@ -344,14 +344,14 @@ FROM admission_rights
 
 -- VW_SERVICES
 DROP VIEW IF EXISTS vw_services CASCADE;
-CREATE VIEW vw_services AS 
+CREATE OR REPLACE VIEW vw_services AS 
 SELECT 
 service_id,title,description,type,active,rrp,added_on 
 FROM services;
 
 -- VW_SERVICE_OFFERINGS
 DROP VIEW IF EXISTS vw_service_offerings CASCADE;
-CREATE VIEW vw_service_offerings AS 
+CREATE OR REPLACE VIEW vw_service_offerings AS 
 SELECT 
 service_offerings.service_offering_id, service_offerings.entity, service_offerings.description, service_offerings.purchase, service_offerings.retail, service_offerings.active, 
 entities.title as entity_title, entities.owner as owner, services.title as title, services.type as type, services.rrp as rrp
@@ -360,3 +360,15 @@ FROM service_offerings
         ON service_offerings.entity = entities.entity_id
     JOIN services
         ON service_offerings.service = services.service_id;
+
+--- VW_APPOINTMENTS
+DROP VIEW IF EXISTS vw_appointments CASCADE;
+CREATE OR REPLACE VIEW vw_appointments AS 
+SELECT appointment_id,appointments.name,appointments.email,appointments.telephone,appointments.message,
+appointments.added_on,appointments.active,appointments.confirmed,appointments.scheduled,
+appointments.entity,entities.title as entity_name,entities.owner,users.name as owner_name
+FROM appointments
+    INNER JOIN entities 
+        ON appointments.entity = entities.entity_id
+    JOIN users  
+        ON entities.owner      = users.username;
