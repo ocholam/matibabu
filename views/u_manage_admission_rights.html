@@ -30,13 +30,14 @@
                                     <select 
                                         name="doctor"
                                         class="form-control"  
-                                        ng-model="data.admission_rights.doctor" >   
+                                        ng-model="data.admission_rights.doctor"
+                                        ng-options="entity.entity_id as entity.title for entity in fetched.vw_entities " >   
                                         <option value="" selected>Select an entity </option>
-                                        <option 
+                                        <!--<option 
                                         ng-repeat="entity in fetched.vw_enntities"
                                         ng-show="entity.owner==storage.user.username"
                                         value="{{entity.entity_id}}" 
-                                        >{{entity.title}}</option>                                  
+                                        >{{entity.title}}</option>                                  -->
                                     </select>
                                     <!--{{fetched.vw_entities}}-->
                                     <div class="help-block" ng-messages="add_admission_rights_form.doctor.$error" ng-if="add_admission_rights_form.doctor.$touched">

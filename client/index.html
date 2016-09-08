@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="bixApp">
 
 <head>
 	<meta charset="UTF-8">
@@ -36,7 +36,8 @@
 	<script src="/framify/resources/jquery.min.js"></script>
 </head>
 
-<body>
+<body ng-controller="appController">
+	<div class="response"></div>
 	<div class="preloader">
 		<img src="img/loader.gif" alt="Preloader image">
 	</div>
@@ -55,11 +56,12 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right main-nav">
-					<li><a href="#intro">Intro</a></li>
 					<li><a href="#services">Services</a></li>
-					<li><a href="#team">Team</a></li>
-					<li><a href="#pricing">Pricing</a></li>
-					<li><a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-blue">Sign Up</a></li>
+					<li><a href="#hospitals">Hospitals</a></li>
+					<li><a href="#doctors">Doctors</a></li>
+					<li><a href="#drugs">Drugs</a></li>
+					<li><a href="#labs">Labs</a></li>
+					<li><a href="#" data-toggle="modal" data-target="#modal_medics" class="btn btn-blue">Sign Up</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -73,6 +75,8 @@
 					<div class="row">
 						<div class="col-md-12 text-center">
 							<h3 class="light white">Infor-Med</h3>
+							{{fetch('vw_services')}}
+							{{fetched}}
 							<h1 class="white typed">Your reliable healthcare partner</h1>
 							<span class="typed-cursor">.</span>
 						</div>
@@ -274,7 +278,7 @@
 			</div>
 		</div>
 	</section>-->
-	<section id="pricing" class="section">
+	<section id="signup" class="section">
 		<div class="container">
 			<div class="row title text-center">
 				<h2 class="margin-top white">Join Us</h2>
@@ -625,6 +629,15 @@
 	</div>
 	<!-- Scripts -->
 	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="/framify/resources/angular.min.js"></script>
+	<script src="js/framify-paginate.min.js"></script>
+	<script src="js/ngStorage.min.js"></script>
+	<script src="js/json-formatter.min.js"></script>
+	<script src="js/angular-messages.min.js"></script>
+	<script src="../assets/js/socket.io.min.js"></script>
+	<script src="js/date-formatter.min.js"></script>
+	<script src="js/framify.js"></script>
+
 	<script>$(function(){  var d = new Date(); $("year").html( d.getFullYear() ) });</script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

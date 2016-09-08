@@ -90,7 +90,8 @@ CREATE TABLE IF NOT EXISTS admission_rights (
     doctor              bigint NOT NULL CONSTRAINT valid_doctor REFERENCES entities(entity_id),
     hospital            bigint NOT NULL CONSTRAINT valid_hospital REFERENCES entities(entity_id),
     note                text,
-    active              boolean DEFAULT true
+    active              boolean DEFAULT true,
+    CONSTRAINT admission_right_does_not_exist UNIQUE (doctor,hospital)
 );
 INSERT INTO admission_rights 
 (doctor,hospital,note)

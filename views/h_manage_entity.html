@@ -32,10 +32,10 @@
                                      name="type" 
                                      ng-model="data.entities.owner" 
                                      ng-options="user.username as user.name for user in fetched.vw_users">   
-                                     <option value="" selected>Pick a Category </option>                                   
+                                     <option value="" selected>Entity Owner </option>                                   
                                     </select>
                                     <div class="help-block" ng-messages="add_entity_form.type.$error" ng-if="add_entity_form.type.$touched">
-                                        <p ng-message="required">Please pick a category.</p>
+                                        <p ng-message="required">Please pick an owner.</p>
                                     </div>
                                 </div>
 
