@@ -1,650 +1,562 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="bixApp">
-
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Infor-Med : Services for all</title>
-	<meta name="description" content="Cardio is a free one page template made exclusively for Codrops by Luka Cvetinovic" />
-	<meta name="keywords" content="html template, css, free, one page, gym, fitness, web design" />
-	<meta name="author" content="Luka Cvetinovic for Codrops" />
-	<!-- Favicons (created with http://realfavicongenerator.net/)-->
-	<link rel="apple-touch-icon" sizes="57x57" href="img/favicons/apple-touch-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="img/favicons/apple-touch-icon-60x60.png">
-	<link rel="icon" type="image/png" href="img/favicons/favicon-32x32.png" sizes="32x32">
-	<link rel="icon" type="image/png" href="img/favicons/favicon-16x16.png" sizes="16x16">
-	<link rel="manifest" href="img/favicons/manifest.json">
-	<link rel="shortcut icon" href="img/favicons/favicon.ico">
-	<meta name="msapplication-TileColor" content="#00a8ff">
-	<meta name="msapplication-config" content="img/favicons/browserconfig.xml">
-	<meta name="theme-color" content="#ffffff">
-	<!-- Normalize -->
-	<link rel="stylesheet" type="text/css" href="css/normalize.css">
-	<!-- Bootstrap -->
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	<!-- Owl -->
-	<link rel="stylesheet" type="text/css" href="css/owl.css">
-	<!-- Animate.css -->
-	<link rel="stylesheet" type="text/css" href="css/animate.css">
-	<!-- Font Awesome -->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.1.0/css/font-awesome.min.css">
-	<!-- Elegant Icons -->
-	<link rel="stylesheet" type="text/css" href="fonts/eleganticons/et-icons.css">
-	<!-- Main style -->
-	<link rel="stylesheet" type="text/css" href="css/cardio.css">
-	<script src="/framify/resources/jquery.min.js"></script>
-</head>
-
-<body ng-controller="appController">
-	<div class="response"></div>
-	<div class="preloader">
-		<img src="img/loader.gif" alt="Preloader image">
-	</div>
-	<nav class="navbar">
-		<div class="container">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+<!doctype html>
+<html ng-app="bixApp" ng-controller="appController">
+	<head>
+		<title>Infor-med: Your reliable healthcare partner </title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="" />
+		<script type="application/x-javascript"> addEventListener("load", function() {setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<!meta charset utf="8">
+		<!--fonts-->
+			<!--<link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>-->
+			<!--<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700' rel='stylesheet' type='text/css'>-->
+		<!--fonts-->
+		<!--owlcss-->
+		<link href="css/owl.carousel.css" rel="stylesheet">
+		<!--bootstrap-->
+			<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<!--coustom css-->
+			<link href="css/style.css" rel="stylesheet" type="text/css"/>
+			<link rel="stylesheet" href="css/chosen.min.css">
+			<link rel="stylesheet" href="css/angular-databases.min.css">
+		<!--default-js-->
+			<script src="js/jquery-2.1.4.min.js"></script>
+		<!--bootstrap-js-->
+			<script src="js/bootstrap.min.js"></script>
+			<script src="angular-databases.min.js"></script>
+			<script src="chosen.jquery.min.js"></script>
+		<!--script-->
+			<script type="text/javascript" src="js/move-top.js"></script>
+			<script type="text/javascript" src="js/easing.js"></script>
+		<!--script-->
+	</head>
+	<body>
+		<div class="header" id="home">
+			<!--<div class="header-top">
+				<div class="container">
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+				</div>
+			</div>-->
+			<div class="header_nav" id="home">
+				<nav class="navbar navbar-default chn-gd">
+					<div class="container">
+				
+					<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#"><img src="img/logo.png" data-active-url="img/logo-active.png" alt=""></a>
+					</button>
+					<a class="navbar-brand logo-st" href="index.html">Infor-med </a>
+					</div>
+					
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+						<a href="#home" class="scroll">
+						<span class="glyphicon glyphicon-home icn_pos hm" aria-hidden="true"></span><br>
+						Home
+						</a>
+						</li>
+						
+						<li>
+						<a href="#features" class="scroll">
+						<span class="glyphicon glyphicon-cog icn_pos" aria-hidden="true"></span><br>
+						Services
+						</a>
+						</li>
+						
+						<li>
+						<a href="#doc" class="scroll">
+						<span class="glyphicon glyphicon-briefcase icn_pos" aria-hidden="true"></span><br>
+						Doctors
+						</a>
+						</li>
+						
+						<li>
+						<a href="#acheive" class="scroll">
+						<span class="glyphicon glyphicon-thumbs-up icn_pos hm2" aria-hidden="true"></span><br>
+						Drugs
+						</a>
+						</li>
+						
+						<li>	
+						<a href="#contact" class="scroll">
+						<span class="glyphicon glyphicon-envelope icn_pos" aria-hidden="true"></span><br>
+						Contact
+						</a>
+						</li>
+						
+						<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							$(".scroll").click(function(event){		
+							event.preventDefault();
+							$('html,body').animate({scrollTop:$(this.hash).offset().top},900);
+							});
+						});
+						</script>
+						
+					</ul>
+					</div>
+					<div class="clearfix"></div>
+					</div>
+				</nav>
 			</div>
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right main-nav">
-					<li><a href="#services">Services</a></li>
-					<li><a href="#hospitals">Hospitals</a></li>
-					<li><a href="#doctors">Doctors</a></li>
-					<li><a href="#drugs">Drugs</a></li>
-					<li><a href="#labs">Labs</a></li>
-					<li><a href="#" data-toggle="modal" data-target="#modal_medics" class="btn btn-blue">Sign Up</a></li>
+			<div class="header_banner">
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+				<!-- Indicators -->
+					<ol class="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+					<li data-target="#myCarousel" data-slide-to="3"></li>
+					</ol>
+
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox">
+					<div class="item active  image-wid">
+					<img src="./images/1a.jpg" alt="..." class="img-responsive">
+					<div class="carousel-caption">
+						<h3>Medical Practitioner Listing</h3>
+						<p>We offer a listing of medical practitioners in various fields all in one place.</p>
+						<button type="button" class="btn btn-info sld">Proceed</button>
+					</div>
+					</div>
+					<div class="item  image-wid">
+					<img src="./images/1d.jpg" alt="..." class="img-responsive">
+					<div class="carousel-caption">
+						<h3>Drug Listing</h3>
+						<p>Get information on where and at what price to get </p>
+						<button type="button" class="btn btn-info sld">Proceed</button>
+					</div>
+					</div>
+					<div class="item  image-wid">
+					<img src="./images/1g.jpg" alt="..." class="img-responsive">
+					<div class="carousel-caption">
+						<h3>Appointment Management</h3>
+						<p>Easily book appointments with medical practitioners.</p>
+						<button type="button" class="btn btn-info sld">Proceed</button>
+					</div>
+					</div>
+					<div class="item  image-wid">
+					<img src="./images/1l.jpg" alt="..." class="img-responsive">
+					<div class="carousel-caption">
+						<h3>Product Listing</h3>
+						<p>Find and order products on offer.</p>
+						<button type="button" class="btn btn-info sld">Read more</button>
+					</div>
+					</div>
+				</div>
+				<!-- Controls -->
+				<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+				</a>
+				<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+				</a>
+				</div>
+			</div>
+		</div>
+		<div class="style-label">
+			<div class="container">
+				<ul class="box-shadow effect2">
+					<li class="col-md-4">
+						<span class="glyphicon glyphicon-leaf flt" aria-hidden="true"></span>
+						<div class="label-text">
+						<h3>Healthcare Provision</h3>
+						<p>We seek to bring the knowledge of available healthcare services to the masses.</p>
+						</div>
+					</li>
+					<li class="col-md-4">
+						<span class="glyphicon glyphicon-eye-open flt" aria-hidden="true"></span>
+						<div class="label-text">
+						<h3>Doctors Consultation</h3>
+						<p>Our system has a module that allows for the easy scheduling and confirmation of doctor's appointments.</p>
+						</div>
+					</li>
+					<li class="col-md-4">
+						<span class="glyphicon glyphicon-pencil flt" aria-hidden="true"></span>
+						<div class="label-text">
+						<h3>Consumer Empowerment</h3>
+						<p>Infor-Med seeks to keep consumers in the know-how on the Recommended Retail Prices of items.</p>
+						</div>
+					</li>
+					<!--<li class="col-md-3">
+						<span class="glyphicon glyphicon-cutlery flt" aria-hidden="true"></span>
+						<div class="label-text">
+						<h3>Diet</h3>
+						<p>Lorem Ipsum is simply dummy text of the printing industry.</p>
+						</div>
+					</li>-->
+					<div class="clearfix"></div>
 				</ul>
 			</div>
-			<!-- /.navbar-collapse -->
 		</div>
-		<!-- /.container-fluid -->
-	</nav>
-	<header id="intro">
-		<div class="container">
-			<div class="table">
-				<div class="header-text">
-					<div class="row">
-						<div class="col-md-12 text-center">
-							<h3 class="light white">Infor-Med</h3>
-							{{fetch('vw_services')}}
-							{{fetched}}
-							<h1 class="white typed">Your reliable healthcare partner</h1>
-							<span class="typed-cursor">.</span>
+		<div class="content">
+			<div class="service_features" id="features">
+				<div class="container">
+					<div class="col-md-4 ser-fet">
+						<h3>Services</h3>
+						<!--<p>We are good at</p>-->
+						<span class="line"></span>
+						<div class="services">
+							<div class="menu-grid">
+								<ul class="menu_drop">
+									<li class="item1 plus"><a href="#" class="active">Pharmaceuticals Listing<span class="caret"></span></a>
+										<ul>
+											<!--<li class="subitem1">
+												<p> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+												Lorem Ipsum is simply dummy text of the printing and typesetting industry</p><br>
+												<p>when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+												It has survived not only five centuries, but also the leap into electronic typesetting</p>
+											</li>-->
+										</ul>
+									</li>
+									<li class="item3 plus"><a href="#" class="active">Hospital Appointments<span class="caret"></span></a>
+										<ul>
+											<!--<li class="subitem1">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry,
+												Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p><br>
+												<p>when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+												It has survived not only five centuries, but also the leap into electronic typesetting</p>
+											</li>-->
+										</ul>
+									</li>
+									<li class="item4 plus"><a href="#" class="active">Hospital Listing<span class="caret"></span></a>
+										<ul>
+											<!--<li class="subitem1">
+												<p> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+												Lorem Ipsum is simply dummy text of the printing and typesetting industry</p><br>
+												<p>when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+												It has survived not only five centuries, but also the leap into electronic typesetting</p>
+											</li>-->
+										</ul>
+									</li>
+									<li class="item4 plus"><a href="#" class="active">Doctor Listing<span class="caret"></span></a>
+										<ul>
+											<!--<li class="subitem1">
+												<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+												Lorem Ipsum is simply dummy text of the printing and typesetting industry</p><br>
+												<p>when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+												It has survived not only five centuries, but also the leap into electronic typesetting</p>
+											</li>-->
+										</ul>
+									</li>
+									
+								</ul>
+								<!-- script for tabs -->
+								<script type="text/javascript">
+									$(function() {
+										var menu_ul = $('.menu_drop > li > ul'),
+											menu_a  = $('.menu_drop > li > a');
+												menu_ul.hide();
+													menu_a.click(function(e) {
+													e.preventDefault();
+													if(!$(this).hasClass('active')) {
+													menu_a.removeClass('active');
+													menu_ul.filter(':visible').slideUp('normal');
+													$(this).addClass('active').next().stop(true,true).slideDown('normal');
+													} else {
+													$(this).removeClass('active');
+												$(this).next().stop(true,true).slideUp('normal');
+											}
+										});
+									});
+								</script>
+							<!-- script for tabs -->
+						</div>
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<section>
-		<div class="cut cut-top"></div>
-		<div class="container">
-			<div class="row intro-tables">
-				<div class="col-md-4">
-					<div class="intro-table intro-table-first">
-						<h5 class="white heading">Services Offered</h5>
-						<div class="owl-carousel owl-schedule bottom">
-							<div class="item">
-								<div class="schedule-row row">
-									<div class="col-xs-6">
-										<h5 class="regular white">Service Listing</h5>
+					<div class="col-md-8 ser-fet">
+						<h3>Features</h3>
+						<!--<p>Our Aim</p>-->
+						<span class="line"></span>
+						<div class="features">
+							<div class="col-md-6 fet-pad">
+								<div class="div-margin">
+									<div class="col-md-3 fet-pad wid">
+										<span class="glyphicon glyphicon-user aim-icn" aria-hidden="true"></span>
 									</div>
-									<div class="col-xs-6 text-right">
-										<h5 class="white">&check;</h5>
+									<div class="col-md-9 fet-pad wid2">
+										<h4>Patient Profile</h4>
+										<!--<p>Lorem Ipsum is simply dummy text of the printing.</p>-->
 									</div>
+									<div class="clearfix"></div>
 								</div>
-								<div class="schedule-row row">
-									<div class="col-xs-6">
-										<h5 class="regular white">Hospital Relations</h5>
+								<div class="div-margin">
+									<div class="col-md-3 fet-pad wid">
+										<span class="glyphicon glyphicon-screenshot aim-icn" aria-hidden="true"></span>
 									</div>
-									<div class="col-xs-6 text-right">
-										<h5 class="white">&check;</h5>
+									<div class="col-md-9 fet-pad wid2">
+										<h4>Advanced Equipment</h4>
+										<!--<p>Lorem Ipsum is simply dummy text of the printing.</p>-->
 									</div>
+									<div class="clearfix"></div>
 								</div>
-								<div class="schedule-row row">
-									<div class="col-xs-6">
-										<h5 class="regular white">Appointment Management</h5>
+								<div class="div-margin">
+									<div class="col-md-3 fet-pad wid">
+										<span class="glyphicon glyphicon-ok aim-icn" aria-hidden="true"></span>
 									</div>
-									<div class="col-xs-6 text-right">
-										<h5 class="white">&check;</h5>
+									<div class="col-md-9 fet-pad wid2">
+										<h4>Operations sucessed</h4>
+										<!--<p>Lorem Ipsum is simply dummy text of the printing.</p>-->
 									</div>
+									<div class="clearfix"></div>
 								</div>
 							</div>
-							<div class="item">
-								<div class="schedule-row row">
-									<div class="col-xs-6">
-										<h5 class="regular white">Comprehensive Search</h5>
+							<div class="col-md-6 fet-pad">
+								<div class="div-margin">
+									<div class="col-md-3 fet-pad wid">
+										<span class="glyphicon glyphicon-piggy-bank aim-icn" aria-hidden="true"></span>
 									</div>
-									<div class="col-xs-6 text-right">
-										<h5 class="white">&check;</h5>
+									<div class="col-md-9 fet-pad wid2">
+										<h4>Health Insurance</h4>
+										<!--<p>Lorem Ipsum is simply dummy text of the printing.</p>-->
 									</div>
+									<div class="clearfix"></div>
 								</div>
-								<div class="schedule-row row">
-									<div class="col-xs-6">
-										<h5 class="regular white">Multiple Account Management</h5>
+								<div class="div-margin">
+									<div class="col-md-3 fet-pad wid">
+										<span class="glyphicon glyphicon-education aim-icn" aria-hidden="true"></span>
 									</div>
-									<div class="col-xs-6 text-right">
-										<h5 class="white">&check;</h5>
+									<div class="col-md-9 fet-pad wid2">
+										<h4>Recognised Doctors</h4>
+										<!--<p>Lorem Ipsum is simply dummy text of the printing.</p>-->
 									</div>
+									<div class="clearfix"></div>
 								</div>
-								<div class="schedule-row row">
-									<div class="col-xs-6">
-										<h5 class="regular white"> Competitive Product Listing</h5>
+								<div class="div-margin">
+									<div class="col-md-3 fet-pad wid">
+										<span class="glyphicon glyphicon-heart aim-icn" aria-hidden="true"></span>
 									</div>
-									<div class="col-xs-6 text-right">
-										<h5 class="white">&check;</h5>
+									<div class="col-md-9 fet-pad wid2">
+										<h4>Satisfaction</h4>
+										<!--<p>Lorem Ipsum is simply dummy text of the printing.</p>-->
 									</div>
+									<div class="clearfix"></div>
 								</div>
-							
-							
 							</div>
+							<div class="clearfix"></div>
 						</div>
 					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="intro-table intro-table-hover">
-						<h5 class="white heading hide-hover">Premium Membership</h5>
-						<div class="bottom">
-							<h4 class="white heading small-heading no-margin regular">Join Infor-Med today</h4>
-							<h4 class="white heading small-pt">20% Discount</h4>
-							<a href="#" class="btn btn-white-fill expand">Register</a>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="intro-table intro-table-third">
-						<h5 class="white heading">Reviews</h5>
-						<div class="owl-testimonials bottom">
-							<div class="item">
-								<h4 class="white heading content">I'm glad that Infor-Med came along to let us find medical services around!</h4>
-								<h5 class="white heading light author">Adam Jordan - farmer</h5>
-							</div>
-							<div class="item">
-								<h4 class="white heading content">Appointment scheduling feature has incresed my appointment reate by over 25% </h4>
-								<h5 class="white heading light author">Greg Pardon - periodontist</h5>
-							</div>
-							<div class="item">
-								<h4 class="white heading content">Infor-Med allows me to find the most affordable places to get reliable medical attention.</h4>
-								<h5 class="white heading light author">Mama Boi - housewife</h5>
-							</div>
-						</div>
-					</div>
+					<div class="clearfix"></div>
 				</div>
 			</div>
-		</div>
-	</section>
-	<section id="services" class="section section-padded">
-		<div class="container">
-			<div class="row text-center title">
-				<h2>Services</h2>
-				<h4 class="light muted">Infor-Med seeks to keep the general public informed of the medical products and services available to them while advicing them on the standard fees charged for them.</h4>
-			</div>
-			<div class="row services">
-				<div class="col-md-4">
-					<div class="service">
-						<div class="icon-holder">
-							<img src="img/icons/heart-blue.png" alt="" class="icon">
-						</div>
-						<h4 class="heading">Healthcare Service Provision</h4>
-						<p class="description">We seek to bring the knowledge of available healthcare services to the masses.</p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="service">
-						<div class="icon-holder">
-							<img src="img/icons/guru-blue.png" alt="" class="icon">
-						</div>
-						<h4 class="heading">Doctors Consultation</h4>
-						<p class="description">Our system has a module that allows for the easy scheduling and confirmation of doctor's appointments; easing the work of patients who seek regular or irregular checkups.</p>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="service">
-						<div class="icon-holder">
-							<img src="img/icons/weight-blue.png" alt="" class="icon">
-						</div>
-						<h4 class="heading">Consumer Empowerment</h4>
-						<p class="description">Infor-Med seeks to keep consumers in the know-how on the Recommended Retail Prices of items.</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="cut cut-bottom"></div>
-	</section>
-	<!--<section id="team" class="section gray-bg">
-		<div class="container">
-			<div class="row title text-center">
-				<h2 class="margin-top">Team</h2>
-				<h4 class="light muted">We're a dream team!</h4>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<div class="team text-center">
-						<div class="cover" style="background:url('img/team/team-cover1.jpg'); background-size:cover;">
-							<div class="overlay text-center">
-								<h3 class="white">$69.00</h3>
-								<h5 class="light light-white">1 - 5 sessions / month</h5>
-							</div>
-						</div>
-						<img src="img/team/team3.jpg" alt="Team Image" class="avatar">
-						<div class="title">
-							<h4>Ben Adamson</h4>
-							<h5 class="muted regular">Fitness Instructor</h5>
-						</div>
-						<button data-toggle="modal" data-target="#modal1" class="btn btn-blue-fill">Sign Up Now</button>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="team text-center">
-						<div class="cover" style="background:url('img/team/team-cover2.jpg'); background-size:cover;">
-							<div class="overlay text-center">
-								<h3 class="white">$69.00</h3>
-								<h5 class="light light-white">1 - 5 sessions / month</h5>
-							</div>
-						</div>
-						<img src="img/team/team1.jpg" alt="Team Image" class="avatar">
-						<div class="title">
-							<h4>Eva Williams</h4>
-							<h5 class="muted regular">Personal Trainer</h5>
-						</div>
-						<a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-blue-fill ripple">Sign Up Now</a>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="team text-center">
-						<div class="cover" style="background:url('img/team/team-cover3.jpg'); background-size:cover;">
-							<div class="overlay text-center">
-								<h3 class="white">$69.00</h3>
-								<h5 class="light light-white">1 - 5 sessions / month</h5>
-							</div>
-						</div>
-						<img src="img/team/team2.jpg" alt="Team Image" class="avatar">
-						<div class="title">
-							<h4>John Phillips</h4>
-							<h5 class="muted regular">Personal Trainer</h5>
-						</div>
-						<a href="#" data-toggle="modal" data-target="#modal1" class="btn btn-blue-fill ripple">Sign Up Now</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>-->
-	<section id="signup" class="section">
-		<div class="container">
-			<div class="row title text-center">
-				<h2 class="margin-top white">Join Us</h2>
-				<h4 class="light white">Choose your user group and get started!</h4>
-			</div>
-			<div class="row no-margin">
-				<div class="col-md-7 no-padding col-md-offset-5 pricings text-center">
-					<div class="pricing">
-						<div class="box-main active" data-img="img/pricing1.jpg">
-							<h4 class="white">Medical Professionals</h4>
-							<h4 class="white regular light strikethrough">KES XXXXX.XX <span class="small-font">/ year</span></h4>
-							<a href="#" data-toggle="modal" data-target="#modal_medics" class="btn btn-white-fill">Sign Up Now</a>
-							<i class="info-icon icon_question"></i>
-						</div>
-						<div class="box-second active">
-							<ul class="white-list text-left">
-								<li>Services and Product Management</li>
-								<li>Appointments portal</li>
-								<li>Hospital Admission Rights</li>
-								<li>Open Dashboard/ Business Card Board</li>
-								<li>Targeted Advertisements </li>
-							</ul>
-						</div>
-					</div>
-					<div class="pricing">
-						<div class="box-main" data-img="img/pricing2.jpg">
-							<h4 class="white">Non Medical Professionals</h4>
-							<h4 class="white regular light">FREE <span class="small-font">/*</span></h4>
-							<a href="#" data-toggle="modal" data-target="#modal_user" class="btn btn-white-fill">Sign Up Now</a>
-							<i class="info-icon icon_question"></i>
-						</div>
-						<div class="box-second">
-							<ul class="white-list text-left">
-								<li>General Drugs Pricing</li>
-								<li>Medical Professional's contacts</li>
-								<li>Simplified Appointment booking</li>
-								<li>Location based Professiona screening</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section class="section section-padded blue-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2">
-					<div class="owl-twitter owl-carousel">
-						<div class="item text-center">
-							<i class="icon fa fa-twitter"></i>
-							<h4 class="white light">Infor_Med helps me know where to buy medicine at the best prices.</h4>
-							<h4 class="light-white light">#medicine #A+ #health</h4>
-						</div>
-						<div class="item text-center">
-							<i class="icon fa fa-twitter"></i>
-							<h4 class="white light">It helps me manage the appointment schedule at my specialized clinic.</h4>
-							<h4 class="light-white light">#health #consultation</h4>
-						</div>
-						<div class="item text-center">
-							<i class="icon fa fa-twitter"></i>
-							<h4 class="white light">It has helped me grow my patient base due to my hospital affiliations for admission.</h4>
-							<h4 class="light-white light">#surgery #medicine #health</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<div class="modal fade" id="modal_user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-popup">
-				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<h3 class="white">User Signup</h3>
-				<form action="" class="popup-form">
-					<!--<input type="text" class="form-control form-white" placeholder="Full Name">
-					<input type="text" class="form-control form-white" placeholder="Email Address">
-					<div class="dropdown">
-						<button id="dLabel" class="form-control form-white dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Pricing Plan
-						</button>
-						<ul class="dropdown-menu animated fadeIn" role="menu" aria-labelledby="dLabel">
-							<li class="animated lightSpeedIn"><a href="#">1 month membership ($150)</a></li>
-							<li class="animated lightSpeedIn"><a href="#">3 month membership ($350)</a></li>
-							<li class="animated lightSpeedIn"><a href="#">1 year membership ($1000)</a></li>
-							<li class="animated lightSpeedIn"><a href="#">Free trial class</a></li>
+		<div class="services" id="acheive">
+			<div class="container top">
+					<h3>Services</h3>
+					<!--script-->
+					<link rel="stylesheet" href="css/swipebox.css">
+					<script src="js/jquery.swipebox.min.js"></script>
+					<script type="text/javascript">
+								jQuery(function($) {
+									$(".swipebox").swipebox();
+								});
+					</script>
+					<!--script-->
+					<div class="gallery-grids">
+						<ul>
+							<li class="col-md-4 gal-alt">
+								<a href="images/1i.jpg" class="swipebox">
+								<img src="images/1i.jpg" alt="/"/>
+									<span class="hide-box">
+										<h4>Laboratory Services</h4>
+										<!--<p>Great transparency Rate</p>-->
+									</span>
+									</a>
+							</li>
+							<li class="col-md-4 gal-alt">
+								<a href="images/1p.jpg" class="swipebox">
+								<img src="images/1p.jpg" alt="/"/>
+									<span class="hide-box">
+										<h4>Radiology Services</h4>
+										<!--<p>Lorem is a dummy Text</p>-->
+									</span>
+								</a>
+							</li>
+							<li class="col-md-4 gal-alt">
+								<a href="images/1n.jpg" class="swipebox">
+								<img src="images/1n.jpg" alt="/" />
+								<span class="hide-box">
+										<h4>Appointment scheduling</h4>
+										<!--<p>Lorem is a dummy Text</p>-->
+								</span>
+								</a>
+							</li>
+							<li class="col-md-4 gal-alt">
+								<a href="images/1k.jpg" class="swipebox">
+								<img src="images/1k.jpg" alt="/" />
+								<span class="hide-box">
+										<h4>Surgery Services</h4>
+										<!--<p>Lorem is a dummy Text</p>-->
+								</span>	
+								</a>
+							</li>
+							<li class="col-md-4 gal-alt">
+								<a href="images/1o.jpg" class="swipebox">
+								<img src="images/1o.jpg" alt="/" />
+								<span class="hide-box">
+										<h4>Equipment Sales</h4>
+										<!--<p>Lorem is a dummy Text</p>-->
+								</span>
+								</a>
+							</li>
+							<li class="col-md-4 gal-alt">
+								<a href="images/1f.jpg" class="swipebox">
+								<img src="images/1f.jpg" alt="/"/>
+								<span class="hide-box">
+										<h4>Venue Renting</h4>
+										<!--<p>Lorem is a dummy Text</p>-->
+								</span>
+								</a>
+							</li>
+							<div class="clearfix"></div>
 						</ul>
-					</div>-->
-
-					<!-- Name -->
-                        <div class="form-group">
-                            <!--<label>Full Name<sup style="color:red">*</sup></label>-->
-                            <input type="text" name="name" class="form-control form-white" 
-                                ng-model="data.users.name"
-                                ng-minlength="3"
-                                ng-maxlength="30"
-                                required placeholder="Full Name">
-                            <!--<div class="help-block" ng-messages="add_user_form.name.$error" ng-if="add_user_form.name.$touched">
-                                <p ng-message="minlength">Please Enter a longer Name.</p>
-                                <p ng-message="maxlength">The name you entered is too long.</p>
-                                <p ng-message="required">A name is required.</p>
-                            </div>-->
-                        </div>          
-                                    
-                        <!-- username -->
-                        <div class="form-group">
-                            <!--<label>Username<sup style="color:red">*</sup></label>-->
-                            <input type="text" name="username" class="form-control form-white" 
-                                ng-model="data.users.username"
-                                ng-minlength="4"
-                                ng-maxlength="15"
-                                required placeholder="username">
-                            <!--<div class="help-block" ng-messages="add_user_form.name.$error" ng-if="add_user_form.name.$touched">
-                                <p ng-message="minlength">Please Enter a valid username.</p>
-                                <p ng-message="maxlength">The username you entered is too long.</p>
-                                <p ng-message="required">A username is required.</p>
-                            </div>-->
-                        </div>
-                        
-                        <!-- password-->
-                        <div class="form-group">
-                            <!--<label>Password<sup style="color:red">*</sup></label>-->
-                            <input type="password" name="password" class="form-control form-white" 
-                                ng-model="data.users.password"
-                                ng-minlength="1"
-                                ng-maxlength="50"
-                                required placeholder="Password">
-                                
-                            <!--<div class="help-block" ng-messages="add_user_form.password.$error" ng-if="add_user_form.password.$touched">
-                                    <p ng-message="minlength">That password is too short.</p>
-                                    <p ng-message="maxlength">That password is too long.</p>
-                                    <p ng-message="required">A password is required.</p>
-                            </div>-->
-                        </div>
-                        
-                        <!-- email -->
-                        <div class="form-group">
-                            <!--<label>Email<sup style="color:red">*</sup></label>-->
-                            <input type="email" name="email" class="form-control form-white" 
-                                ng-model="data.users.email"
-                                ng-pattern="app.isemail"
-                                required placeholder="email">
-                                
-                            <!--<div class="help-block" ng-messages="add_user_form.email.$error" ng-if="add_user_form.email.$touched">
-                                <p ng-message="required">An email address is required for password recovery.</p>
-                                <p ng-message="pattern">Please enter a valid email address</p>
-                            </div>-->
-                        </div>
-                        
-                            <!-- telephone -->
-                        <div class="form-group">
-                            <!--<label>telephone<sup style="color:red">*</sup></label>-->
-                            <input type="tel" name="telephone" class="form-control form-white" 
-                                ng-model="data.users.telephone"
-                                ng-pattern="app.istelephone"
-                                required placeholder="telephone">
-                                
-                            <!--<div class="help-block" ng-messages="add_user_form.telephone.$error" ng-if="add_user_form.telephone.$touched">
-                                <p ng-message="pattern">Please enter a valid telephone number</p>
-                                <p ng-message="required">Please enter a valid telephone number</p>
-                            </div>-->
-                        </div>
-                        
-                        
-
-					<div class="checkbox-holder text-left">
-						<div class="checkbox">
-							<input type="checkbox" value="None" id="squaredOne" name="check" />
-							<label for="squaredOne"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
-						</div>
 					</div>
-
-					<div class="form-group" ng-controller="hospitalCtrl">
-                            <!--<span hidden ng-if="!add_user_form.$invalid">{{data.users=setCreds(data.users)}}</span>-->
-                            
-                            <button 
-							ng-click="add('vw_users',data.users,'response','password',loginRedirect)"
-							class=" btn btn-submit" 
-							ng-disabled="add_user_form.$invalid">
-								Signup</button>
-                        </div>
-					<!--<button type="submit" class="btn btn-submit">Submit</button>-->
-				</form>
 			</div>
 		</div>
-	</div>
+		</div>
 
-	<div class="modal fade" id="modal_medics" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-popup">
-				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<h3 class="white">Medical Professionals' Signup</h3>
-				<form action="" class="popup-form">
-					<!--<input type="text" class="form-control form-white" placeholder="Full Name">
-					<input type="text" class="form-control form-white" placeholder="Email Address">
-					<div class="dropdown">
-						<button id="dLabel" class="form-control form-white dropdown" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Pricing Plan
-						</button>
-						<ul class="dropdown-menu animated fadeIn" role="menu" aria-labelledby="dLabel">
-							<li class="animated lightSpeedIn"><a href="#">1 month membership ($150)</a></li>
-							<li class="animated lightSpeedIn"><a href="#">3 month membership ($350)</a></li>
-							<li class="animated lightSpeedIn"><a href="#">1 year membership ($1000)</a></li>
-							<li class="animated lightSpeedIn"><a href="#">Free trial class</a></li>
+		<!--<div class="doctor-port" id="doc">
+			<h3>Doctors</h3>
+			<!-- requried-jsfiles-for owl --
+			<script src="js/owl.carousel.js"></script>
+			<script>
+				$(document).ready(function() {
+					$("#owl-demo").owlCarousel({
+						items : 4,
+						lazyLoad : true,
+						autoPlay : true,
+						pagination : false,
+					});
+				});
+			</script>
+			<!-- //requried-jsfiles-for owl --
+			<div class="container">
+				<div id="owl-demo" class="owl-carousel text-center">
+					<div class="item g1">
+						<img class="lazyOwl img-responsive" data-src="images/a2.jpg" alt="name">
+						<div class="caption">
+						<h4>Dr.David Warner</h4>
+						<span>Neque porro quisquam est qui dolorem </span>
+						</div>
+					</div>
+					<div class="item g1">
+						<img class="lazyOwl img-responsive" data-src="images/a3.jpg" alt="name">
+						<div class="caption">
+						<h4>Dr.Angelina</h4>
+						<span>Neque porro quisquam est qui dolorem </span>
+						</div>
+					</div>
+					<div class="item g1">
+						<img class="lazyOwl img-responsive" data-src="images/a5.jpg" alt="name">
+						<div class="caption">
+						<h4>Dr.Richard Harrison</h4>
+						<span>Neque porro quisquam est qui dolorem </span>
+						</div>
+					</div>
+					<div class="item g1">
+						<img class="lazyOwl img-responsive" data-src="images/a1.jpg" alt="name">
+						<div class="caption">
+						<h4>Dr.Jane</h4>
+						<span>Neque porro quisquam est qui dolorem </span>
+						</div>
+					</div>
+					<div class="item g1">
+						<img class="lazyOwl img-responsive" data-src="images/a4.jpg" alt="name">
+						<div class="caption">
+						<h4>Dr.Natallie</h4>
+						<span>Neque porro quisquam est qui dolorem </span>
+						</div>
+					</div>
+					<div class="item g1">
+						<img class="lazyOwl img-responsive" data-src="images/a6.jpg" alt="name">
+						<div class="caption ">
+						<h4>Dr.Christiana</h4>
+						<span>Neque porro quisquam est qui dolorem </span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>-->
+
+		<div class="social-label" id="contact">
+				<div class="col-md-4 text-label">
+					<p>Follow, Like, Share us on Social Media.</p>
+				</div>
+					<div class="col-md-8 social-icn">
+						<ul>
+							<li>
+								<a href="#" class="face"></a>
+							</li>
+							<li>
+								<a href="#" class="twit"></a>
+							</li>
+							<li>
+								<a href="#" class="gplus"></a>
+							</li>
+							<li>
+								<a href="#" class="inst"></a>
+							</li>
+							<li>
+								<a href="#" class="drib"></a>
+							</li>
+							<li>
+								<a href="#" class="in"></a>
+							</li>
 						</ul>
-					</div>-->
-
-					<!-- Name -->
-                        <div class="form-group">
-                            <!--<label>Full Name<sup style="color:red">*</sup></label>-->
-                            <input type="text" name="name" class="form-control form-white" 
-                                ng-model="data.users.name"
-                                ng-minlength="3"
-                                ng-maxlength="30"
-                                required placeholder="Full Name">
-                            <!--<div class="help-block" ng-messages="add_user_form.name.$error" ng-if="add_user_form.name.$touched">
-                                <p ng-message="minlength">Please Enter a longer Name.</p>
-                                <p ng-message="maxlength">The name you entered is too long.</p>
-                                <p ng-message="required">A name is required.</p>
-                            </div>-->
-                        </div>          
-                                    
-                        <!-- username -->
-                        <div class="form-group">
-                            <!--<label>Username<sup style="color:red">*</sup></label>-->
-                            <input type="text" name="username" class="form-control form-white" 
-                                ng-model="data.users.username"
-                                ng-minlength="4"
-                                ng-maxlength="15"
-                                required placeholder="username">
-                            <!--<div class="help-block" ng-messages="add_user_form.name.$error" ng-if="add_user_form.name.$touched">
-                                <p ng-message="minlength">Please Enter a valid username.</p>
-                                <p ng-message="maxlength">The username you entered is too long.</p>
-                                <p ng-message="required">A username is required.</p>
-                            </div>-->
-                        </div>
-                        
-                        <!-- password-->
-                        <div class="form-group">
-                            <!--<label>Password<sup style="color:red">*</sup></label>-->
-                            <input type="password" name="password" class="form-control form-white" 
-                                ng-model="data.users.password"
-                                ng-minlength="1"
-                                ng-maxlength="50"
-                                required placeholder="Password">
-                                
-                            <!--<div class="help-block" ng-messages="add_user_form.password.$error" ng-if="add_user_form.password.$touched">
-                                    <p ng-message="minlength">That password is too short.</p>
-                                    <p ng-message="maxlength">That password is too long.</p>
-                                    <p ng-message="required">A password is required.</p>
-                            </div>-->
-                        </div>
-                        
-                        <!-- email -->
-                        <div class="form-group">
-                            <!--<label>Email<sup style="color:red">*</sup></label>-->
-                            <input type="email" name="email" class="form-control form-white" 
-                                ng-model="data.users.email"
-                                ng-pattern="app.isemail"
-                                required placeholder="email">
-                                
-                            <!--<div class="help-block" ng-messages="add_user_form.email.$error" ng-if="add_user_form.email.$touched">
-                                <p ng-message="required">An email address is required for password recovery.</p>
-                                <p ng-message="pattern">Please enter a valid email address</p>
-                            </div>-->
-                        </div>
-                        
-                            <!-- telephone -->
-                        <div class="form-group">
-                            <!--<label>telephone<sup style="color:red">*</sup></label>-->
-                            <input type="tel" name="telephone" class="form-control form-white" 
-                                ng-model="data.users.telephone"
-                                ng-pattern="app.istelephone"
-                                required placeholder="telephone">
-                                
-                            <!--<div class="help-block" ng-messages="add_user_form.telephone.$error" ng-if="add_user_form.telephone.$touched">
-                                <p ng-message="pattern">Please enter a valid telephone number</p>
-                                <p ng-message="required">Please enter a valid telephone number</p>
-                            </div>-->
-                        </div>
-                        
-                        
-
-					<div class="checkbox-holder text-left">
-						<div class="checkbox">
-							<input type="checkbox" value="None" id="squaredOne" name="check" />
-							<label for="squaredOne"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span></label>
-						</div>
 					</div>
-
-					<div class="form-group" ng-controller="hospitalCtrl">
-                            <!--<span hidden ng-if="!add_user_form.$invalid">{{data.users=setCreds(data.users)}}</span>-->
-                            
-                            <button 
-							ng-click="add('vw_users',data.users,'response','password',loginRedirect)"
-							class=" btn btn-submit" 
-							ng-disabled="add_user_form.$invalid">
-								Signup</button>
-                        </div>
-					<!--<button type="submit" class="btn btn-submit">Submit</button>-->
-				</form>
-			</div>
+				<div class="clearfix"></div>
 		</div>
-	</div>
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6 text-center-mobile">
-					<h3 class="white">List your Products on Infor-Med!</h3>
-					<h5 class="light regular light-white">Improve your visibility.</h5>
-					<!--<a href="#" class="btn btn-blue ripple trial-button"></a>-->
-					<a href="#" class="btn btn-blue ripple trial-button">Start Free Trial</a>
-				</div>
-				<div class="col-sm-6 text-center-mobile">
-					<h3 class="white">Server Status: <span class="open-blink" style="color:red !important; "></span></h3>
-					<!--<div class="row opening-hours">
-						<div class="col-sm-6 text-center-mobile">
-							<h5 class="light-white light">Mon - Fri</h5>
-							<h3 class="regular white">9:00 - 22:00</h3>
-						</div>
-						<div class="col-sm-6 text-center-mobile">
-							<h5 class="light-white light">Sat - Sun</h5>
-							<h3 class="regular white">10:00 - 18:00</h3>
-						</div>
-					</div>-->
-				</div>
+		<div class="contact">
+			<div class="map">
+				<!--<iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d190028.76432096347!2d12.535997899999987!3d41.91007110000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f6196f9928ebb%3A0xb90f770693656e38!2sRome%2C+Italy!5e0!3m2!1sen!2sin!4v1436158065010" frameborder="0" style="border:0" allowfullscreen></iframe>-->
 			</div>
-			<div class="row bottom-footer text-center-mobile">
-				<div class="col-sm-8">
-					<p>&copy; <year></year> Infor-Med. Powered by <a href="#">Synetos ICT Solutions</a></p>
-				</div>
-				<div class="col-sm-4 text-right text-center-mobile">
-					<ul class="social-footer">
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-					</ul>
+			<div class="contact-form">
+				<div class="container">
+					<div class="col-md-3 pd adress">
+						<h3>adress</h3>
+						<ul>
+							<li>Nairobi</li>
+							<li>Kenya</li>
+							<li>SomeWhere, someStreet</li>
+							<li>Some Addr</li
+						</ul>
+					</div>
+					<div class="col-md-3 pd news-letter">
+						<h3>newsletter</h3>
+						<p>Enter your e-mail to subscribe our newsletter</p>
+						<form>
+						<input class="mail" type="text" name="email" value="E-mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-mail';}">	
+						<button type="button" class="btn btn-info sub1">Go</button>
+						</form>
+					</div>
+					<div class="col-md-6 pd contact-us">
+						<h3>contact us</h3>
+						<form>
+						<textarea value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Enter your text here...</textarea>
+						<br>
+						<input class="name" type="text" name="name" value="Your name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
+						<input class="nuber" type="text" name="Phone number" value="Phone Number" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Number';}">
+						<button type="button" class="btn btn-info sub1">Send</button>
+						</form>
+					</div>
+					<div class="clearfix"></div>
 				</div>
 			</div>
 		</div>
-	</footer>
-	<!-- Holder for mobile navigation -->
-	<div class="mobile-nav">
-		<ul>
-		</ul>
-		<a href="#" class="close-link"><i class="arrow_up"></i></a>
-	</div>
-	<!-- Scripts -->
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="/framify/resources/angular.min.js"></script>
-	<script src="js/framify-paginate.min.js"></script>
-	<script src="js/ngStorage.min.js"></script>
-	<script src="js/json-formatter.min.js"></script>
-	<script src="js/angular-messages.min.js"></script>
-	<script src="../assets/js/socket.io.min.js"></script>
-	<script src="js/date-formatter.min.js"></script>
-	<script src="js/framify.js"></script>
-
-	<script>$(function(){  var d = new Date(); $("year").html( d.getFullYear() ) });</script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/wow.min.js"></script>
-	<script src="js/typewriter.js"></script>
-	<script src="js/jquery.onepagenav.js"></script>
-	<script src="js/main.js"></script>
-</body>
-
+		<div class="footer">
+			<div class="container">
+				<div class="footer-text">
+				<h3><a href="index.html">Infor-Med</a></h3>
+				<!--<p>&copy; 2016 <a href="http://www.bixbyte.io" target="_blank">Bixbyte Solutions</a></p>-->
+				</div>
+			</div>
+		</div>
+		<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+	</body>
 </html>
+

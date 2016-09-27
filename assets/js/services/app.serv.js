@@ -25,7 +25,22 @@ app.service("app",['$http','$ionicPopup',function( $http, $ionicPopup ){
                 });
         
     };
-      
+
+    //@ CREATE A COPY OF AN OBJECT
+    this.clone = (obj) => {
+        return JSON.parse( JSON.stringify( obj ) );
+    };
+/*
+this.clone = (obj) => {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+}
+*/
+
     //!APPLICATION URL
     //this.url = "http://41.89.162.4:3000";
     this.url = this.hlink;

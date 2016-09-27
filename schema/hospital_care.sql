@@ -354,8 +354,8 @@ FROM services;
 DROP VIEW IF EXISTS vw_service_offerings CASCADE;
 CREATE OR REPLACE VIEW vw_service_offerings AS 
 SELECT 
-service_offerings.service_offering_id, service_offerings.entity, service_offerings.description, service_offerings.purchase, service_offerings.retail, service_offerings.active, 
-entities.title as entity_title, entities.owner as owner, services.title as title, services.type as type, services.rrp as rrp
+service_offerings.service_offering_id, service_offerings.service, service_offerings.entity, service_offerings.description, service_offerings.purchase, service_offerings.retail, service_offerings.active, 
+entities.title as entity_title, entities.owner as owner, services.title as title, entities.telephone as owner_telephone, entities.location, services.type as type, services.rrp as rrp
 FROM service_offerings
     INNER JOIN entities 
         ON service_offerings.entity = entities.entity_id

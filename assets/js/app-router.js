@@ -5,7 +5,7 @@ app.config(["$stateProvider","$urlRouterProvider","ChartJsProvider",function($st
                url          :"/framify",
                templateUrl  : "views/login.html",
                controller   : "appController",
-               cache        : false
+               cache        : true
             }); 
     
     //!THE DYNAMIC ROUTE SETTER
@@ -19,7 +19,7 @@ app.config(["$stateProvider","$urlRouterProvider","ChartJsProvider",function($st
                url          : rData.url,
                templateUrl  : rData.view,
                controller   : rData.controller,
-            cache           : false
+               cache        : true
             });   
             
         });

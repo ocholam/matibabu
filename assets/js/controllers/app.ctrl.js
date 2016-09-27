@@ -572,9 +572,9 @@ app.controller("appController", ['app','$scope','$location','$ionicModal','$root
 //@ INJECT A STANDARD WHERE "Extras" OBJECT
 $scope.addExtras = ( targetObj, extrasObj, subStrings, removeKeys) => {
 
-        targetObj  = targetObj || {};
-        extrasObj  = extrasObj || {};
-            subStrings = subStrings || '';
+        targetObj  = (targetObj)? $scope.app.clone(targetObj) : {};
+        extrasObj  = (extrasObj)? $scope.app.clone(extrasObj) : {};
+        subStrings = subStrings || '';
         removeKeys = removeKeys || '';
 
         var extras = '';

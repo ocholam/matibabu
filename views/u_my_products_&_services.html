@@ -101,8 +101,8 @@
                                 <!--<span hidden>{{data.my_services.owner=storage.user.username}}</span>-->
 
                                 <!--<json-formatter open="1" json="fetched"></json-formatter>-->
-                                <!--<span hidden ng-if="!add_my_service_form.$invalid" >{{(data.my_services= sudo( addExtras(data.my_services,{username: storage.user.username},'username:owner','password,name,email,telephone,account_number,entity,active'),' ' ) ) }}</span>-->
-                                <!--<span hidden ng-if="!add_my_service_form.$invalid">{{data.my_services=sudo(data.my_services,storage.user)}}</span>-->
+                                <span hidden ng-if="!add_my_service_form.$invalid" >{{(data.my_services= sudo( addExtras(data.my_services,{username: storage.user.username},'username:owner','password,name,email,telephone,account_number,entity,active'),' ' ) ) }}</span>
+                                <span hidden ng-if="!add_my_service_form.$invalid">{{data.my_services=sudo(data.my_services,storage.user)}}</span>
                                 <!-- Submit Button -->
                                 <div class="form-group">
                                     <!--!frame.isRoot() ||-->

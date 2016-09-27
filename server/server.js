@@ -11,8 +11,109 @@
 // })();
 
 require("bixbyte-frame");
-var helper = require("sendgrid").mail;
-var sg = require('sendgrid')(process.env.SENDGRID_API_KEY);
+
+/**
+ * MAILGUN EMAIL 
+ * DEFINE YOUR API KEY IN A FILE NAMED mailgun.conf in the config directory
+ * 
+ * the mailgun.conf file in the config directory should look like :
+ * 
+ * module.exports = {
+                    apiKey: "YOUR_MAILGUN_SPECIAL_KEY_GOES_HERE",
+                    domain: "mg.YOUR_DOMAIN.TLD"
+                 };
+ * 
+ */
+var apiKey = require(`${__dirname}/../config/mailgun.conf`);
+var email  = mailgun(apiKey);
+
+/**
+ * sendData should be in the format: 
+ * 
+ * var attch = new mailgun.Attachment({data: filepath, filename: filename});
+ * {
+		from: 'Excited User <me@samples.mailgun.org>',
+		to: 'serobnic@mail.ru',
+		subject: 'Hello',
+		text: 'Testing some Mailgun awesomness!',
+		attachment: attch
+	};
+
+	for more, visit https://www.npmjs.com/package/mailgun-js
+ */
+var sendMail = (sendData) => {
+
+	return new Promise( (resolve,reject) =>{
+
+		email.messages().send(sendData, function (error, body) {
+			if(error){
+				reject(error);
+			}else{
+				resolve(body);
+			}
+		});
+
+	});	
+	
+};
+
+var mailData = {
+					from: `Bixbyte Server Monitor <server_monitor@bixbyte.io>`
+					,to: ['server_monitor@bixbyte.io']
+					,bcc: ['mbaeian@gmail.com']
+					,subject: `Service Started at ${myAddr}:${app.port} `
+					,text: `Hello,\n\nYour service running on ${myAddr} port ${app.port} has just been started.\n\nWe hope that you are enjoying the framify experience.\n\nSincerely:\n\tThe Framify team. `
+					,html: `<font color="gray"><u><h2>YOUR SERVICE IS UP!</u></font></h2>
+							<br>
+							Hello,<br><br>
+							Your service running on  <b>${myAddr}</b> port <b>${app.port}</b> has just been started.
+							<br><br>
+							We hope that you are enjoying the framify experience.
+							<br>
+							<h4>Sincerely:</h4>
+							<br>
+							<i><u>The framify team.</u></i>
+							<br><br><br>
+							`,
+					attachment: `${__dirname}/../favicon.ico`
+				};
+
+var getPassword = (to,link) => {
+	return {
+					from: `Infor-Med Accounts <accounts@bixbyte.io>`
+					,to: to.email
+					,reply_to: 'noreply@bixbyte.io'
+					,subject: `Password Reset Request.`
+					,text: `Hello ${to.name},\n\n Your password reset key is ${link}\n\nWe hope that you are enjoying the infor-med experience.\n\nIf you didn't request for a reset key , please ignore this.\n\nSincerely:\n\tThe Infor-med team. `
+					,html: `<font color="gray"><u><h2>PASSWORD RESET</u></font></h2>
+							<br>
+							Hello ${to.name},<br><br>
+							we at Infor-med have received a password  reset request for your account.
+							<br><br>
+							Your access code is
+
+							<br><br>
+							<bold><span style="background-color: #E6EDF3;padding:10px;">${link}</span></bold>
+
+							<br><br>
+							If you got this email erroneously, please ignore it.
+							<br><br>
+							We hope that you are enjoying the infor-med experience.
+							<br><br>
+							Sincerely:<br>
+							<i>The Infor-med team.</i>
+							<br><br><br>
+							`
+					// ,attachment: `${__dirname}/../favicon.ico`
+			};
+
+};
+
+// sendMail(mailData)
+// .then(d=>c_log(d))
+// .catch(e=>c_log(e));
+
+
 //** SETUP THE PHP CGI
 app.use("/php", php.cgi(`${__dirname}/../php`) );
 
@@ -24,6 +125,17 @@ app.use(express.static( __dirname + '/../'));
 //!ROOT ROUTE
 app.route("/").all(function(req,res){
 	res.sendFile( "index.html");
+});
+
+app.route("/accounts/recovery")
+.all( (req,res) => {
+
+	req.body = keyFormat(req.body,["email","name","token"]);
+	// http://192.168.1.136:1357/#/u_change_password/ianmin2@live.com/153797e5fc6433812172aa8d47ec69e1
+	sendMail( getPassword({ email: req.body.email, name: req.body.name },`${req.body.token}`) )
+	.then( d => res.send( makeResponse( 200, d ) ) )
+	.catch( e => res.send( makeResponse( 500, e ) ) )
+
 });
 
 app.route("/login").all( (req,res) => {

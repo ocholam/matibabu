@@ -1,0 +1,498 @@
+<!doctype html>
+<html ng-app="bixApp" ng-controller="appController">
+	<head>
+		<title>Infor-med: Your reliable healthcare partner </title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="" />
+		<script type="application/x-javascript"> addEventListener("load", function() {setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<!meta charset utf="8">
+		<!--fonts-->
+			<!--<link href='http://fonts.googleapis.com/css?family=Monda:400,700' rel='stylesheet' type='text/css'>-->
+			<!--<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700' rel='stylesheet' type='text/css'>-->
+		<!--fonts-->
+		<!--owlcss-->
+		<link href="css/owl.carousel.css" rel="stylesheet">
+		<!--bootstrap-->
+			<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<!--coustom css-->
+			<link href="css/style.css" rel="stylesheet" type="text/css"/>
+			<link rel="stylesheet" href="css/font-awesome.min.css">
+			<link rel="stylesheet" href="css/chosen.min.css">
+			<link rel="stylesheet" href="css/angular-datatables.min.css">
+		<!--default-js-->
+			<script src="js/jquery-2.1.4.min.js"></script>
+		<!--bootstrap-js-->
+			<script src="js/bootstrap.min.js"></script>
+			<script src="js/chosen.jquery.min.js"></script>
+		<!--script-->
+			<script type="text/javascript" src="js/move-top.js"></script>
+			<script type="text/javascript" src="js/easing.js"></script>
+		<!--script-->
+
+		<link rel="stylesheet" href="css/json-formatter.min.css">
+		<link rel="stylesheet" href="css/chosen.min.css">
+		<script src="/framify/resources/angular.min.js"></script>
+		<script src="js/angular-datatables.min.js"></script>
+		<script src="js/framify-paginate.min.js"></script>
+		<script src="js/ngStorage.min.js"></script>
+		<script src="js/json-formatter.min.js"></script>
+		<script src="js/angular-messages.min.js"></script>
+		<script src="../assets/js/socket.io.min.js"></script>
+		<script src="js/date-formatter.min.js"></script>
+		<script src="js/chosen.jquery.min.js"></script>
+		<script src="js/jquery.dataTables.min.js"></script>
+		script[src=]
+		<script src="js/framify.js"></script>
+
+	</head>
+	<body ng-init="fetch([['vw_entities'],['vw_services'],['vw_service_offerings'],['vw_types']])">
+		<div class="header" id="home">
+			<!--<div class="header-top">
+				<div class="container">
+					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+				</div>
+			</div>-->
+			<!--<div class="header_nav" id="home">
+				<nav class="navbar navbar-default chn-gd">
+					<div class="container">
+				
+					<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand logo-st" href="index.html">Infor-med </a>
+					</div>
+					
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+						<a href="#home" class="scroll">
+						<span class="glyphicon glyphicon-home icn_pos hm" aria-hidden="true"></span><br>
+						Home
+						</a>
+						</li>
+						
+						<li>
+						<a href="#features" class="scroll">
+						<span class="glyphicon glyphicon-cog icn_pos" aria-hidden="true"></span><br>
+						Services
+						</a>
+						</li>
+						
+						<li>
+						<a href="#doc" class="scroll">
+						<span class="glyphicon glyphicon-briefcase icn_pos" aria-hidden="true"></span><br>
+						Doctors
+						</a>
+						</li>
+						
+						<li>
+						<a href="#acheive" class="scroll">
+						<span class="glyphicon glyphicon-thumbs-up icn_pos hm2" aria-hidden="true"></span><br>
+						Drugs
+						</a>
+						</li>
+						
+						<li>	
+						<a href="#contact" class="scroll">
+						<span class="glyphicon glyphicon-envelope icn_pos" aria-hidden="true"></span><br>
+						Contact
+						</a>
+						</li>
+						
+						<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							$(".scroll").click(function(event){		
+							event.preventDefault();
+							$('html,body').animate({scrollTop:$(this.hash).offset().top},900);
+							});
+						});
+						</script>
+						
+					</ul>
+					</div>
+					<div class="clearfix"></div>
+					</div>
+				</nav>
+			</div>-->
+			<div class="header_banner">
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+				<!-- Indicators -->
+					<ol class="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+					<li data-target="#myCarousel" data-slide-to="3"></li>
+					</ol>
+
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox">
+					<div class="item active  image-wid">
+					<img src="./images/1a.jpg" alt="..." class="img-responsive">
+					<div class="carousel-caption">
+						<h3>Medical Practitioner Listing</h3>
+						<p>We offer a listing of medical practitioners in various fields all in one place.</p>
+						<button type="button" class="btn btn-info sld">Proceed</button>
+					</div>
+					</div>
+					<div class="item  image-wid">
+					<img src="./images/1d.jpg" alt="..." class="img-responsive">
+					<div class="carousel-caption">
+						<h3>Drug Listing</h3>
+						<p>Get information on where and at what price to get </p>
+						<button type="button" class="btn btn-info sld">Proceed</button>
+					</div>
+					</div>
+					<div class="item  image-wid">
+					<img src="./images/1g.jpg" alt="..." class="img-responsive">
+					<div class="carousel-caption">
+						<h3>Appointment Management</h3>
+						<p>Easily book appointments with medical practitioners.</p>
+						<button type="button" class="btn btn-info sld">Proceed</button>
+					</div>
+					</div>
+					<div class="item  image-wid">
+					<img src="./images/1l.jpg" alt="..." class="img-responsive">
+					<div class="carousel-caption">
+						<h3>Product Listing</h3>
+						<p>Find and order products on offer.</p>
+						<button type="button" class="btn btn-info sld">Read more</button>
+					</div>
+					</div>
+				</div>
+				<!-- Controls -->
+				<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+				</a>
+				<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+				</a>
+				</div>
+			</div>
+		</div>
+		
+
+		<!--<json-formatter open="1" json="fetched"></json-formatter>-->
+	
+		<div  style="padding:30px;">
+
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#hospitals">Hospitals</a></li>
+				<li><a data-toggle="tab" href="#doctors">Doctors</a></li>
+				<li><a data-toggle="tab" href="#drugs">Products and Services</a></li>
+				<li><a data-toggle="tab" href="#labs">Labs</a></li>
+			</ul>
+			<div class="tab-content">
+				<div id="hospitals" class="tab-pane fade in active">
+				<label class="item item-input pull-left col-lg-5" style="padding-top:10px;">
+					<i class="icon ion-search placeholder-icon"></i>
+					<input type="text" class="" ng-model="search" value="" placeholder="Search"> 
+				</label>
+				<table id="lhospital"  align="center"  class="table table-striped  responsive-table"  name="content">
+					<thead>
+					<tr  style="font-weight:bold; text-transform:uppercase;">                           
+						<th ng-click="sort('title')">Title
+							<span class="icon " ng-show="sortKey=='title'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+						</th>
+						<th ng-click="sort('type_title')">Category
+							<span class="icon " ng-show="sortKey=='type_title'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+						</th>
+						<th ng-click="sort('telephone')">Telephone
+							<span class="icon " ng-show="sortKey=='telephone'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+						</th>
+						<th ng-click="sort('web')">Website
+							<span class="icon " ng-show="sortKey=='web'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+						</th>          
+						<th ng-click="sort('email')">Email
+							<span class="icon" ng-show="sortkey=='email'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span></th>                         
+						<th class="noprint" style="margin:0 auto;text-align:center;"></th>
+					</tr>
+					</thead>
+					<tbody>
+						<form  name="service_edit" novalidate >
+							<tr 
+							dir-paginate="entity in fetched.vw_entities |orderBy:sortKey:reverse|filter:search|itemsPerPage:5" 
+							ng-show="entity.super_type==1" 
+							pagination-id="hospital" >
+								
+									<th scope="row" data-label="Name">{{entity.title}}</th>
+									<td data-label="Category" class="form-group">
+										{{entity.type_title}}
+									</td>
+									<td data-label="Telephone" class="form-group">
+										{{entity.telephone}}
+									</td>
+									<td data-label="Web" class="form-group">
+										{{entity.web}}
+									</td>
+
+									<td data-label="Email" class="form-group">
+										{{entity.email}}
+									</td>
+									
+									<td data-label="" class="noprint" style="margin:0 auto;text-align:center;"> 
+										<!--ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" -->
+										<!--<button                                                 
+											style="border-radius:50%;" 
+											ng-disabled="service_edit.$invalid" 
+											class="btn btn-raised btn-md icon btn-raised ion-checkmark-round btn-success" 
+											style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
+											ng-click="update('services',{ title: service.title, description: service.description, type: service.type, extras: ' service_id=\'{{service.service_id}}\'', token: { user: 'userAdmin', key: '153797e5fc6433812172aa8d47ec69e1', specifics: storage.user  } },'response')" 
+											></button>-->
+									</td>
+								
+							</tr>
+						</form>
+					</tbody>
+				</table>
+				<dir-pagination-controls
+					max-size="5"
+					direction-links="true"
+					pagination-id="hospital"
+					boundary-links="true" >
+				</dir-pagination-controls>
+			</div>
+			<div id="doctors" class="tab-pane fade">
+				<label class="item item-input pull-left col-lg-5" style="padding-top:10px;">
+					<i class="icon ion-search placeholder-icon"></i>
+					<input type="text" class="" ng-model="search" value="" placeholder="Search"> 
+				</label>
+				<table id="doctor"  align="center"  class="table table-striped  responsive-table"  name="content">
+				<thead>
+					<tr  style="font-weight:bold; text-transform:uppercase;">                           
+						<th ng-click="sort('title')">Title
+							<span class="icon " ng-show="sortKey=='title'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+						</th>
+						<th ng-click="sort('type_title')">Category
+							<span class="icon " ng-show="sortKey=='type_title'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+						</th>
+						<th ng-click="sort('telephone')">Telephone
+							<span class="icon " ng-show="sortKey=='telephone'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+						</th>
+						<th ng-click="sort('web')">Website
+							<span class="icon " ng-show="sortKey=='web'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+						</th>          
+						<th ng-click="sort('email')">Email
+							<span class="icon" ng-show="sortkey=='email'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span></th>                         
+						<th class="noprint" style="margin:0 auto;text-align:center;"></th>
+					</tr>
+					</thead>
+					<tbody>
+						<form  name="service_edit" novalidate >
+							<tr 
+							dir-paginate="entity in fetched.vw_entities |orderBy:sortKey:reverse|filter:search|itemsPerPage:5" 
+							ng-show="entity.super_type==2" 
+							pagination-id="doctor" >
+								
+									<th scope="row" data-label="Name">{{entity.title}}</th>
+									<td data-label="Category" class="form-group">
+										{{entity.type_title}}
+									</td>
+									<td data-label="Telephone" class="form-group">
+										{{entity.telephone}}
+									</td>
+									<td data-label="Web" class="form-group">
+										{{entity.web}}
+									</td>
+
+									<td data-label="Email" class="form-group">
+										{{entity.email}}
+									</td>
+									
+									<td data-label="" class="noprint" style="margin:0 auto;text-align:center;"> 
+										<!--ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" -->
+										<!--<button                                                 
+											style="border-radius:50%;" 
+											ng-disabled="service_edit.$invalid" 
+											class="btn btn-raised btn-md icon btn-raised ion-checkmark-round btn-success" 
+											style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
+											ng-click="update('services',{ title: service.title, description: service.description, type: service.type, extras: ' service_id=\'{{service.service_id}}\'', token: { user: 'userAdmin', key: '153797e5fc6433812172aa8d47ec69e1', specifics: storage.user  } },'response')" 
+											></button>-->
+									</td>
+								
+							</tr>
+						</form>
+					</tbody>
+				</table>
+				<dir-pagination-controls
+					max-size="5"
+					direction-links="true"
+					pagination-id="doctor"
+					boundary-links="true" >
+				</dir-pagination-controls>
+			</div>
+			<div id="drugs" class="tab-pane fade">
+
+				<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content" style="padding:20px;">
+						MY CONTENT HERE!
+						</div>
+					</div>
+				</div>
+
+
+				<label class="item item-input pull-left col-lg-5" style="padding-top:10px;">
+					<i class="icon ion-search placeholder-icon"></i>
+					<input type="text" class="" ng-model="search" value="" placeholder="Search"> 
+				</label>
+				<table id="service"  align="center"  class="table table-striped  responsive-table"  name="content">
+					<thead>
+					<tr  style="font-weight:bold; text-transform:uppercase;">                           
+						<th ng-click="sort('title')">Name
+							<span class="icon " ng-show="sortKey=='service_id'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+						</th>
+						<th ng-click="sort('description')">Description
+							<span class="icon " ng-show="sortKey=='title'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+						</th>
+						<th ng-click="sort('rrp')">Recommended Price
+							<span class="icon " ng-show="sortKey=='description'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+						</th>
+						<th>
+
+						</th>
+					</tr>
+					</thead>
+					<tbody>
+					<form  name="service_edit" novalidate >
+					<tr 
+					dir-paginate="service in fetched.vw_services |orderBy:sortKey:reverse|filter:search|itemsPerPage:5" 
+					pagination-id="drugs" >
+						
+							<th scope="row" data-label="Name">{{service.title}}</th>
+							<td data-label="Description" class="form-group">
+								{{service.description}}
+							</td>
+
+							<td data-label="Recommended Price" class="form-group">
+								{{service.rrp}}
+							</td>
+
+							
+							
+							<td data-label="" class="noprint" style="margin:0 auto;text-align:center;"> {{data.temp}}
+								<!--ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" -->
+								<button
+								style=""
+								class="btn btn-success btn-small"
+								data-toggle="modal" data-target=".bs-example-modal-lg">
+								<i class="fa fa-chevron-right"
+								></i>
+								</button>
+
+							</td>
+						
+					</tr>
+					</form>
+					</tbody>
+				</table>
+				<dir-pagination-controls
+					max-size="5"
+					direction-links="true"
+					boundary-links="true"
+					pagination-id="drugs" >
+				</dir-pagination-controls>
+			</div>
+			<div id="labs" class="tab-pane fade">
+				<label class="item item-input pull-left col-lg-5" style="padding-top:10px;">
+					<i class="icon ion-search placeholder-icon"></i>
+					<input type="text" class="" ng-model="search" value="" placeholder="Search"> 
+				</label>
+				<table id="lab"  align="center"  class="table table-striped  responsive-table"  name="content">
+					<thead>
+					<tr  style="font-weight:bold; text-transform:uppercase;">                           
+						<th ng-click="sort('title')">Title
+							<span class="icon " ng-show="sortKey=='title'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+						</th>
+						<th ng-click="sort('type_title')">Category
+							<span class="icon " ng-show="sortKey=='type_title'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+						</th>
+						<th ng-click="sort('telephone')">Telephone
+							<span class="icon " ng-show="sortKey=='telephone'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+						</th>
+						<th ng-click="sort('web')">Website
+							<span class="icon " ng-show="sortKey=='web'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+						</th>          
+						<th ng-click="sort('email')">Email
+							<span class="icon" ng-show="sortkey=='email'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span></th>                         
+						<th class="noprint" style="margin:0 auto;text-align:center;"></th>
+					</tr>
+					</thead>
+					<tbody>
+						<form  name="service_edit" novalidate >
+							<tr 
+							dir-paginate="entity in fetched.vw_entities |orderBy:sortKey:reverse|filter:search|itemsPerPage:5" 
+							pagination-id="lab"
+							ng-show="entity.super_type==3" 
+							>
+								
+									<th scope="row" data-label="Name">{{entity.title}}</th>
+									<td data-label="Category" class="form-group">
+										{{entity.type_title}}
+									</td>
+									<td data-label="Telephone" class="form-group">
+										{{entity.telephone}}
+									</td>
+									<td data-label="Web" class="form-group">
+										{{entity.web}}
+									</td>
+
+									<td data-label="Email" class="form-group">
+										{{entity.email}}
+									</td>
+									
+									<td data-label="" class="noprint" style="margin:0 auto;text-align:center;"> 
+										<!--ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" -->
+										<!--<button                                                 
+											style="border-radius:50%;" 
+											ng-disabled="service_edit.$invalid" 
+											class="btn btn-raised btn-md icon btn-raised ion-checkmark-round btn-success" 
+											style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
+											ng-click="update('services',{ title: service.title, description: service.description, type: service.type, extras: ' service_id=\'{{service.service_id}}\'', token: { user: 'userAdmin', key: '153797e5fc6433812172aa8d47ec69e1', specifics: storage.user  } },'response')" 
+											></button>-->
+									</td>
+								
+							</tr>
+						</form>
+					</tbody>
+				</table>
+				<dir-pagination-controls
+				    pagination-id="lab"
+					max-size="5"
+					direction-links="true"
+					boundary-links="true" >
+				</dir-pagination-controls>
+			</div>	
+		
+		</div>
+
+		</div>
+	
+		<script>
+			$(document).ready(function() {
+				$('#example').DataTable();
+			} );
+		</script>
+
+		<div class="footer">
+			<div class="container">
+				<div class="footer-text">
+				<h3><a href="index.html">Infor-Med</a></h3>
+				<!--<p>&copy; 2016 <a href="http://www.bixbyte.io" target="_blank">Bixbyte Solutions</a></p>-->
+				</div>
+			</div>
+		</div>
+		<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+	</body>
+	<style>
+		th {
+			cursor: pointer;
+		}
+	</style>
+</html>

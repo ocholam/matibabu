@@ -9,5 +9,19 @@ app.service("cgi",[function(){
                     data: data       
                 });
     };
-                
+
+    this.main = function(path,data,cb){
+        console.dir(path)
+                $.ajax({
+                    method: "POST",
+                    url: path,
+                    data: data       
+                }).then(function(d){
+                    console.dir(d);
+                    if(cb && typeof(cb)=='function'){
+                        cb();
+                    }
+                })
+    }
+
 }])
