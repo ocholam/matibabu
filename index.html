@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/css/css.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{nav.title}}</title>
+    <title ng-bind="nav.title"></title>
     
 </head>
 
@@ -32,8 +32,7 @@
                    <a ng-click="$ionicGoBack()" style="font-size:2em;" class="button button-icon icon positive outline light pull-left ion-android-arrow-dropleft"></a>
                 </ion-nav-buttons>
                 
-                <ion-nav-title ng-show="!nav.hasFilters">
-                       {{ nav.title }}
+                <ion-nav-title ng-show="!nav.hasFilters" ng-bind="nav.title">
                 </ion-nav-title>
                 
                 <ion-nav-buttons side="right">
@@ -50,7 +49,7 @@
         <ion-side-menu side="right">
             
 			<header class="bar bar-header bar-positive">
-                <h1 class="title">{{nav.alias}}</h1>
+                <h1 class="title" ng-bind="nav.alias"></h1>
             </header>
             
             <ion-content class="has-header">
@@ -58,8 +57,8 @@
                     <ul class="list">
                         <a class="item dropdown-link dropdown-link--is-large" href="#{{link.url}}" ng-repeat="link in links" ng-show="link.menu == 'true' && ( link.parent == 'false' )">
                            
-                            <i class="material-icons">{{link.icon}}</i>
-                            <span>{{link.title}}</span>
+                            <i class="material-icons" ng-bind="link.icon"></i>
+                            <span ng-bind="link.title"></span>
                             
                         </a>
                         <a class="item dropdown-link dropdown-link--is-large" href="#/admin" >
