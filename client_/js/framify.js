@@ -989,8 +989,9 @@ $scope.addExtras = ( targetObj, extrasObj, subStrings, removeKeys) => {
 // APPLICATION SPECIFIC ADDITIONS
 
 //@ LOAD A SERVICE ONTO THE STAGE
-$scope.service = {};
-$scope.entity  = {};
+$scope.service      = {};
+$scope.myService    = {};
+$scope.entity       = {};
 
 $scope.showService = (serviceData) => {
     $scope.service.available = true;
@@ -998,10 +999,16 @@ $scope.showService = (serviceData) => {
     $scope.$apply();
 };
 
+$scope.setService = (serviceData) => {
+    alert(setService)
+    // $scope.myService = serviceData;
+    // $scope.$apply();
+};
+
 $scope.showEntity = (serviceData) => {
     $scope.entity.available = true;
     $scope.entity.current   = serviceData;
-    $scope.$apply();
+    // $scope.$apply();
 };
 
 //@ Count my entities

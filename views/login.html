@@ -46,6 +46,12 @@
             ng-disabled="loginForm.$invalid">Submit</button>
         </div>
         
+       <div 
+       ng-click="redirect('#/u_change_password/:email/:token')"
+       style="color:#387EF5; cursor:pointer;">
+            Lost Access?
+       </div> 
+
     </form>
     
     </div>

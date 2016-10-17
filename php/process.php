@@ -9,6 +9,26 @@ header("Content-Type:application/json");
 			$this->c  = $connection;
 			
 		}
+
+		//@ SANITIZE THE DATABASE VALUES THAT YOU GET
+		private function sanitize($input){
+			return 	$input;
+			// if(get_magic_quotes_qpc($input)){
+
+			// 	$input = trim($input); // get rid of white space left and right
+			// 	$input = htmlentities($input); // convert symbols to html entities
+			// 	return $input;
+
+			// } else {
+
+			// 	$input = htmlentities($input); // convert symbols to html entities
+			// 	$input = addslashes($input); // server doesn't add slashes, so we will add them to escape ',",\,NULL
+			// 	$input = preg_replace( '|%[a-fA-F0-9][a-fA-F0-9]|', '', $input ); //strip out any % encoded octets
+			// 	return $input;
+
+			// }
+
+		}
 		
 		//@ ADDER FUNCTION
 		public function addFunc( $addData ){
@@ -40,7 +60,7 @@ header("Content-Type:application/json");
 				
 				$field_names  .= $field.",";
 				
-				$field_values .= "'".$values[$pos]."',";
+				$field_values .= "'".$this->sanitize($values[$pos])."',";
 				
 			}
 			
@@ -59,6 +79,7 @@ header("Content-Type:application/json");
 
 			$table  	= $countData["table"];
 			$extras 	= @$countData["extras"];
+			$specifics	= ( @$getData["specifics"] != NULL ) ? $getData["specifics"] : "*";
 			
 			unset( $countData["table"] );
 			unset( $countData["extras"] );
@@ -78,17 +99,24 @@ header("Content-Type:application/json");
 			
 			forEach( $keys as $pos => $field ){
 				
-				array_push($conditions, $field."='".$values[$pos]."'");
+				array_push($conditions, $field."='".$this->sanitize($values[$pos])."'");
 				
 			}
 			$conditions = ( sizeof($conditions) > 0 )? ( " WHERE ".implode(" AND ", $conditions)  ) : "";
 
-			$query = "SELECT count(*) FROM ".$table." ".$conditions."".@$extras;
+			$query = "SELECT count($specifics) FROM ".$table." ".$conditions."".@$extras;
 			
 			//return $this->c->wrapResponse(200,$query,"");
 			$result = $this->c->printQueryResults($query,true,false);
 
-			return $this->c->wrapResponse(200, $result[0]["count"], true );
+			$postgres 	= ( $result[0]["count"] != null && $result[0]["count"] != "" ) ? $result[0]["count"] : $result[0]["count(".$specifics.")"] ;
+			$mysql 		= ( $result[0]["count(*)"] != null && $result[0]["count(*)"] != "" ) ? $result[0]["count(*)"] : $result[0]["count(".$specifics.")"] ;
+
+			$count = ( $result[0]["count"] != null && $result[0]["count"] != "" ) ? $postgres : $mysql;
+
+			// return json_encode( $count );
+
+			return $this->c->wrapResponse(200, $count, true );
 
 		}
 		
@@ -96,7 +124,7 @@ header("Content-Type:application/json");
 		public function getFunc( $getData ){
 			
 			$table  	= $getData["table"];
-			$extras 	= @$getData["extras"];
+			$extras 	= ( @$getData["extras"] != null ) ? $getData['extras'] : " LIMIT 500";
 			$specifics	= ( @$getData["specifics"] != NULL ) ? $getData["specifics"] : "*";
 			
 			unset( $getData["table"] );
@@ -117,7 +145,7 @@ header("Content-Type:application/json");
 			
 			forEach( $keys as $pos => $field ){
 				
-				array_push($conditions, $field."='".$values[$pos]."'");
+				array_push($conditions, $field."='".$this->sanitize($values[$pos])."'");
 				
 			}
 			$conditions = ( sizeof($conditions) > 0 )? ( " WHERE ".implode(" AND ", $conditions)  ) : "";			
@@ -153,7 +181,7 @@ header("Content-Type:application/json");
 			
 			$table  = $deleteData["table"];
 			$extras = @$deleteData["extras"];
-			$specifics	= ( @$deleteData["specifics"] != NULL ) ? $deleteData["specifics"] : "*";
+			//$specifics	= ( @$deleteData["specifics"] != NULL ) ? $deleteData["specifics"] : "*";
 			
 			unset( $deleteData["table"] );
 			unset( $deleteData["extras"] );
@@ -173,13 +201,15 @@ header("Content-Type:application/json");
 			
 			forEach( $keys as $pos => $field ){
 				
-				array_push($conditions, $field."='".$values[$pos]."'");
+				array_push($conditions, $field."='".$this->sanitize($values[$pos])."'");
 				
 			}
 			
-			$conditions = ( sizeof($conditions) > 0 )? ( " WHERE ".implode(" AND ", $conditions)  ) : "";			
 			
-			$query = "DELETE FROM ".$table.$conditions." ".@$extras;
+			$conditions = ( sizeof($conditions) > 0 )? ( implode(" AND ", $conditions)  ) : " null=null ";			
+			
+			//PREVENT THE DELETION OF ALL RECORDS WHERE NO IMPLICIT RULE IS SET {{using WHERE}}
+			$query = "DELETE FROM ".$table." WHERE ".$conditions." ".@$extras;
 			
 			//return $this->c->wrapResponse(200,$query,"");
 			return $this->c->aQuery($query, true, $table." record deleted.","Failed.");
@@ -190,7 +220,7 @@ header("Content-Type:application/json");
 		public function updateFunc( $updateData ){
 		
 			$table  = $updateData["table"];
-			$extras = @$updateData["extras"];
+			$extras = ( @$updateData["extras"] != NULL ) ? $updateData["extras"] : "null=null";
 			
 			unset( $updateData["table"] );
 			unset( $updateData["extras"] );
@@ -212,14 +242,14 @@ header("Content-Type:application/json");
 			
 			forEach( $keys as $pos => $field ){
 				
-				$update_string .= $field."='".$values[$pos]."',";
+				$update_string .= $field."='".$this->sanitize($values[$pos])."',";
 				
 			}
 			
 			$update_string     = rtrim($update_string, ",");
 			
-    
-            		$query = "UPDATE ".$table." SET ".$update_string." WHERE ".@$extras;
+			//PREVENT THE UPDATING OF ALL RECORDS WHERE NO IMPLICIT RULE IS SET {{using WHERE}}
+			$query = "UPDATE ".$table." SET ".$update_string." WHERE ".@$extras;
 			
 			// return $this->c->makeResponse( 200, $query );
 			return $this->c->aQuery( $query, true, $table." record updated.", "Failed.");
