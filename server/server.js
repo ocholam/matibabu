@@ -94,15 +94,15 @@ var genMail = (sendData) => {
 
 var getPassword = (to,link) => {
 	return {
-					from: `Infor-Med Accounts <accounts@bixbyte.io>`
+					from: `Info-Med Accounts <accounts@bixbyte.io>`
 					,to: to.email
 					,reply_to: 'noreply@bixbyte.io'
 					,subject: `Password Reset Request.`
-					,text: `Hello ${to.name},\n\n Your password reset key is ${link}\n\nWe hope that you are enjoying the infor-med experience.\n\nIf you didn't request for a reset key , please ignore this.\n\nSincerely:\n\tThe Infor-med team. `
+					,text: `Hello ${to.name},\n\n Your password reset key is ${link}\n\nWe hope that you are enjoying the Info-Med experience.\n\nIf you didn't request for a reset key , please ignore this.\n\nSincerely:\n\tThe Info-Med team. `
 					,html: `<font color="gray"><u><h2>PASSWORD RESET</u></font></h2>
 							<br>
 							Hello ${to.name},<br><br>
-							we at Infor-med have received a password  reset request for your account.
+							we at Info-Med have received a password  reset request for your account.
 							<br><br>
 							Your access code is
 
@@ -112,10 +112,10 @@ var getPassword = (to,link) => {
 							<br><br>
 							If you got this email erroneously, please ignore it.
 							<br><br>
-							We hope that you are enjoying the infor-med experience.
+							We hope that you are enjoying the Info-Med experience.
 							<br><br>
 							Sincerely:<br>
-							<i>The Infor-med team.</i>
+							<i>The Info-Med team.</i>
 							<br><br><br>
 							`
 					// ,attachment: `${__dirname}/../favicon.ico`
@@ -147,10 +147,19 @@ app.route("/sendMail")
 	genMail(mailParams)
 	.then( (d) => {
 		sendMail(d)
-		.then( sd => res.send( makeResponse(200,sd) ))
-		.catch( ed => res.send( makeResponse(500,ed) ))
+		.then( (sd) => { 			
+			res.send( makeResponse(200,sd) )
+		})
+		.catch( (ed) => { 
+			console.log( "Failed to send email")
+			console.dir(ed)
+			res.send( makeResponse(500, (ed.message || ed ) ) )
+		})
 	})
-	.catch( em => res.send( makeResponse( 500,em) ))
+	.catch( (em) => { 
+		console.log( "Failed to initialize email parameters")
+		res.send( makeResponse( 500,(em.message || em )) ) 
+	})
 })
 
 app.route("/accounts/recovery")

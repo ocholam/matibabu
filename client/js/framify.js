@@ -1,4 +1,56 @@
-    angular.module('bixApp', ['framify-paginate','ngStorage','jsonFormatter','ngMessages'])
+    angular.module('bixApp', ['ui.router','framify-paginate','ngStorage','jsonFormatter','ngMessages'])
+    .config(["$stateProvider", "$urlRouterProvider",function($stateProvider, $urlRouterProvider){
+
+        $stateProvider
+        .state('app',{
+            url:"/app"
+            ,templateUrl: 'views/app.html'
+            ,abstract: 'app.dash'
+            ,controller: 'hospitalCtrl'
+            ,resolve: {
+                currentStats : function($http){
+                    // return $http.get('/currentStats')
+                    //         .then(function(response){
+                    //             return response.data;
+                    //         })
+                    return {};
+                }
+            }
+        })
+
+
+        .state('app.dash',{
+            url: '/dash'
+            ,templateUrl: 'views/dash.html'
+        })
+
+        //@ HOSPITALS ================================>
+        .state('app.hospitals',{
+            url: '/hospitals'
+            ,templateUrl: 'views/hospitals.html'
+        })
+
+        //@ SERVICES ================================>
+        .state('app.services',{
+            url: '/services'
+            ,templateUrl: 'views/services.html'
+        })
+
+        //@ DOCTORS ================================>
+        .state('app.doctors',{
+            url: '/doctors'
+            ,templateUrl: 'views/doctors.html'
+        })
+
+        //@ LABS ================================>
+        .state('app.labs',{
+            url: '/labs'
+            ,templateUrl: 'views/labs.html'
+        })
+        
+        $urlRouterProvider.otherwise("/app/dash");
+
+    }])
 
     .service("app",['$http',function($http){
 
