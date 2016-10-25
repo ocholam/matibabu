@@ -1,5 +1,5 @@
 <framify menu="false" path="u_manage_appointments" url="/u_appointment_management" title="Manage Appointments" parent="false" icon="perm_contact_calendar" controller="appController" ></framify>
-<ion-content scrollbar-x="false" scrollbar-y="false" style="padding-bottom:20px;">
+<ion-content overflow-scroll="true" scrollbar-x="false" scrollbar-y="false" style="padding-bottom:20px;">
 <div class="col-lg-12" id="response" ng-init="fetch([['vw_appointments',{ owner: storage.user.username }]])"></div>
 
 <json-formatter json="fetched.vw_appointments" open="2"></json-formatter>

@@ -1,0 +1,124 @@
+ <div ng-if="bookAppointment" class="container-fluid">
+   
+    <center>
+    <div class="col-lg-12">
+        <form name="form_appointment_book" novalidate>
+            <table class="">
+            <thead>
+                <tr>
+                    <td colspan="2"><center><h3>{{appointmentTitle}} Appointment Scheduling</h3></center></td>
+                </tr>                    
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <label >Name<sup style="color:red">*</sup></label>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <input 
+                            type="text"
+                            name="name" 
+                            class="form-control" 
+                            placeholder="Your Name Here" 
+                            ng-model="data.appointment.name"
+                            required>
+                        <div class="help-block" ng-messages="form_appointment_book.name.$error" ng-if="form_appointment_book.name.$touched">
+                            <p ng-message="required">Please enter your name.</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+                <tr>
+                <td>
+                    <label >Email<sup style="color:red">*</sup></label>
+                </td>
+                <td>
+                    <div class="form-group">
+                    
+                        <input 
+                            type="email" 
+                            name="email"
+                            class="form-control" 
+                            ng-pattern="app.isemail"
+                            placeholder="Your Email" 
+                            ng-model="data.appointment.email"
+                            required>
+                        <div class="help-block" ng-messages="form_appointment_book.email.$error" ng-if="form_appointment_book.email.$touched">
+                            <p ng-message="required">Please enter your email.</p>
+                            <p ng-message="pattern">Enter a valid email.</p>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+                <tr>
+                <td>
+                    <label >Telephone<sup style="color:red">*</sup></label>
+                </td>
+                <td>
+                    <div class="form-group">
+                    
+                        <input 
+                            type="tel" 
+                            name="telephone"
+                            class="form-control" 
+                            ng-pattern="app.istelephone"
+                            placeholder="Your Telephone" 
+                            ng-model="data.appointment.telephone"
+                            required>
+                        <div class="help-block" ng-messages="form_appointment_book.telephone.$error" ng-if="form_appointment_book.telephone.$touched">
+                            <p ng-message="required">Please enter your telephone number.</p>
+                            <p ng-message="pattern">Enter a valid telephone number.</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+                <tr>
+                <td>
+                    <label >Message<sup style="color:red">*</sup></label>
+                </td>
+                <td>
+                        <div class="form-group">
+                    
+                        <textarea 
+                            name="message"
+                            class="form-control"
+                            ng-minlength="15"
+                            placeholder="Your message to the doctor" 
+                            ng-model="data.appointment.message"
+                            required>
+                        </textarea>
+                        <div class="help-block" ng-messages="form_appointment_book.message.$error" ng-if="form_appointment_book.message.$touched">
+                            <p ng-message="required">Please enter an appointment description message.</p>
+                            <p ng-message="minlength">Please type a longer message/description.</p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+                <tr>
+                <td colspan="2">
+                    <span hidden>{{data.appointment.entity=appointmentId}}</span>
+                    <span hidden ng-if="!add_user_form.$invalid">{{data.appointment=setCreds(data.appointment)}}</span>
+                    
+                    <div class="form-group">                        
+                        <button 
+                            class="button button-small button-royal" 
+                            ng-click="add('appointments',data.appointment,'response',null,nextAppointment)"
+                            ng-disabled="form_appointment_book.$invalid"
+                        >Book Appointment</button>
+                        <button 
+                            class="button button-small button-assertive" 
+                            ng-click="clearAppointment()"
+                        >Go Back</button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            </table>
+        </form>
+        
+
+    </div>
+    </center>
+</div>

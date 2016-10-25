@@ -10,7 +10,7 @@
         </h1>
         <h1 class="title" ng-if="!searchSelect.enableSearch">{{ searchSelect.title }}</h1>
     </ion-header-bar>
-    <ion-content>
+    <ion-content overflow-scroll="true">
         <div class="list">
         <div ng-if="searchSelect.keyProperty && searchSelect.valueProperty">
             <ion-radio collection-repeat="option in options | filter: searchSelect.searchvalue" item-height="55px" item-width="100%" ng-value="option[searchSelect.keyProperty]" ng-click="saveOption()" ng-checked="option[searchSelect.selectedProperty]" ng-model="searchSelect.option">

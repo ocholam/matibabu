@@ -53,7 +53,8 @@ class User_Model extends CI_Model {
         // Prepare user password (hash).
         if (isset($user_settings['password'])) {
             $this->load->helper('general');
-            $salt = $this->db->get_where('ea_user_settings', array('id_users' => $user['id']))->row()->salt;
+            // $salt =$this->db->get_where('ea_user_settings', array('id_users' => $user['id']))->row()->salt;
+            $salt = md5("hospital_care_matibabu");
             $user_settings['password'] = hash_password($salt, $user_settings['password']);
         }
 
@@ -89,7 +90,8 @@ class User_Model extends CI_Model {
      */
     public function check_login($username, $password) {
         $this->load->helper('general');
-        $salt = $this->user_model->get_salt($username);
+        // $salt =$this->user_model->get_salt($username);
+        $salt = md5("hospital_care_matibabu");
         $password = hash_password($salt, $password);
 
         $user_data = $this->db
@@ -143,7 +145,8 @@ class User_Model extends CI_Model {
 
         // Create a new password and send it with an email to the given email address.
         $new_password = generate_random_string();
-        $salt = $this->db->get_where('ea_user_settings', array('id_users' => $user_id))->row()->salt;
+        // $salt =$this->db->get_where('ea_user_settings', array('id_users' => $user_id))->row()->salt;
+        $salt = md5("hospital_care_matibabu");
         $hash_password = hash_password($salt, $new_password);
         $this->db->update('ea_user_settings', array('password' => $hash_password), array('id_users' => $user_id));
 

@@ -78,6 +78,20 @@ var mailData = {
 					attachment: `${__dirname}/../favicon.ico`
 				};
 
+var genMail = (sendData) => {
+	return new Promise( (resolve,reject) => {
+		resolve({
+			from : sendData.from
+			,to: [sendData.to]
+			,bcc: sendData.bcc
+			,subject: sendData.subject 
+			,text: sendData.text
+			,html: sendData.html
+			,attachment: sendData.attachment || `${__dirname}/../favicon.ico`
+		})
+	})
+}
+
 var getPassword = (to,link) => {
 	return {
 					from: `Infor-Med Accounts <accounts@bixbyte.io>`
@@ -126,6 +140,18 @@ app.use(express.static( __dirname + '/../'));
 app.route("/").all(function(req,res){
 	res.sendFile( "index.html");
 });
+
+app.route("/sendMail")
+.all( (req,res) => {
+	let mailParams = keyFormat(req.body);
+	genMail(mailParams)
+	.then( (d) => {
+		sendMail(d)
+		.then( sd => res.send( makeResponse(200,sd) ))
+		.catch( ed => res.send( makeResponse(500,ed) ))
+	})
+	.catch( em => res.send( makeResponse( 500,em) ))
+})
 
 app.route("/accounts/recovery")
 .all( (req,res) => {
