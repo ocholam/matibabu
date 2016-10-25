@@ -58,7 +58,8 @@
 		<script src="js/framify.js"></script>
 
 	</head>
-	<body ng-init="fetch([['vw_entities'],['vw_services'],['vw_service_offerings'],['vw_types']])" ng-controller="hospitalCtrl">
+	<!--ng-init="fetch([['vw_entities'],['vw_services'],['vw_service_offerings'],['vw_types']])"-->
+	<body  ng-controller="hospitalCtrl">
 		
 		<div class="header_nav" id="home">
 				<nav class="navbar navbar-default chn-gd">
@@ -77,49 +78,54 @@
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-						<a href="#home" class="scroll">
-						<span class="glyphicon glyphicon-home icn_pos hm" aria-hidden="true"></span><br>
-						Home
-						</a>
+							<a ui-sref="app.dash">
+								<span class="glyphicon glyphicon-home icn_pos hm" aria-hidden="true"></span><br>
+								Home
+							</a>
 						</li>
 						
 						<li>
-						<a ui-sref="app.doctors" >
-						<span class="glyphicon glyphicon-cog icn_pos" aria-hidden="true"></span><br>
-						Doctors
-						</a>
+							<a ui-sref="app.doctors" >
+								<span class="fa fa-stethoscope icn_pos " style="fon-weight:bold;" aria-hidden="true"></span><br>
+								Doctors
+							</a>	
 						</li>
 						
 						<li>
-						<a ui-sref="app.hospitals" >
-						<span class="glyphicon glyphicon-briefcase icn_pos" aria-hidden="true"></span><br>
-						Hospitals
-						</a>
+							<a ui-sref="app.hospitals" >
+								<span class="fa fa-hospital-o icn_pos" aria-hidden="true"></span><br>
+								Hospitals
+							</a>
 						</li>
 
 						<li>	
-						<a ui-sref="app.labs" >
-						<span class="glyphicon glyphicon-envelope icn_pos" aria-hidden="true"></span><br>
-						Labs
-						</a>
+							<a ui-sref="app.labs" >
+								<span class="glyphicon glyphicon-grain icn_pos" aria-hidden="true"></span><br>
+								Labs
+							</a>
 						</li>
 						
 						<li>
-						<a ui-sref="app.services" >
-						<span class="glyphicon glyphicon-thumbs-up icn_pos hm2" aria-hidden="true"></span><br>
-						Services
-						</a>
-						</li>
-						
-						<li style="display:none">
-							<a ui-sref="app.services">
-								<span class="glyphicon glyphicon-thumbs-up icn_pos hm2" aria-hidden="true"></span><br>
+							<a ui-sref="app.services" >
+								<span class="glyphicon glyphicon-thumbs-up icn_pos" aria-hidden="true"></span><br>
 								Services
 							</a>
 						</li>
 						
-						
-						<script type="text/javascript">
+						<li >
+							<a ui-sref="app.services">
+								<span class="glyphicon glyphicon-thumbs-up icn_pos hm2" aria-hidden="true"></span><br>
+								Services
+							</a>
+						</li>											
+					</ul>
+					</div>
+					
+					</div>
+				</nav>
+			</div>
+
+			<script type="text/javascript">
 						jQuery(document).ready(function($) {
 							$(".scroll").click(function(event){		
 							event.preventDefault();
@@ -127,13 +133,7 @@
 							});
 						});
 						</script>
-						
-					</ul>
-					</div>
 					<div class="clearfix"></div>
-					</div>
-				</nav>
-			</div>
 		
 
 	<ui-view></ui-view>
