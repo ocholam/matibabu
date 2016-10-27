@@ -128,6 +128,7 @@
     this.isoDate    = () => new Date().format('isoDate');
     this.newIsoDate = (d) => new Date(d).format('isoDate')
     this.toIsoDate  = dObj => dObj.format('isoDate');
+    this.now        = () => new Date().format('frameTime');
     
     this.monthNum     = () => new Date().format('monthNum');
     this.newMonthNum  = d  => new Date(d).format('monthNum');
@@ -244,10 +245,14 @@
     this.ispassword = /^[-@./\!\$\%\^|#&,+\w\s]{6,50}$/;    
     this.isPassword = prospective_password=>this.ispassword.test( prospective_password );
 
-    //* VALIDATE NUMBERS
+    //*VALIDATE NUMBERS
     this.isnumber = /^-{0,1}\d*\.{0,1}\d+$/;
     this.isNumber = prospective_number=>this.isnumber.test( prospective_number );
 
+
+    //*VALIDATE  DD-MM-YYYY HH:MM e.g 29-02-2013
+    this.isdate = /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[012])-(19|20)[0-9]{2} (2[0-3]|[0-1][0-9]):[0-5][0-9]$/;
+    this.isDate = prospective_date=>this.isdate.test( prospective_date );
 
     //*VALIDATE TELEPHONE NUMBERS
 

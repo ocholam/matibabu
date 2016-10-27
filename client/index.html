@@ -12,32 +12,61 @@
 			<!--<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,300,100,700' rel='stylesheet' type='text/css'>-->
 		<!--fonts-->
 		<!--owlcss-->
+		<style>
+			hr {
+					display: block;
+					margin-top: 0.5em;
+					margin-bottom: 0.5em;
+					margin-left: auto;
+					margin-right: auto;
+					border-style: inset;
+					border-width: 1px;
+				}
+		</style>
 		<link href="css/owl.carousel.css" rel="stylesheet">
 		<!--bootstrap-->
 			<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+			
 		<!--coustom css-->
 			<link href="css/style.css" rel="stylesheet" type="text/css"/>
+			<link rel="stylesheet" href="css/font-awesome.min.css">
 			<link rel="stylesheet" href="css/chosen.min.css">
-			<link rel="stylesheet" href="css/angular-databases.min.css">
+			<link rel="stylesheet" href="css/angular-datatables.min.css">			
+			<link rel="stylesheet" href="css/bootstrap-material-design.min.css">
+			<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
 		<!--default-js-->
 			<script src="js/jquery-2.1.4.min.js"></script>
 		<!--bootstrap-js-->
 			<script src="js/bootstrap.min.js"></script>
-			<script src="angular-databases.min.js"></script>
-			<script src="chosen.jquery.min.js"></script>
+			<script src="js/chosen.jquery.min.js"></script>
 		<!--script-->
 			<script type="text/javascript" src="js/move-top.js"></script>
 			<script type="text/javascript" src="js/easing.js"></script>
 		<!--script-->
+
+		<link rel="stylesheet" href="css/json-formatter.min.css">
+		<link rel="stylesheet" href="css/chosen.min.css">
+		<script src="js/angular.min.js"></script>
+		<script src="js/angular-ui-router.min.js"></script>
+		<script src="js/angular-datatables.min.js"></script>
+		<script src="js/framify-paginate.min.js"></script>
+		<script src="js/ngStorage.min.js"></script>
+		<script src="js/json-formatter.min.js"></script>
+		<script src="js/angular-messages.min.js"></script>
+		<script src="js/socket.io.min.js"></script>
+		<script src="js/date-formatter.min.js"></script>
+		<script src="js/chosen.jquery.min.js"></script>
+		<script src="js/jquery.dataTables.min.js"></script>
+		<script src="js/bootstrap-datetimepicker.min.js"></script>
+		
+		<script src="js/framify.js"></script>
+		
+
 	</head>
-	<body>
-		<div class="header" id="home">
-			<!--<div class="header-top">
-				<div class="container">
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-				</div>
-			</div>-->
-			<div class="header_nav" id="home">
+	<!--ng-init="fetch([['vw_entities'],['vw_services'],['vw_service_offerings'],['vw_types']])"-->
+	<body  ng-controller="hospitalCtrl">
+		
+		<div class="header_nav" id="home">
 				<nav class="navbar navbar-default chn-gd">
 					<div class="container">
 				
@@ -54,500 +83,73 @@
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-						<a href="#home" class="scroll">
-						<span class="glyphicon glyphicon-home icn_pos hm" aria-hidden="true"></span><br>
-						Home
-						</a>
+							<a ui-sref="app.dash">
+								<span class="glyphicon glyphicon-home icn_pos hm" aria-hidden="true"></span><br>
+								Home
+							</a>
 						</li>
 						
 						<li>
-						<a href="#features" class="scroll">
-						<span class="glyphicon glyphicon-cog icn_pos" aria-hidden="true"></span><br>
-						Doctors
-						</a>
+							<a ui-sref="app.doctors" >
+								<span class="fa fa-stethoscope icn_pos " style="fon-weight:bold;" aria-hidden="true"></span><br>
+								Doctors
+							</a>	
 						</li>
 						
 						<li>
-						<a href="#doc" class="scroll">
-						<span class="glyphicon glyphicon-briefcase icn_pos" aria-hidden="true"></span><br>
-						Hospitals
-						</a>
+							<a ui-sref="app.hospitals" >
+								<span class="fa fa-hospital-o icn_pos" aria-hidden="true"></span><br>
+								Hospitals
+							</a>
 						</li>
-						
-						<li>
-						<a href="#acheive" class="scroll">
-						<span class="glyphicon glyphicon-thumbs-up icn_pos hm2" aria-hidden="true"></span><br>
-						Services
-						</a>
-						</li>
-						
+
 						<li>	
-						<a href="#contact" class="scroll">
-						<span class="glyphicon glyphicon-envelope icn_pos" aria-hidden="true"></span><br>
-						Labs
-						</a>
+							<a ui-sref="app.labs" >
+								<span class="glyphicon glyphicon-grain icn_pos" aria-hidden="true"></span><br>
+								Labs
+							</a>
 						</li>
 						
-						<script type="text/javascript">
-						jQuery(document).ready(function($) {
-							$(".scroll").click(function(event){		
-							event.preventDefault();
-							$('html,body').animate({scrollTop:$(this.hash).offset().top},900);
-							});
-						});
-						</script>
+						<li>
+							<a ui-sref="app.services" >
+								<span class="glyphicon glyphicon-thumbs-up icn_pos" aria-hidden="true"></span><br>
+								Services
+							</a>
+						</li>
 						
+						<li >
+							<a href="http://admin.infomed.co.ke">
+								<span class="fa fa-lock icn_pos hm2" aria-hidden="true"></span><br>
+								Admin Panel
+							</a>
+						</li>	
+
 					</ul>
 					</div>
-					<div class="clearfix"></div>
+					
 					</div>
 				</nav>
 			</div>
-			<div class="header_banner">
-				<div id="myCarousel" class="carousel slide" data-ride="carousel">
-				<!-- Indicators -->
-					<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-					<li data-target="#myCarousel" data-slide-to="3"></li>
-					</ol>
 
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner" role="listbox">
-					<div class="item active  image-wid">
-					<img src="./images/1a.jpg" alt="..." class="img-responsive">
-					<div class="carousel-caption">
-						<h3>Medical Practitioner Listing</h3>
-						<p>We offer a listing of medical practitioners in various fields all in one place.</p>
-						<button type="button" class="btn btn-info sld">Proceed</button>
-					</div>
-					</div>
-					<div class="item  image-wid">
-					<img src="./images/1d.jpg" alt="..." class="img-responsive">
-					<div class="carousel-caption">
-						<h3>Drug Listing</h3>
-						<p>Get information on where and at what price to get </p>
-						<button type="button" class="btn btn-info sld">Proceed</button>
-					</div>
-					</div>
-					<div class="item  image-wid">
-					<img src="./images/1g.jpg" alt="..." class="img-responsive">
-					<div class="carousel-caption">
-						<h3>Appointment Management</h3>
-						<p>Easily book appointments with medical practitioners.</p>
-						<button type="button" class="btn btn-info sld">Proceed</button>
-					</div>
-					</div>
-					<div class="item  image-wid">
-					<img src="./images/1l.jpg" alt="..." class="img-responsive">
-					<div class="carousel-caption">
-						<h3>Product Listing</h3>
-						<p>Find and order products on offer.</p>
-						<button type="button" class="btn btn-info sld">Read more</button>
-					</div>
-					</div>
-				</div>
-				<!-- Controls -->
-				<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-				</a>
-				<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-				</a>
-				</div>
-			</div>
-		</div>
-		<div class="style-label">
-			<div class="container">
-				<ul class="box-shadow effect2">
-					<li class="col-md-4">
-						<span class="glyphicon glyphicon-leaf flt" aria-hidden="true"></span>
-						<div class="label-text">
-						<h3>Healthcare Provision</h3>
-						<p>We seek to bring the knowledge of available healthcare services to the masses.</p>
-						</div>
-					</li>
-					<li class="col-md-4">
-						<span class="glyphicon glyphicon-eye-open flt" aria-hidden="true"></span>
-						<div class="label-text">
-						<h3>Doctors Consultation</h3>
-						<p>Our system has a module that allows for the easy scheduling and confirmation of doctor's appointments.</p>
-						</div>
-					</li>
-					<li class="col-md-4">
-						<span class="glyphicon glyphicon-pencil flt" aria-hidden="true"></span>
-						<div class="label-text">
-						<h3>Consumer Empowerment</h3>
-						<p>Info-Med seeks to keep consumers in the know-how on the Recommended Retail Prices of items.</p>
-						</div>
-					</li>
-					<!--<li class="col-md-3">
-						<span class="glyphicon glyphicon-cutlery flt" aria-hidden="true"></span>
-						<div class="label-text">
-						<h3>Diet</h3>
-						<p>Lorem Ipsum is simply dummy text of the printing industry.</p>
-						</div>
-					</li>-->
 					<div class="clearfix"></div>
-				</ul>
-			</div>
-		</div>
-		<div class="content">
-			<div class="service_features" id="features">
-				<div class="container">
-					<div class="col-md-4 ser-fet">
-						<h3>Services</h3>
-						<!--<p>We are good at</p>-->
-						<span class="line"></span>
-						<div class="services">
-							<div class="menu-grid">
-								<ul class="menu_drop">
-									<li class="item1 plus"><a href="#" class="active">Pharmaceuticals Listing<span class="caret"></span></a>
-										<ul>
-											<!--<li class="subitem1">
-												<p> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-												Lorem Ipsum is simply dummy text of the printing and typesetting industry</p><br>
-												<p>when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-												It has survived not only five centuries, but also the leap into electronic typesetting</p>
-											</li>-->
-										</ul>
-									</li>
-									<li class="item3 plus"><a href="#" class="active">Hospital Appointments<span class="caret"></span></a>
-										<ul>
-											<!--<li class="subitem1">
-												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry,
-												Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p><br>
-												<p>when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-												It has survived not only five centuries, but also the leap into electronic typesetting</p>
-											</li>-->
-										</ul>
-									</li>
-									<li class="item4 plus"><a href="#" class="active">Hospital Listing<span class="caret"></span></a>
-										<ul>
-											<!--<li class="subitem1">
-												<p> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-												Lorem Ipsum is simply dummy text of the printing and typesetting industry</p><br>
-												<p>when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-												It has survived not only five centuries, but also the leap into electronic typesetting</p>
-											</li>-->
-										</ul>
-									</li>
-									<li class="item4 plus"><a href="#" class="active">Doctor Listing<span class="caret"></span></a>
-										<ul>
-											<!--<li class="subitem1">
-												<p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-												Lorem Ipsum is simply dummy text of the printing and typesetting industry</p><br>
-												<p>when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-												It has survived not only five centuries, but also the leap into electronic typesetting</p>
-											</li>-->
-										</ul>
-									</li>
-									
-								</ul>
-								<!-- script for tabs -->
-								<script type="text/javascript">
-									$(function() {
-										var menu_ul = $('.menu_drop > li > ul'),
-											menu_a  = $('.menu_drop > li > a');
-												menu_ul.hide();
-													menu_a.click(function(e) {
-													e.preventDefault();
-													if(!$(this).hasClass('active')) {
-													menu_a.removeClass('active');
-													menu_ul.filter(':visible').slideUp('normal');
-													$(this).addClass('active').next().stop(true,true).slideDown('normal');
-													} else {
-													$(this).removeClass('active');
-												$(this).next().stop(true,true).slideUp('normal');
-											}
-										});
-									});
-								</script>
-							<!-- script for tabs -->
-						</div>
-						</div>
-					</div>
-					<div class="col-md-8 ser-fet">
-						<h3>Features</h3>
-						<!--<p>Our Aim</p>-->
-						<span class="line"></span>
-						<div class="features">
-							<div class="col-md-6 fet-pad">
-								<div class="div-margin">
-									<div class="col-md-3 fet-pad wid">
-										<span class="glyphicon glyphicon-user aim-icn" aria-hidden="true"></span>
-									</div>
-									<div class="col-md-9 fet-pad wid2">
-										<h4>Patient Profile</h4>
-										<!--<p>Lorem Ipsum is simply dummy text of the printing.</p>-->
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="div-margin">
-									<div class="col-md-3 fet-pad wid">
-										<span class="glyphicon glyphicon-screenshot aim-icn" aria-hidden="true"></span>
-									</div>
-									<div class="col-md-9 fet-pad wid2">
-										<h4>Advanced Equipment</h4>
-										<!--<p>Lorem Ipsum is simply dummy text of the printing.</p>-->
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="div-margin">
-									<div class="col-md-3 fet-pad wid">
-										<span class="glyphicon glyphicon-ok aim-icn" aria-hidden="true"></span>
-									</div>
-									<div class="col-md-9 fet-pad wid2">
-										<h4>Operations sucessed</h4>
-										<!--<p>Lorem Ipsum is simply dummy text of the printing.</p>-->
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="col-md-6 fet-pad">
-								<div class="div-margin">
-									<div class="col-md-3 fet-pad wid">
-										<span class="glyphicon glyphicon-piggy-bank aim-icn" aria-hidden="true"></span>
-									</div>
-									<div class="col-md-9 fet-pad wid2">
-										<h4>Health Insurance</h4>
-										<!--<p>Lorem Ipsum is simply dummy text of the printing.</p>-->
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="div-margin">
-									<div class="col-md-3 fet-pad wid">
-										<span class="glyphicon glyphicon-education aim-icn" aria-hidden="true"></span>
-									</div>
-									<div class="col-md-9 fet-pad wid2">
-										<h4>Recognised Doctors</h4>
-										<!--<p>Lorem Ipsum is simply dummy text of the printing.</p>-->
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="div-margin">
-									<div class="col-md-3 fet-pad wid">
-										<span class="glyphicon glyphicon-heart aim-icn" aria-hidden="true"></span>
-									</div>
-									<div class="col-md-9 fet-pad wid2">
-										<h4>Satisfaction</h4>
-										<!--<p>Lorem Ipsum is simply dummy text of the printing.</p>-->
-									</div>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		<div class="services" id="acheive">
-			<div class="container top">
-					<h3>Services</h3>
-					<!--script-->
-					<link rel="stylesheet" href="css/swipebox.css">
-					<script src="js/jquery.swipebox.min.js"></script>
-					<script type="text/javascript">
-								jQuery(function($) {
-									$(".swipebox").swipebox();
-								});
-					</script>
-					<!--script-->
-					<div class="gallery-grids">
-						<ul>
-							<li class="col-md-4 gal-alt">
-								<a href="images/1i.jpg" class="swipebox">
-								<img src="images/1i.jpg" alt="/"/>
-									<span class="hide-box">
-										<h4>Laboratory Services</h4>
-										<!--<p>Great transparency Rate</p>-->
-									</span>
-									</a>
-							</li>
-							<li class="col-md-4 gal-alt">
-								<a href="images/1p.jpg" class="swipebox">
-								<img src="images/1p.jpg" alt="/"/>
-									<span class="hide-box">
-										<h4>Radiology Services</h4>
-										<!--<p>Lorem is a dummy Text</p>-->
-									</span>
-								</a>
-							</li>
-							<li class="col-md-4 gal-alt">
-								<a href="images/1n.jpg" class="swipebox">
-								<img src="images/1n.jpg" alt="/" />
-								<span class="hide-box">
-										<h4>Appointment scheduling</h4>
-										<!--<p>Lorem is a dummy Text</p>-->
-								</span>
-								</a>
-							</li>
-							<li class="col-md-4 gal-alt">
-								<a href="images/1k.jpg" class="swipebox">
-								<img src="images/1k.jpg" alt="/" />
-								<span class="hide-box">
-										<h4>Surgery Services</h4>
-										<!--<p>Lorem is a dummy Text</p>-->
-								</span>	
-								</a>
-							</li>
-							<li class="col-md-4 gal-alt">
-								<a href="images/1o.jpg" class="swipebox">
-								<img src="images/1o.jpg" alt="/" />
-								<span class="hide-box">
-										<h4>Equipment Sales</h4>
-										<!--<p>Lorem is a dummy Text</p>-->
-								</span>
-								</a>
-							</li>
-							<li class="col-md-4 gal-alt">
-								<a href="images/1f.jpg" class="swipebox">
-								<img src="images/1f.jpg" alt="/"/>
-								<span class="hide-box">
-										<h4>Venue Renting</h4>
-										<!--<p>Lorem is a dummy Text</p>-->
-								</span>
-								</a>
-							</li>
-							<div class="clearfix"></div>
-						</ul>
-					</div>
-			</div>
-		</div>
-		</div>
+		
 
-		<!--<div class="doctor-port" id="doc">
-			<h3>Doctors</h3>
-			<!-- requried-jsfiles-for owl --
-			<script src="js/owl.carousel.js"></script>
-			<script>
-				$(document).ready(function() {
-					$("#owl-demo").owlCarousel({
-						items : 4,
-						lazyLoad : true,
-						autoPlay : true,
-						pagination : false,
+		
+	<ui-view></ui-view>
+		
+	
+		<script>
+			jQuery(document).ready(function($) {
+					$('.table').DataTable();					
+					$(".scroll").click(function(event){		
+						event.preventDefault();
+						$('html,body').animate({scrollTop:$(this.hash).offset().top},900);
 					});
-				});
-			</script>
-			<!-- //requried-jsfiles-for owl --
-			<div class="container">
-				<div id="owl-demo" class="owl-carousel text-center">
-					<div class="item g1">
-						<img class="lazyOwl img-responsive" data-src="images/a2.jpg" alt="name">
-						<div class="caption">
-						<h4>Dr.David Warner</h4>
-						<span>Neque porro quisquam est qui dolorem </span>
-						</div>
-					</div>
-					<div class="item g1">
-						<img class="lazyOwl img-responsive" data-src="images/a3.jpg" alt="name">
-						<div class="caption">
-						<h4>Dr.Angelina</h4>
-						<span>Neque porro quisquam est qui dolorem </span>
-						</div>
-					</div>
-					<div class="item g1">
-						<img class="lazyOwl img-responsive" data-src="images/a5.jpg" alt="name">
-						<div class="caption">
-						<h4>Dr.Richard Harrison</h4>
-						<span>Neque porro quisquam est qui dolorem </span>
-						</div>
-					</div>
-					<div class="item g1">
-						<img class="lazyOwl img-responsive" data-src="images/a1.jpg" alt="name">
-						<div class="caption">
-						<h4>Dr.Jane</h4>
-						<span>Neque porro quisquam est qui dolorem </span>
-						</div>
-					</div>
-					<div class="item g1">
-						<img class="lazyOwl img-responsive" data-src="images/a4.jpg" alt="name">
-						<div class="caption">
-						<h4>Dr.Natallie</h4>
-						<span>Neque porro quisquam est qui dolorem </span>
-						</div>
-					</div>
-					<div class="item g1">
-						<img class="lazyOwl img-responsive" data-src="images/a6.jpg" alt="name">
-						<div class="caption ">
-						<h4>Dr.Christiana</h4>
-						<span>Neque porro quisquam est qui dolorem </span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>-->
+					
+			});
+			
+		</script>
 
-		<div class="social-label" id="contact">
-				<div class="col-md-4 text-label">
-					<p>Follow, Like, Share us on Social Media.</p>
-				</div>
-					<div class="col-md-8 social-icn">
-						<ul>
-							<li>
-								<a href="#" class="face"></a>
-							</li>
-							<li>
-								<a href="#" class="twit"></a>
-							</li>
-							<li>
-								<a href="#" class="gplus"></a>
-							</li>
-							<li>
-								<a href="#" class="inst"></a>
-							</li>
-							<li>
-								<a href="#" class="drib"></a>
-							</li>
-							<li>
-								<a href="#" class="in"></a>
-							</li>
-						</ul>
-					</div>
-				<div class="clearfix"></div>
-		</div>
-		<div class="contact">
-			<div class="map">
-				<!--<iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d190028.76432096347!2d12.535997899999987!3d41.91007110000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f6196f9928ebb%3A0xb90f770693656e38!2sRome%2C+Italy!5e0!3m2!1sen!2sin!4v1436158065010" frameborder="0" style="border:0" allowfullscreen></iframe>-->
-			</div>
-			<div class="contact-form">
-				<div class="container">
-					<div class="col-md-3 pd adress">
-						<h3>adress</h3>
-						<ul>
-							<li>Nairobi</li>
-							<li>Kenya</li>
-							<li>SomeWhere, someStreet</li>
-							<li>Some Addr</li
-						</ul>
-					</div>
-					<div class="col-md-3 pd news-letter">
-						<h3>newsletter</h3>
-						<p>Enter your e-mail to subscribe our newsletter</p>
-						<form>
-						<input class="mail" type="text" name="email" value="E-mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-mail';}">	
-						<button type="button" class="btn btn-info sub1">Go</button>
-						</form>
-					</div>
-					<div class="col-md-6 pd contact-us">
-						<h3>contact us</h3>
-						<form>
-						<textarea value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Enter your text here...</textarea>
-						<br>
-						<input class="name" type="text" name="name" value="Your name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}">
-						<input class="nuber" type="text" name="Phone number" value="Phone Number" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Number';}">
-						<button type="button" class="btn btn-info sub1">Send</button>
-						</form>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
 		<div class="footer">
 			<div class="container">
 				<div class="footer-text">
@@ -558,5 +160,13 @@
 		</div>
 		<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 	</body>
-</html>
 
+
+
+
+	<style>
+		th {
+			cursor: pointer;
+		}
+	</style>
+</html>
