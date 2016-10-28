@@ -124,7 +124,7 @@ header("Content-Type:application/json");
 		public function getFunc( $getData ){
 			
 			$table  	= $getData["table"];
-			$extras 	= ( @$getData["extras"] != null ) ? $getData['extras'] : " LIMIT 500";
+			$extras 	= ( @$getData["extras"] != null ) ? $getData['extras'] : " LIMIT 100000";
 			$specifics	= ( @$getData["specifics"] != NULL ) ? $getData["specifics"] : "*";
 			
 			unset( $getData["table"] );

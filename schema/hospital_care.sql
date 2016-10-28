@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS types (
     title        varchar(100) NOT NULL CONSTRAINT unique_type UNIQUE,
     active       boolean DEFAULT true
 );
-INSERT INTO types (title) VALUES ('Hospitals'),('Doctors'),('Labs'),('');
+INSERT INTO types (title) VALUES ('Hospitals'),('Doctors'),('Labs'),('Others');
 
 --- SUB_TYPES
 DROP TABLE IF EXISTS sub_types CASCADE;
@@ -112,22 +112,23 @@ CREATE TABLE IF NOT EXISTS appointments (
     added_on            timestamp DEFAULT CURRENT_TIMESTAMP,
     active              boolean DEFAULT true,
     confirmed           boolean,
-    scheduled           date
+    scheduled           timestamp WITHOUT TIME ZONE
 );
 
 --- SERVICES / PRODUCTS
 DROP TABLE IF EXISTS services CASCADE;
 CREATE TABLE IF NOT EXISTS services (
     service_id          bigserial PRIMARY KEY,
-    title               varchar(50),
+    title               varchar(255),
     description         text,
     type                varchar(1) NOT NULL DEFAULT 's',
+    offerer     bigint CONSTRAINT required_service_offerer REFERENCES types(type_id) DEFAULT 1,
     active              boolean DEFAULT true,
+    purchase            integer DEFAULT 0,
     rrp                 integer DEFAULT 0,
     added_on            timestamp DEFAULT CURRENT_TIMESTAMP
 );
-INSERT INTO services ( title,description,type,active,rrp )
-VALUES ( 'Tooth Extraction','Children and adult tooth extraction','s',true,'2500' );
+
 
 --- SERVICE_OFFERINGS / PRODUCT_OFFERINGS
 DROP TABLE IF EXISTS service_offerings CASCADE;
@@ -347,7 +348,8 @@ FROM admission_rights
 DROP VIEW IF EXISTS vw_services CASCADE;
 CREATE OR REPLACE VIEW vw_services AS 
 SELECT 
-service_id,title,description,type,active,rrp,added_on 
+service_id,title,description,type,active,rrp,added_on, offerer, purchase,
+( SELECT types.title FROM types WHERE services.offerer = types.type_id) AS offerer_name
 FROM services;
 
 -- VW_SERVICE_OFFERINGS

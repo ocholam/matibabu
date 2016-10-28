@@ -1119,7 +1119,13 @@ $scope.showEntity = (serviceData) => {
 
     //@ REDIRECT USER TO LOGIN PAGE
     $scope.loginRedirect = () => {
-        window.location = "/#/login";
+        window.location = "http://admin.infomed.co.ke/#/login";
+    };
+
+    $scope.ConfirmJoin = () => {
+
+        // data.users;
+
     };
 
     //@ SETUP USER CREDENTIALS FOR USER SIGNUP
