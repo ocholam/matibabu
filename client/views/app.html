@@ -393,8 +393,9 @@
 							<td>
 								<div class="form-group ">
 									<!--<span hidden>{{ data.appointment.sheduled_date = 2016-11-01 10:05 }}</span>-->
-									<!--id="datetimepicker"-->
+									<!---->
 									<input 
+									id="datetimepicker"
 									type="text" 
 									name="scheduled"
 									placeholder="DD-MM-YYYY hh:mm"
@@ -405,7 +406,7 @@
 									required>	
 
 									<!--form_appointment_book.scheduled.$touched-->
-									<div class="help-block" ng-messages="form_appointment_book.scheduled.$error" ng-if="true">
+									<div class="help-block" ng-messages="form_appointment_book.scheduled.$error" ng-if="form_appointment_book.scheduled.$touched">
 										<p ng-message="required">Please enter an appointment date in the format <font color="#309BBE">DD-MM-YYYY hh:mm</font></p>
 										<p ng-message="pattern">Please Enter a  date time in the format <font color="#309BBE">DD-MM-YYYY hh:mm</font>
 											<br> e.g <font color="green">{{app.now()}}</font> 
@@ -417,7 +418,8 @@
 
 
 									<script>
-										$('#datetimepicker').datetimepicker();
+										//$('#datetimepicker').datetimepicker();
+										$('#datetimepicker').bootstrapMaterialDatePicker({ format : 'DD-MM-YYYY HH:mm' }); 
 									</script>
 									
 									
