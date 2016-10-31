@@ -27,6 +27,7 @@ tests/**
 
 #! Ignore the video folder
 video/**
+**video/**
 
 #! Ignore all webkit builder folders
 **webkit**
