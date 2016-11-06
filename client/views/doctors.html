@@ -50,13 +50,17 @@
                         </td>  
                         <td data-label="" class="noprint" style="margin:0 auto;text-align:center;"> 
                             <!--ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" -->
-                            <!--<button                                                 
+                              <!--ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" -->
+                               <button                                                 
                                 style="border-radius:50%;" 
-                                ng-disabled="service_edit.$invalid" 
-                                class="btn btn-raised btn-md icon btn-raised ion-checkmark-round btn-success" 
+                                ng-disabled="false" 
+                                class="btn btn-sm btn-primary" 
+                                
                                 style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
-                                ng-click="update('services',{ title: service.title, description: service.description, type: service.type, extras: ' service_id=\'{{service.service_id}}\'', token: { user: 'userAdmin', key: '153797e5fc6433812172aa8d47ec69e1', specifics: storage.user  } },'response')" 
-                                ></button>-->
+                                ng-click="setAppointment(entity)" 
+                                data-toggle="modal" data-target="#appointment_booking"
+                                ><i class="fa  fa-calendar-plus-o"></i></button>
+                        </td>
                         </td>
                     
                 </tr>
