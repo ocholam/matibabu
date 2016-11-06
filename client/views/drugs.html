@@ -1,12 +1,12 @@
 <h3 style="background-color:#309BBE; padding:10px;color:white">
-    Service Listing
+    Drug Listing
 </h3>
 <!--DRUGS-->
 <script>
     $("#services_img,#appointments_img,#drugs_img,#doctors_img").removeClass("active")
-    $("#services_img").addClass("active")
+    $("#drugs_img").addClass("active")
 </script>
-<div ng-init="fetch([['vw_services',{type:'s',active:true}],['vw_service_offerings',{active:true}],['vw_types']])" id="services" class="">
+<div ng-init="fetch([['vw_services', {type:'p'}],['vw_service_offerings',{active:true}],['vw_types']])" id="drugs" class="">
 
     <label class="item item-input pull-left col-lg-5" style="padding-top:10px;">
         <i class="icon ion-search placeholder-icon"></i>
@@ -21,9 +21,14 @@
             <th ng-click="sort('description')">Description
                 <span class="icon " ng-show="sortKey=='title'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
             </th>
-           
+            <th ng-click="sort('rrp')">Recommended Price
+                <span class="icon " ng-show="sortKey=='description'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
+            </th>
             <th>
-                Find Professionals
+                Find Retailers
+            </th>
+            <th>
+
             </th>
         </tr>
         </thead>
@@ -31,10 +36,9 @@
         <form  name="service_edit" novalidate >
         <tr 
         dir-paginate="service in fetched.vw_services |orderBy:sortKey:reverse|filter:search|itemsPerPage:5" 
-        pagination-id="services"
+        pagination-id="drugs"
         >
-            
-                <th ng-if="service.type=='s'"
+                <th ng-if="service.type=='p'"
                 scope="row" 
                 data-label="Name"
                 style="text-transform:capitalize;"
@@ -42,14 +46,24 @@
                 <!--<json-formatter json="service" open="1"></json-formatter>-->
                     {{service.title }}
                 </th>
-                <td ng-if="service.type=='s'"
+                <td ng-if="service.type=='p'"
                 data-label="Description" 
                 class="form-group"
                 style="text-transform:capitalize;"
                 >
                     {{service.description}}
-                </td> 
-                <td  ng-if="service.type=='s'"
+                </td>
+
+                <td ng-if="service.type=='p'"
+                data-label="Recommended Price" 
+                class="form-group"
+                >
+                    {{service.rrp | currency : "" : 0}}
+                </td>
+
+                
+                
+                <td ng-if="service.type=='p'"
                 data-label="" 
                 class="noprint" 
                 style="margin:0 auto;text-align:center;"
@@ -74,7 +88,7 @@
     max-size="5" 
     direction-links="true" 
     boundary-links="true" 
-    pagination-id="services" 
+    pagination-id="drugs" 
     class="ng-isolate-scope">
     </dir-pagination-controls>
 

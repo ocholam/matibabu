@@ -41,6 +41,12 @@
             ,templateUrl: 'views/services.html'
         })
 
+         //@ DRUGS ================================>
+        .state('app.drugs',{
+            url: '/drugs'
+            ,templateUrl: 'views/drugs.html'
+        })
+
         //@ DOCTORS ================================>
         .state('app.doctors',{
             url: '/doctors'
