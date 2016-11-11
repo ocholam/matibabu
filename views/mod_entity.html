@@ -167,6 +167,7 @@
             
             <!-- Submit Button -->
             <div class="form-group">
+                {{data.entities.owner_name=undefined}}
                 <button 
                 ng-disabled="!frame.isRoot() || add_entity_form.$invalid" 
                 ng-click="add('vw_entities',data.entities,'response')" 

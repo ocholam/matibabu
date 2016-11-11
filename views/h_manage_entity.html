@@ -272,7 +272,7 @@
                                             ng-disabled="!entity.title"
                                             class="btn btn-raised btn-md icon btn-raised ion-compose btn-success" 
                                             style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
-                                            ng-click="editEntity(entity)" 
+                                            ng-click="entity.owner_name=undefined;editEntity(entity)" 
                                             ></button>
                                     </td>                                    
                                 </tr>
@@ -452,6 +452,7 @@
                                  
                                 <!-- Submit Button -->
                                 <div class="form-group">
+                                     {{data.entities.owner_name=undefined}}
                                     <button 
                                     ng-disabled="!frame.isRoot() || edit_entity_form.$invalid" 
                                     ng-click="update('vw_entities',current,'response');clearEntity()" 

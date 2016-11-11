@@ -6,6 +6,7 @@ app.controller("entitiesController",["$scope","$ionicModal",($scope,$ionicModal)
 
     //@ HANDLE ENTITY EDITING
     $scope.editEntity   = (currdata) => {
+        delete currdata.owner_name;
         $scope.current  = currdata;
         $scope.editing  = true;
     };

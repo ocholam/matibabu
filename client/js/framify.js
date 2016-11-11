@@ -1,4 +1,4 @@
-    angular.module('bixApp', ['ui.router','framify-paginate','ngStorage','jsonFormatter','ngMessages','ngMaterial','materialCalendar'])
+    angular.module('bixApp', ['ui.router','framify-paginate','ngStorage','jsonFormatter','ngMaterial','materialCalendar'])
     .config(["$stateProvider", "$urlRouterProvider","$mdThemingProvider",function($stateProvider, $urlRouterProvider, $mdThemingProvider){
 
          $mdThemingProvider
