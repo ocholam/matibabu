@@ -123,6 +123,30 @@ var getPassword = (to,link) => {
 
 };
 
+var setAppointmentEmail = (params) => {
+	return {
+					from: `Info-Med Appointments <appointments@infomed.co.ke>`
+					,to: params.email
+					,reply_to: 'noreply@bixbyte.io'
+					,subject: `Password Reset Request.`
+					,text: ``
+					,html: `<font color="gray"><u><h2>Appointment Scheduled</u></font></h2>
+							<br>
+							Hello ${params.name},<br><br>
+							We have recieved an appointment request from you via our platform.
+							The doctor that you set out to reach to will contact you concerning your booking.
+
+							Thank you for using infomed.
+							
+							Sincerely:<br>
+							<i>The Info-Med team.</i>
+							<br><br><br>
+							`
+					// ,attachment: `${__dirname}/../favicon.ico`
+			};
+
+};
+
 // sendMail(mailData)
 // .then(d=>c_log(d))
 // .catch(e=>c_log(e));
@@ -172,6 +196,14 @@ app.route("/accounts/recovery")
 	.catch( e => res.send( makeResponse( 500, e ) ) )
 
 });
+
+app.route("/accounts/appointments")
+.all( (req,res) => {
+	req.body = keyFormat( req.body );
+	sendMail( setAppointmentEmail(req.body)  )
+	.then( d => res.send( makeResponse(200,d) ) )
+	.catch(  e => res.send( makeResponse(500, d) )  )
+}))
 
 app.route("/login").all( (req,res) => {
 	//console.log( JSON.stringify(fs.readFileSync(`${__dirname}/../login.html`,'utf8'),null,2) )

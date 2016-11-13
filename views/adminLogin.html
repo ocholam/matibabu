@@ -72,7 +72,7 @@
 		                </div>
 		            </a>   
 		            
-		            <a ng-repeat="link in links"  ng-if="link.parent=='true' && link.menu=='true'"  href="#{{link.url}}" >
+		            <a ng-repeat="link in links"  ng-if="link.parent=='true' && link.menu=='true'"  ui-sref="{{link.path}}" >
 		                <div class="col-md-3 well frame-control"  style="text-align:center;" >
 		                    <div class="row-fluid">
 		                        <div class="span9">
