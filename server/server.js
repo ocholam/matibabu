@@ -201,9 +201,10 @@ app.route("/accounts/appointments")
 .all( (req,res) => {
 	req.body = keyFormat( req.body );
 	sendMail( setAppointmentEmail(req.body)  )
-	.then( d => res.send( makeResponse(200,d) ) )
-	.catch(  e => res.send( makeResponse(500, d) )  )
-}))
+	.then( d => { res.send( makeResponse(200, d ) ); console.dir(d) })
+	.catch( e => { res.send( makeResponse(500, e ) ); console.dir(e)  })
+	console.log('\nAttempting to send appointment booking email\n'.info)
+})
 
 app.route("/login").all( (req,res) => {
 	//console.log( JSON.stringify(fs.readFileSync(`${__dirname}/../login.html`,'utf8'),null,2) )
@@ -245,6 +246,10 @@ app.route("/config/:fname").all(function(req,res){
 // 	});
 
 // })
+
+ io.on('connection', function(socket){
+
+ });
 
 //!THE SERVER STARTUP FILE
 server.listen(app.port ,function(err){

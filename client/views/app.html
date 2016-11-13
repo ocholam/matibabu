@@ -1,5 +1,5 @@
 <div class="header" id="home">
-    
+    <div id="header"></div>
     <div class="header_banner">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
@@ -18,7 +18,8 @@
             <div class="carousel-caption">
                 <h3>Medical Practitioner Listing</h3>
                 <p>We offer a listing of medical practitioners in various fields all in one place.</p>
-                <button type="button" class="btn btn-info sld">Proceed</button>
+                <!--<button type="button" class="btn btn-info sld">Proceed</button>-->
+				<button type="button" class="btn btn-info sld" data-toggle="modal" data-target="#signup">signup</button>
             </div>
             </div>
             <div id="drugs_img" class="item  image-wid">
@@ -26,7 +27,7 @@
             <div class="carousel-caption">
                 <h3>Drug Listing and Pricing</h3>
                 <p>Get the latest information on where and at what price to get your drugs.</p>
-                <button type="button" class="btn btn-info sld">Proceed</button>
+                <button type="button" class="btn btn-info sld" data-toggle="modal" data-target="#signup">signup</button>
             </div>
             </div>
             <div id="appointments_img" class="item  image-wid">
@@ -34,7 +35,8 @@
             <div class="carousel-caption">
                 <h3>Appointment Management</h3>
                 <p>Easily book appointments with medical practitioners.</p>
-                <button type="button" class="btn btn-info sld">Proceed</button>
+                <!--<button type="button" class="btn btn-info sld">Proceed</button>-->
+				<button type="button" class="btn btn-info sld" data-toggle="modal" data-target="#signup">signup</button>
             </div>
             </div>
             <div id="services_img" class="item  image-wid">
@@ -42,7 +44,8 @@
             <div  class="carousel-caption">
                 <h3>Service Pricing and Listing</h3>
                 <p>Find professional mediacal services closest to you at the best prices.</p>
-                <button type="button" class="btn btn-info sld">Read more</button>
+                <!--<button type="button" class="btn btn-info sld">Read more</button>-->
+				<button type="button" class="btn btn-info sld" data-toggle="modal" data-target="#signup">signup</button>
             </div>
             </div>
         </div>
@@ -186,9 +189,9 @@
 
 			<center>
 				<h3><font color="gray"><u>Join Info-Med</u></font> </h3>
+				<font color="#309BBE"><sub>This form is only for those who want their products listed on infomed.</sub></font>
 			</center>
-			<form name="add_user_form" class="col-lg-10" style="" novalidate>
-				<!--<div ng-if="!frame.isRoot()" class="alert alert-danger"><button class="close" data-dismiss="alert" aria-label="close"><span aria-hidden="true">&times;</span></button><center style="font-weight:bold;">Your access level does not permit you to add administrators.</center></div>-->
+			<form name="add_user_form" class="" style="" novalidate>
 					
 				<!-- Name -->
 				<div class="form-group">
@@ -252,7 +255,7 @@
 				
 					<!-- telephone -->
 				<div class="form-group">
-					<label>telephone<sup style="color:red">*</sup></label>
+					<label>Telephone<sup style="color:red">*</sup></label>
 					<input type="tel" name="telephone" class="form-control" 
 						ng-model="data.users.telephone"
 						ng-pattern="app.istelephone"
@@ -267,7 +270,9 @@
 				<div class="form-group" ng-controller="hospitalCtrl">
 					<span hidden ng-if="!add_user_form.$invalid">{{data.users=setCreds(data.users)}}</span>
 					<!--!frame.isRoot()-->
-					<button ng-click="add('vw_users',data.users,'response','password',loginRedirect)" class=" button button-positive" ng-disabled="add_user_form.$invalid">Add User</button>
+					
+					<button class="btn btn-info" ng-click="add('vw_users',data.users,'response','password',loginRedirect);" ng-disabled="add_user_form.$invalid">Join Infomed</button>
+					<font color="#309BBE"><sub>This form is <b>only</b> for those who want their products listed on infomed.</sub></font>
 				</div>
 				<br><br><br>
 			</form>
@@ -428,14 +433,14 @@
 						<tr>
 							<td colspan="2">
 								<span hidden>{{data.appointment.entity=appointmentId}}</span>
-								<span hidden ng-if="!add_user_form.$invalid">{{data.appointment=setCreds(data.appointment)}}</span>
+								<span hidden ng-if="!form_appointment_book.$invalid">{{data.appointment=setCreds(data.appointment)}}</span>
 								
 								<div class="form-group">                        
 									<button 
 										class="btn btn-sm btn-primary" 
 										data-toggle="modal"
 										data-target="#appointment_booking"
-										ng-click="add('appointments',data.appointment,'response',null,nextAppointment);clearAppointment()"
+										ng-click="add('appointments',data.appointment,'response',null,nextAppointment);sendAppointmentEmail({'email': data.appointment.email, 'name': data.appointment.name})"
 										ng-disabled="form_appointment_book.$invalid"
 									>Book Appointment</button>
 									<button 

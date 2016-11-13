@@ -9,7 +9,7 @@
 <div ng-init="fetch([['vw_entities']])" id="labs" class="">
     <label class="item item-input pull-left col-lg-5" style="padding-top:10px;">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" class="form-control" ng-model="search" value="" placeholder="Search"> 
+        <input type="text" class="form-control" ng-model="search" value="" placeholder="Search for a lab by name,telephone,location or website"> 
     </label>
     <table id="lab"  align="center"  class="table table-striped  responsive-table"  name="content">
         <thead>
@@ -39,7 +39,7 @@
                 pagination-id="lab"
                 >
                     
-                        <th scope="row" data-label="Name">{{entity.title}}</th>
+                        <td scope="row" data-label="Name" class="form-group">{{entity.title}}</td>
                         <td data-label="Telephone" class="form-group">
                             {{entity.telephone}}
                         </td>
@@ -47,19 +47,21 @@
                             {{entity.location}}
                         </td>
                         <td data-label="Web" class="form-group">
-                            {{entity.web}}
+                            {{entity.web || "not specified"}}
                         </td>
-                        <td data-label="" class="noprint" style="margin:0 auto;text-align:center;"> 
+                         <td data-label="" class="noprint pull-right" style="text-align:right !important;"> 
                             <!--ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" -->
-                            <!--<button                                                 
+                              <!--ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" -->
+                               <button                                                 
                                 style="border-radius:50%;" 
-                                ng-disabled="service_edit.$invalid" 
-                                class="btn btn-raised btn-md icon btn-raised ion-checkmark-round btn-success" 
+                                ng-disabled="false" 
+                                class="btn btn-sm btn-primary" 
+                                
                                 style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
-                                ng-click="update('services',{ title: service.title, description: service.description, type: service.type, extras: ' service_id=\'{{service.service_id}}\'', token: { user: 'userAdmin', key: '153797e5fc6433812172aa8d47ec69e1', specifics: storage.user  } },'response')" 
-                                ></button>-->
+                                ng-click="setAppointment(entity)" 
+                                data-toggle="modal" data-target="#appointment_booking"
+                                ><i class="fa  fa-calendar-plus-o"></i></button>
                         </td>
-                    
                 </tr>
             </form>
         </tbody>

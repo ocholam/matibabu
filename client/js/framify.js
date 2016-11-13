@@ -372,7 +372,8 @@
     this.server.host  = '41.89.162.252';
     //this.server.host  = '127.0.0.1';
     this.server.port  = '3000';
-    this.socket       = io.connect(`http://${this.server.host}:${this.server.port}`);
+    // this.socket       = io.connect(`http://${this.server.host}:${this.server.port}`);
+    this.socket       = io.connect();
     const socket      = this.socket;
 
 
@@ -1196,6 +1197,7 @@ $scope.showEntity = (serviceData) => {
         $scope.bookAppointment     =true;
         $scope.appointmentId       =entity.entity_id;
         $scope.appointmentTitle    =entity.title;
+        $scope.appointmentEmail    =entity.email;
         $scope.appointmentTelephone=entity.telephone;
         //$scope.$apply();
 
@@ -1227,8 +1229,10 @@ $scope.showEntity = (serviceData) => {
 
     };
 
-    $scope.appointmentEmail = ( appointmentData ) => {
+    $scope.sendAppointmentEmail = ( appointmentData ) => {
 
+        $scope.app.ajax( '/accounts/appointments', appointmentData, console.dir,$scope.app.alert )
+       
     }
 
     // //@ SIMPLE FILTER BY OWNER
