@@ -142,8 +142,8 @@ CREATE TABLE IF NOT EXISTS service_offerings (
     active                  boolean DEFAULT true,
     added_on                timestamp DEFAULT CURRENT_TIMESTAMP
 );
-INSERT INTO service_offerings (service_offering_id,entity,description,service,purchase,retail)
-VALUES (1,1,'Simple and Painless',1,0,3500);
+-- INSERT INTO service_offerings (service_offering_id,entity,description,service,purchase,retail)
+-- VALUES (1,1,'Simple and Painless',1,0,3500);
 
 
 -- --

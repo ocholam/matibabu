@@ -28,7 +28,8 @@
             </th>
             <th ng-click="sort('web')">Website
                 <span class="icon " ng-show="sortKey=='web'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
-            </th>          
+            </th> 
+            <!--<th ng-click="">Book Appointment</th>         -->
            
         </tr>
         </thead>
@@ -50,7 +51,7 @@
                             {{entity.location}}
                         </td>
                         <td data-label="Web" class="form-group">
-                            {{entity.web}}
+                            <a href="http://{{entity.web}}"> {{entity.web || "not specified"}}</a>
                         </td>
                         
                         <td data-label="" class="noprint" style="margin:0 auto;text-align:center;"> 

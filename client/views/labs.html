@@ -48,9 +48,9 @@
                             {{entity.location}}
                         </td>
                         <td data-label="Web" class="form-group">
-                            {{entity.web || "not specified"}}
+                            <a href="http://{{entity.web}}"> {{entity.web || "not specified"}}</a>
                         </td>
-                         <td data-label="" class="noprint" style=""> 
+                        <td data-label="" class="noprint" style=""> 
                             <!--ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" -->
                               <!--ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" -->
                                <button                                                 

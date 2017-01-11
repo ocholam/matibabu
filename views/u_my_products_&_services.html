@@ -1,11 +1,12 @@
 <framify menu="false" path="u_my_products_&_services" url="/u_my_products_&_services" title="My Products & Services" parent="false" icon="folder_shared" controller="appController" ></framify>
 <ion-content overflow-scroll="true" scrollbar-x="false" scrollbar-y="false" style="padding-bottom:20px;" >
-<div class="col-lg-12" id="response" ></div>
+
 
 <!--<div  class="" ng-init="authorize();" ></div>-->
 <!--ng-if="frame.isAdmin()"-->
  <div class="" ng-controller="hospitalCtrl" >
      <div class="" >
+         <div class="col-lg-12" id="response" ></div>
          <div ng-init="fetch([['vw_services'],['vw_types'],['entities',{ specifics: 'entity_id,title', owner: storage.user.username }],['vw_service_offerings', { owner: storage.user.username }]]);frame.currTab='add';sort('title');"></div>
          <div class="col-lg-12">
                  <!--<json-formatter open="1" json="data.my_services"></json-formatter>-->

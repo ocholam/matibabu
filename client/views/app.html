@@ -95,12 +95,12 @@
 				<th ng-click="sort('location')">Location
 					<span class="icon " ng-show="sortKey=='location'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
 				</th>
-				<th ng-click="sort('retail')">Retail Price
+				<th ng-click="sort('retail')">Price
 					<span class="icon " ng-show="sortKey=='retail'" ng-class="{'fa fa-chevron-up':reverse,'fa fa-chevron-down':!reverse}"></span>
 				</th>
-				<th>
-
-				</th>
+				<!--<th>
+					Book Appointment
+				</th>-->
 			</tr>
 			</thead>
 			<tbody>
@@ -129,7 +129,7 @@
 					data-label="Website" 
 					class="form-group"
 					>
-						{{service_offering.owner_web}}
+						<a href="http://{{service_offering.owner_web}}">{{service_offering.owner_web}}</a>
 					</td>
 
 					<td 
@@ -147,6 +147,20 @@
 					>
 						{{service_offering.retail | currency : "" : 0}}
 					</td>
+
+					<!--<td data-label="" class="noprint" style=""> 
+						ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" 
+							ng-if="(storage.admin.admin_name==admin.admin_name || frame.isRoot() )&& admin.admin_name!='userAdmin'" 
+							<button                                                 
+							style="border-radius:50%;" 
+							ng-disabled="false" 
+							class="btn btn-sm btn-primary" 
+							
+							style="font-weight:bold; font-size:1em !important; color:white !important; text-align:center;" 
+							ng-click="setAppointment(entity)" 
+							data-toggle="modal" data-target="#appointment_booking"
+							><i class="fa  fa-calendar-plus-o"></i></button>
+					</td>-->
 
 					<td  
 					ng-if="service_offering.service == service.current.service_id"
@@ -272,7 +286,11 @@
 					<span hidden ng-if="!add_user_form.$invalid">{{data.users=setCreds(data.users)}}</span>
 					<!--!frame.isRoot()-->
 					
-					<button class="btn btn-info" ng-click="add('vw_users',data.users,'response','password',loginRedirect);" ng-disabled="add_user_form.$invalid">Join Infomed</button>
+					
+					<button 
+					class="btn btn-info" 
+					ng-click="add('vw_users',data.users,'',isSignedUp);"
+					ng-disabled="add_user_form.$invalid">Join Infomed</button>
 					<font color="#309BBE"><sub>This form is <b>only</b> for those who want their products listed on infomed.</sub></font>
 				</div>
 				<br><br><br>
