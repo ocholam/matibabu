@@ -71,6 +71,9 @@
     }])
 .controller('hospitalCtrl',['$scope',function($scope){
 
+    $scope.data             = {};
+    $scope.data.users       = {};
+
     //@ REDIRECT USER TO LOGIN PAGE
     $scope.loginRedirect = () => {
         window.location = "http://admin.infomed.co.ke/#/login";
@@ -86,9 +89,34 @@
     $scope.isSignedUp = (obj) => {
         return new Promise(function(resolve,reject){
             if(obj.response == 200){
-                 $scope.app.notify("Successfully registered user","success",10000)
-                 window.location = "http://admin.infomed.co.ke/#/login";
-                 resolve(true);
+
+                // alert( $scope.data )
+
+                let apiKey = "355912060268866";
+
+                $scope.cgi.mail({
+                    from :      "accounts@infomed.co.ke"
+                    ,to :       $scope.data.users.email
+                    ,subject:   "Welcome to infomed"
+                    ,text:      `Hello ${$scope.data.users.name},\n\nWelcome to the infomed service; we are glad to have you here.\nWhen in need of assistance, feel free contact us at info@infomed.co.ke`
+                });
+
+                $scope.sms.oneSMS($scope.data.users.telephone ,`Hello ${$scope.data.users.name}, we are glad to welcome you to the infomed service. Your username is ${$scope.data.users.username} and your recovery email is ${$scope.data.users.email}. For any inquiries, please write to info@infomed.co.ke` ,apiKey)                
+                .then((r)=>{
+                    
+                    $scope.app.notify("Successfully registered the user " + $scope.data.users.username,"success",10000)
+                    // window.location = "http://admin.infomed.co.ke/#/login";
+                    resolve(true);
+
+                })
+                .catch((e)=>{
+                   
+                    $scope.app.notify("Successfully registered the user" + $scope.data.users.username + " with no SMS","success",10000)
+                    // window.location = "http://admin.infomed.co.ke/#/login";
+                    resolve(true);
+
+                })
+                 
             }else{               
                 resolve(obj)
             }           
